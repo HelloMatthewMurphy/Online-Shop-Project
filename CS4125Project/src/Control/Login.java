@@ -5,7 +5,7 @@
  */
 package Control;
 
-import Business.Account;
+import User.Account;
 import java.util.ArrayList;
 
 /**

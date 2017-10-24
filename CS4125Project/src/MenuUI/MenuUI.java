@@ -34,6 +34,7 @@ public class MenuUI {
             System.out.println("Enter your password please");
             String password = scan.nextLine();
             Login login = new Login(username,password);
+            boolean bool = login.Validate();
         }
     }
     
