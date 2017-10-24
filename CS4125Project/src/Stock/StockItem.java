@@ -14,4 +14,35 @@ public class StockItem {
     private double price;
     private String category;
     private String description;
+    
+    public StockItem(){
+    
+    }
+    
+    public StockItem(String name, double price, String category, String description){
+    this.name = name;
+    this.price = price;
+    this.category = category;
+    this.description = description;
+    }
+    
+    public String getName(){
+    return this.name;
+    }
+    
+    public double getPrice(){
+    return this.price;
+    }
+    
+    public String getCategory(){
+    return this.category;
+    }
+    
+    public String getDescription(){
+    return this.description;
+    }
+    
+    public void setPrice(double price){
+        this.price = price;
+    }
 }
