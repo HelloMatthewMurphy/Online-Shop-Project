@@ -5,6 +5,8 @@
  */
 package cs4125project;
 
+import UI.MenuUI;
+
 /**
  *
  * @author Ryan Murphy
@@ -16,6 +18,8 @@ public class CS4125Project {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MenuUI menu = new MenuUI();
+        menu.startSession();
     }
     
 }
