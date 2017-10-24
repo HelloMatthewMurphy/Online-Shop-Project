@@ -14,19 +14,29 @@ import java.util.ArrayList;
  */
 public class Login {
 ArrayList<Account> users; 
-private String username;
+private String email;
 private String password;
 
-    public Login(String username, String password){
-        this.username = username;
+    public Login(String email, String password){
+        this.email = email;
         this.password = password;
         users = new ArrayList<Account>();
     }
     
+    public String getEmail(){
+        return email;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+    
+    
+    
     public boolean Validate(){
         boolean validated = false;
         for (int i = 0; i < users.size();i++){
-            if ((users.get(i).getUsername() == username) && (users.get(i).getPassword() == password) ){
+            if ((users.get(i).getEmail() == email) && (users.get(i).getPassword() == password) ){
                 validated = true;
                 System.out.println("Thanks, enjoy your visit!");
             }

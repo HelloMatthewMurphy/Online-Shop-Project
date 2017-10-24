@@ -29,11 +29,11 @@ public class MenuUI {
             choice = scan.nextLine();
         }
         else if(choice.equals("L")){
-            System.out.println("Enter your username please");
-            String username = scan.nextLine();
-            System.out.println("Enter your password please");
+            System.out.println("Enter your email please:");
+            String email = scan.nextLine();
+            System.out.println("Enter your password please:");
             String password = scan.nextLine();
-            Login login = new Login(username,password);
+            Login login = new Login(email,password);
             boolean bool = login.Validate();
         }
     }

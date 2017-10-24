@@ -20,4 +20,9 @@ public class Accounts {
         this.email = email;
     }
     
+    public Accounts(String password, String email){
+        this.password = password;
+        this.email = email;
+    }
+    
 }
