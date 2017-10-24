@@ -20,6 +20,18 @@ private String password;
     public Login(String username, String password){
         this.username = username;
         this.password = password;
+        users = new ArrayList<Account>();
+    }
+    
+    public boolean Validate(){
+        boolean validated = false;
+        for (int i = 0; i < users.size();i++){
+            if ((users.get(i).getUsername() == username) && (users.get(i).getPassword() == password) ){
+                validated = true;
+                System.out.println("Thanks, enjoy your visit!");
+            }
+        }     
+        return validated;
     }
         
 }
