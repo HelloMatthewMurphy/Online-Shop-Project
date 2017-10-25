@@ -25,4 +25,12 @@ public class Accounts {
         this.email = email;
     }
     
+    public String getEmail(){
+        return email;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+    
 }

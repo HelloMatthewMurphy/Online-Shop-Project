@@ -6,7 +6,6 @@
 package Database;
 
 import Control.Login;
-import User.Account;
 import User.Accounts;
 import java.util.ArrayList;
 
@@ -16,9 +15,9 @@ import java.util.ArrayList;
  */
 public class AccountDB {
     private String filename;
-    private ArrayList<Account> accounts;
+    private ArrayList<Accounts> accounts;
     
-    public AccountDB(ArrayList<Account> accounts){
+    public AccountDB(ArrayList<Accounts> accounts){
         this.accounts = accounts;
     }
     
