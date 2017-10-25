@@ -6,6 +6,7 @@ import Stock.StockItem;
  *
  * @author Matthew Murphy
  */
+//Hey bois this is your boy Matthew Murphy
 public class Purchase {
     
     private StockItem item;
