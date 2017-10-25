@@ -9,18 +9,18 @@ package User;
  *
  * @author Brian
  */
-public class Accounts {
+public class Account {
     private String username;
     private String password;
     private String email;
     
-    public Accounts(String username, String password, String email){
+    public Account(String username, String password, String email){
         this.username = username;
         this.password = password;
         this.email = email;
     }
     
-    public Accounts(String password, String email){
+    public Account(String password, String email){
         this.password = password;
         this.email = email;
     }

@@ -6,7 +6,7 @@
 package Database;
 
 import Control.Login;
-import User.Accounts;
+import User.Account;
 import java.util.ArrayList;
 
 /**
@@ -15,14 +15,14 @@ import java.util.ArrayList;
  */
 public class AccountDB {
     private String filename;
-    private ArrayList<Accounts> accounts;
+    private ArrayList<Account> accounts;
     
-    public AccountDB(ArrayList<Accounts> accounts){
+    public AccountDB(ArrayList<Account> accounts){
         this.accounts = accounts;
     }
     
-    public Accounts Login(Login login){
-        return new Accounts(login.getEmail(),login.getPassword());
+    public Account Login(Login login){
+        return new Account(login.getEmail(),login.getPassword());
     }
     
     public void setFileName(String file){

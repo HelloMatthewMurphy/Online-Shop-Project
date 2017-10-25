@@ -5,7 +5,7 @@
  */
 package cs4125project;
 
-import UI.MenuUI;
+import MenuUI.MenuUI;
 
 /**
  *
