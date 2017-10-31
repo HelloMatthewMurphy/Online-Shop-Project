@@ -24,6 +24,10 @@ public class Customer extends Account{
         location.setAddress(address);
     }
     
+    public String getLocation(){
+        return location.getAddress();
+    }
+    
     public void checkStock(){
         
     }

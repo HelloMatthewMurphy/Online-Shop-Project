@@ -1,12 +1,12 @@
 package Services;
 
 import Stock.StockItem;
+import ThirdParty.*;
 
 /**
  *
  * @author Matthew Murphy
  */
-//Hey bois this is your boy Matthew Murphy
 public class Purchase {
     
     private StockItem item;
@@ -15,6 +15,12 @@ public class Purchase {
     public Purchase(StockItem item, int quantity){
         this.item = item;
         this.quantity = quantity;
+    }
+    
+    public boolean makePurchase(String address){
+        CreditCardCo credit = new CreditCardCo();
+        ShippingCo ship = new ShippingCo();
+        return true;
     }
     
 }
