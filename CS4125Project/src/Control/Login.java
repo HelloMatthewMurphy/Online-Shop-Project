@@ -5,8 +5,11 @@
  */
 package Control;
 
+import Database.AccountDB;
 import User.Account;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -16,11 +19,15 @@ public class Login {
 ArrayList<Account> users; 
 private String email;
 private String password;
+private AccountDB account;
 
-    public Login(String email, String password){
-        this.email = email;
-        this.password = password;
+    public Login(String email, String password) throws IOException{
         users = new ArrayList<Account>();
+        this.email = email;
+        account = new AccountDB();
+        this.password = password;
+        //System.out.println(account.load().size());
+        users.addAll(account.load());
     }
     
     public String getEmail(){
@@ -33,14 +40,25 @@ private String password;
     
     
     
-    public boolean Validate(){
+    public boolean Validate() throws InterruptedException{
+        //System.out.println(users.size());
         boolean validated = false;
         for (int i = 0; i < users.size();i++){
-            if ((users.get(i).getEmail() == email) && (users.get(i).getPassword() == password) ){
+            if ((users.get(i).getEmail().equals(email)) && (users.get(i).getPassword().equals(password)) ){
                 validated = true;
-                System.out.println("Thanks, enjoy your visit!");
             }
-        }     
+            
+        }  
+        if(validated == false){
+            System.out.println("Error,Please enter a valid login");
+        }
+        else if (validated == true){
+                System.out.println("Thanks, enjoy your visit!");
+                System.out.println("\n");
+                System.out.println("\n");
+                System.out.println("\n");
+                TimeUnit.SECONDS.sleep(2);
+                }
         return validated;
     }
         

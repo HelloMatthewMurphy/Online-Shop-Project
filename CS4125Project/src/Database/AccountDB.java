@@ -7,12 +7,14 @@ package Database;
 
 import Control.Login;
 import User.Account;
+import User.Customer;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +27,7 @@ public class AccountDB {
     
     public AccountDB(){
         filename = "";
+        accounts = new ArrayList<Account>();
     }
     
     public AccountDB(List<Account> accounts){
@@ -63,6 +66,7 @@ public class AccountDB {
     public List<Account> load() throws FileNotFoundException, IOException{
         try{
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
+        BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
 		fileReader.readLine();
 		fileReader.readLine();
 		String fileLine;
@@ -70,16 +74,26 @@ public class AccountDB {
 		String username = "";
                 String password = "";
                 String email = "";
-                System.out.println("qwertyuiop");
 		while ((fileLine = fileReader.readLine()) != null) {
 			String [] data = fileLine.split(",", -1);
 			username= data[0];
+                        System.out.println(username);
 			password = data[1];
+                        System.out.println(password);
 			email = data[2];
-                        System.out.println("Hello" + username);
-			accounts.add(new Account(username,password,email));
+			accounts.add(new Customer(username,password,email));
 			}
 			fileReader.close();
+                        
+                fileReader2.readLine();
+                fileReader2.readLine();
+                String fileLine1 = "";
+                String username1 = "";
+                String password1 = "";
+                String email1 = "";
+                while((fileLine1 = fileReader2.readLine()) != null){
+                    
+                }
              }			
                             
 			catch (Exception ex){
