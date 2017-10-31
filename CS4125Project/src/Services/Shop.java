@@ -42,7 +42,13 @@ public class Shop {
     }
     
     public void returnItem(StockItem item){
-        //Needs to add item back to warehouse
+        boolean done = false;
+        for(int i = 0; i < warehouses.size() && !done; i++){
+            if(warehouses.get(i).hasItem(item.getName())){
+                warehouses.get(i).addStock(item.getName(), 1);
+                done = true;
+            }
+        }
     }
     
     public void makePurchase(StockItem item, int quantity){

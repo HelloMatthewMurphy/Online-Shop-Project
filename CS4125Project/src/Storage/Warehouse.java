@@ -27,7 +27,10 @@ public class Warehouse {
     }
     
     public void addStock(String itemName, int amount){
-        stock.put(itemName, amount);
+        if(stock.containsKey(itemName))
+            stock.put(itemName, stock.get(itemName) + amount);
+        else
+            stock.put(itemName, amount);
     }
     
     public void buyStock(String itemBought, int amountBought){

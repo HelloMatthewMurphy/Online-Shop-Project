@@ -6,6 +6,7 @@
 package cs4125project;
 
 import MenuUI.MenuUI;
+import Services.TestingShop;
 import java.io.IOException;
 
 /**
@@ -19,7 +20,8 @@ public class CS4125Project {
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         // TODO code application logic here
-        MenuUI menu = new MenuUI();
-        menu.startSession();
+        //MenuUI menu = new MenuUI();
+        //menu.startSession();
+        TestingShop.test();
     }    
 }
