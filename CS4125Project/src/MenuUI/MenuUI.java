@@ -66,14 +66,14 @@ public class MenuUI {
             }
             
         }
-        else{
+        else {
             boolean valid = false;
             while (valid == false){
-                //System.out.println("Enter your username");
+                System.out.println("Enter your username");
                 username = scan.nextLine();
-                //System.out.println("Enter your password");
+                System.out.println("Enter your password");
                 password = scan.nextLine();
-               // System.out.println("Enter your email address");
+                System.out.println("Enter your email address");
                 email = scan.nextLine();
                     if(users.isEmpty()){
                         valid = true;

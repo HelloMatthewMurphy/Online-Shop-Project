@@ -17,7 +17,7 @@ public class CS4125Project {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // TODO code application logic here
         MenuUI menu = new MenuUI();
         menu.startSession();

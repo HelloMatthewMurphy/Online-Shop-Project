@@ -7,6 +7,7 @@ package Database;
 
 import Control.Login;
 import User.Account;
+import User.Customer;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -65,6 +66,7 @@ public class AccountDB {
     public List<Account> load() throws FileNotFoundException, IOException{
         try{
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
+        BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
 		fileReader.readLine();
 		fileReader.readLine();
 		String fileLine;
@@ -75,11 +77,23 @@ public class AccountDB {
 		while ((fileLine = fileReader.readLine()) != null) {
 			String [] data = fileLine.split(",", -1);
 			username= data[0];
+                        System.out.println(username);
 			password = data[1];
+                        System.out.println(password);
 			email = data[2];
-			accounts.add(new Account(username,password,email));
+			accounts.add(new Customer(username,password,email));
 			}
 			fileReader.close();
+                        
+                fileReader2.readLine();
+                fileReader2.readLine();
+                String fileLine1 = "";
+                String username1 = "";
+                String password1 = "";
+                String email1 = "";
+                while((fileLine1 = fileReader2.readLine()) != null){
+                    
+                }
              }			
                             
 			catch (Exception ex){

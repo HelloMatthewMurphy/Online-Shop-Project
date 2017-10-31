@@ -12,6 +12,11 @@ import Stock.StockItem;
  * @author Jack
  */
 public class Supervisor extends Account{
+    
+    public Supervisor(String name, String password, String email){
+        super(name, password, email);
+    }
+    
     public void buyStock(StockItem stock){
         
     }

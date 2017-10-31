@@ -12,7 +12,12 @@ import Storage.Location;
  * @author Jack
  */
 public class Customer extends Account{
-    Location location = new Location();
+    Location location;
+    
+    public Customer(String name, String password, String email){
+        super(name, password, email);
+        this.location = new Location(); 
+    }
     
     public void setLoc(String country, String address){
         location.setCountry(country);
