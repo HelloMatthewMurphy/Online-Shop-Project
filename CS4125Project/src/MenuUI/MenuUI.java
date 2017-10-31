@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -35,7 +36,7 @@ public class MenuUI {
         email = "";
     }
     
-    public void startSession() throws IOException{
+    public void startSession() throws IOException, InterruptedException{
         
        System.out.println("Welcome to Silian Shops!");
         System.out.println("L)ogin");
@@ -59,6 +60,9 @@ public class MenuUI {
             String password = scan.nextLine();
             Login login = new Login(email,password);
             bool = login.Validate(); 
+            if (bool == true){
+                showMenu();
+            }
             }
             
         }
@@ -97,6 +101,20 @@ public class MenuUI {
             
             
         }
+    }
+    public void showMenu() throws IOException, InterruptedException{
+       System.out.println("Welcome " + username);
+       System.out.println("L)ogout");
+       String input = scan.nextLine();
+       
+       if(input.equals("L")){
+           System.out.println("Thanks for visiting, see you next time");
+           System.out.println("\n");
+           System.out.println("\n");
+           System.out.println("\n");
+           TimeUnit.SECONDS.sleep(2);
+           startSession();
+       }
     }
     
     

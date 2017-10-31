@@ -9,6 +9,7 @@ import Database.AccountDB;
 import User.Account;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -39,7 +40,7 @@ private AccountDB account;
     
     
     
-    public boolean Validate(){
+    public boolean Validate() throws InterruptedException{
         //System.out.println(users.size());
         boolean validated = false;
         for (int i = 0; i < users.size();i++){
@@ -53,6 +54,10 @@ private AccountDB account;
         }
         else if (validated == true){
                 System.out.println("Thanks, enjoy your visit!");
+                System.out.println("\n");
+                System.out.println("\n");
+                System.out.println("\n");
+                TimeUnit.SECONDS.sleep(2);
                 }
         return validated;
     }
