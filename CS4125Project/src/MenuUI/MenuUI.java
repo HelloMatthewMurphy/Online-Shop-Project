@@ -41,11 +41,16 @@ public class MenuUI {
         System.out.println("L)ogin");
         System.out.println("R)egister");
         String choice = scan.nextLine();
+        boolean validCommand = false;
+        while (validCommand == false){
         if(!(choice.equals("L") || choice.equals("R")) ){
             System.out.println("Error, Type 'L' for Login or 'R' for Register");
             choice = scan.nextLine();
         }
-        else if(choice.equals("L")){
+        else validCommand = true;
+        }
+        
+        if(choice.equals("L")){
             boolean bool =false;
             while(bool == false){
             System.out.println("Enter your email please:");
