@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class AccountDB {
     
     public AccountDB(){
         filename = "";
+        accounts = new ArrayList<Account>();
     }
     
     public AccountDB(List<Account> accounts){
@@ -70,13 +72,11 @@ public class AccountDB {
 		String username = "";
                 String password = "";
                 String email = "";
-                System.out.println("qwertyuiop");
 		while ((fileLine = fileReader.readLine()) != null) {
 			String [] data = fileLine.split(",", -1);
 			username= data[0];
 			password = data[1];
 			email = data[2];
-                        System.out.println("Hello" + username);
 			accounts.add(new Account(username,password,email));
 			}
 			fileReader.close();

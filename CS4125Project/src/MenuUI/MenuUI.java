@@ -35,7 +35,7 @@ public class MenuUI {
         email = "";
     }
     
-    public void startSession(){
+    public void startSession() throws IOException{
         
        System.out.println("Welcome to Silian Shops!");
         System.out.println("L)ogin");
@@ -46,12 +46,16 @@ public class MenuUI {
             choice = scan.nextLine();
         }
         else if(choice.equals("L")){
+            boolean bool =false;
+            while(bool == false){
             System.out.println("Enter your email please:");
             String email = scan.nextLine();
             System.out.println("Enter your password please:");
             String password = scan.nextLine();
             Login login = new Login(email,password);
-            boolean bool = login.Validate();
+            bool = login.Validate(); 
+            }
+            
         }
         else{
             boolean valid = false;
