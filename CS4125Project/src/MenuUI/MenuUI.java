@@ -69,11 +69,11 @@ public class MenuUI {
         else{
             boolean valid = false;
             while (valid == false){
-                System.out.println("Enter your username");
+                //System.out.println("Enter your username");
                 username = scan.nextLine();
-                System.out.println("Enter your password");
+                //System.out.println("Enter your password");
                 password = scan.nextLine();
-                System.out.println("Enter your email address");
+               // System.out.println("Enter your email address");
                 email = scan.nextLine();
                     if(users.isEmpty()){
                         valid = true;
@@ -90,11 +90,18 @@ public class MenuUI {
             }  
                 users.add(new Account(username, password, email));
                  for(int i = 0; i < users.size();i++){
-                 System.out.println(users.get(i).getUsername());
-                 System.out.println(users.size());
+                 //System.out.println(users.get(i).getUsername());
+                // System.out.println(users.size());
                 }
                 try{
                 db.save();
+                System.out.println("You've been successfully registered!");
+                System.out.println("\n");
+                System.out.println("\n");
+                System.out.println("\n");
+                TimeUnit.SECONDS.sleep(2);
+                
+                startSession();
                 }catch(IOException e){
                     
                 }
