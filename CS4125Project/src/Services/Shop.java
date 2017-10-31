@@ -6,6 +6,7 @@ import Storage.Warehouse;
 import User.Customer;
 import Services.Purchase;
 import Storage.Location;
+import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,10 +22,11 @@ public class Shop {
     private StockItem item;
     private int quantity;
     private Customer account;
-    private List<Warehouse> warehouses;
+    private ArrayList<Warehouse> warehouses;
     
     public Shop(Customer account){
         this.account = account;
+        warehouses = new ArrayList<Warehouse>();
     }
     
     public Map<String, Integer> checkStock(){
@@ -47,11 +49,23 @@ public class Shop {
         Purchase pur = new Purchase(item, quantity);
         boolean purchaseHappened = false;
         purchaseHappened = pur.makePurchase(account.getLocation());
+        if(purchaseHappened){
+            boolean done = false;
+            for(int i = 0; i < warehouses.size() && !done; i++){
+                if(warehouses.get(i).hasItem(item.getName())){
+                    warehouses.get(i).buyStock(item.getName(), quantity);
+                    done = true;
+                }
+            }
+        }
     }
     
     public void addDiscount(){
         
     }
     
+    public void addWarehouse(Warehouse w){
+        warehouses.add(w);
+    }
+    
 }
-

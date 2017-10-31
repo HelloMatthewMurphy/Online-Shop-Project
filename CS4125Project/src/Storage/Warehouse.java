@@ -30,6 +30,15 @@ public class Warehouse {
         stock.put(itemName, amount);
     }
     
+    public void buyStock(String itemBought, int amountBought){
+        stock.put(itemBought, stock.get(itemBought) - amountBought);
+    }
+    
+    public boolean hasItem(String itemName){
+        boolean bool = stock.containsKey(itemName);
+        return bool;
+    }
+    
     public Map<String, Integer> checkStock(){
         return stock;
     }
