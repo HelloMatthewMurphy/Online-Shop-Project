@@ -15,15 +15,18 @@ public class StockItem {
     private String category;
     private String description;
     
-    public StockItem(){
-    
+    public StockItem(String name, double price){
+        this.name = name;
+        this.price = price;
+        this.category = "";
+        this.description = "";
     }
     
     public StockItem(String name, double price, String category, String description){
-    this.name = name;
-    this.price = price;
-    this.category = category;
-    this.description = description;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.description = description;
     }
     
     public String getName(){
