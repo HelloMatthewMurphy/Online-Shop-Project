@@ -8,6 +8,8 @@ package MenuUI;
 import Control.Login;
 import Database.AccountDB;
 import User.Account;
+import User.AccountFactory;
+import User.Customer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +89,9 @@ public class MenuUI {
 
                         }
             }  
-                users.add(new Account(username, password, email));
+                //users.add(new Customer(username, password, email));
+                AccountFactory factory = new AccountFactory();
+                users.add((Customer)factory.createAccount("customer", username, password, email));
                  for(int i = 0; i < users.size();i++){
                  //System.out.println(users.get(i).getUsername());
                 // System.out.println(users.size());

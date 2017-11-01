@@ -9,7 +9,7 @@ package User;
  *
  * @author Brian
  */
-public class Account {
+public abstract class Account {
     private String username;
     private String password;
     private String email;

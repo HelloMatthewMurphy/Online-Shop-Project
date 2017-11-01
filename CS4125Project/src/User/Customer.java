@@ -28,18 +28,4 @@ public class Customer extends Account{
         return location.getAddress();
     }
     
-    public void checkStock(){
-        
-    }
-    
-    public void checkRecomendations(){
-        
-    }
-    
-    public void returnItem(String itemName){
-        
-    }
-    
-    
-    
 }
