@@ -56,7 +56,7 @@ public class AccountDB implements IDatabase {
     }
     
     @Override
-    public void load() throws IOException{
+    public void load() throws IOException {
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
         BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
         fileReader.readLine();
