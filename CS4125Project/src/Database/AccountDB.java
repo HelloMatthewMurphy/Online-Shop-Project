@@ -42,7 +42,7 @@ public class AccountDB implements IDatabase {
     
     @Override
     public void save() throws IOException{
-        PrintWriter writer = new PrintWriter(new FileWriter("RegisteredUsers.csv", false));	
+        PrintWriter writer = new PrintWriter(new FileWriter(filename, false));	
         writer.write("Username,Password,Email\n\n");
         for (int i = 0; i < accounts.size();i++){
             writer.write(String.valueOf(accounts.get(i).getUsername()));

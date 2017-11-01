@@ -6,11 +6,12 @@
 package cs4125project;
 
 import MenuUI.MenuUI;
+import Services.TestingShop;
 import java.io.IOException;
 
 /**
  *
- * @author Ryan Murphy
+ * @author Matthew Murphy
  */
 public class CS4125Project {
 
@@ -22,7 +23,8 @@ public class CS4125Project {
         Database.TestWarehouseDB.test();
         
         // TODO code application logic here
-        MenuUI menu = new MenuUI();
-        menu.startSession();
+        //MenuUI menu = new MenuUI();
+        //menu.startSession();
+        TestingShop.test();
     }
 }

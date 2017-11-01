@@ -1,6 +1,9 @@
 package Services;
 
 //import Business.Account;
+import Database.DBControler;
+import Observers.Observer;
+import Observers.WarehouseStockObserver;
 import Stock.StockItem;
 import Storage.Warehouse;
 import User.Customer;
@@ -22,11 +25,15 @@ public class Shop {
     private StockItem item;
     private int quantity;
     private Customer account;
-    private ArrayList<Warehouse> warehouses;
+    private List<Warehouse> warehouses;
+    private List<Observer> observers;
     
     public Shop(Customer account){
         this.account = account;
         warehouses = new ArrayList<Warehouse>();
+        warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
+        observers = new ArrayList<Observer>();
+        observers.add(new WarehouseStockObserver(this));
     }
     
     public Map<String, Integer> checkStock(){
@@ -36,7 +43,6 @@ public class Shop {
             tempStock = warehouses.get(i).checkStock();
             // Loop through and check if item exists on totalStock.
             totalStock.putAll(tempStock);
-            
         }
         return totalStock;
     }
@@ -49,6 +55,7 @@ public class Shop {
                 done = true;
             }
         }
+        updateAllObservers();
     }
     
     public void makePurchase(StockItem item, int quantity){
@@ -63,6 +70,7 @@ public class Shop {
                     done = true;
                 }
             }
+            updateAllObservers();
         }
     }
     
@@ -72,6 +80,12 @@ public class Shop {
     
     public void addWarehouse(Warehouse w){
         warehouses.add(w);
+    }
+    
+    private void updateAllObservers(){
+        for(Observer observer : observers) {
+            observer.update();
+        }
     }
     
 }
