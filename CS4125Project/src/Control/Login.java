@@ -53,7 +53,7 @@ public class Login {
         
         if(validated == false){
             System.out.println("Error,Please enter a valid login");
-        }
+        }        
         else if (validated == true){
             System.out.println("Thanks, enjoy your visit!");
             System.out.println("\n");

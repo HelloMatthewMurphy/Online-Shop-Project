@@ -12,13 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author Shane
  */
-public class StockItemDB {
+public class StockItemDB implements IDatabase {
     
     String filename;
     HashMap<String, StockItem> stockItems;
@@ -28,14 +26,16 @@ public class StockItemDB {
         stockItems = new HashMap();
     }
     
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-    
     public void addStockItem(StockItem stockItem) {
         stockItems.put(stockItem.getName(), stockItem);
     }
     
+    @Override
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+    
+    @Override
     public void save() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         writer.write("Name,Price,Category,Description\n");
@@ -52,12 +52,13 @@ public class StockItemDB {
         writer.flush();
     }
     
-    public HashMap<String, StockItem> load() throws IOException {
+    @Override
+    public void load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
         
-        HashMap<String, StockItem> result = new HashMap();
+        stockItems = new HashMap();
         
         String line;
         while ((line = reader.readLine()) != null) {
@@ -66,9 +67,11 @@ public class StockItemDB {
             
             StockItem si = new StockItem(data[0], price, data[2], data[3]);
             
-            result.put(data[0], si);
+            stockItems.put(data[0], si);
         }
-        
-        return result;
+    }
+    
+    public HashMap<String, StockItem> getStockItems() {
+        return stockItems;
     }
 }
