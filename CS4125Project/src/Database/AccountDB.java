@@ -22,7 +22,8 @@ import java.util.List;
  *
  * @author Brian
  */
-public class AccountDB {
+public class AccountDB implements IDatabase {
+    
     private String filename;
     private List<Account> accounts;
     
@@ -32,71 +33,62 @@ public class AccountDB {
     }
     
     public AccountDB(List<Account> accounts){
+        filename = "";
         this.accounts = accounts;
     }
     
-    public void setFileName(String file){
+    @Override
+    public void setFilename(String file){
         filename = file;
     }
     
+    @Override
     public void save() throws IOException{
         PrintWriter writer = new PrintWriter(new FileWriter("RegisteredUsers.csv", false));	
-		writer.write("Username");
-		writer.write(",");
-		writer.write("Password");
-		writer.write(",");
-		writer.write("Email"); 
-                writer.write("\n");
-                writer.write("");
-                writer.write("\n");
-                    for (int i = 0; i < accounts.size();i++){
-                        writer.write(String.valueOf(accounts.get(i).getUsername()));
-                        writer.write(",");
-                        writer.write(String.valueOf(accounts.get(i).getPassword()));
-                        writer.write(",");
-                        writer.write(String.valueOf(accounts.get(i).getEmail()));
-                        writer.write("\n");
-                    }
-                    writer.close();
+        writer.write("Username,Password,Email\n\n");
+        for (int i = 0; i < accounts.size();i++){
+            writer.write(String.valueOf(accounts.get(i).getUsername()));
+            writer.write(",");
+            writer.write(String.valueOf(accounts.get(i).getPassword()));
+            writer.write(",");
+            writer.write(String.valueOf(accounts.get(i).getEmail()));
+            writer.write("\n");
+        }
+        writer.close();
     }
     
-    public List<Account> load() throws FileNotFoundException, IOException{
-        try{
+    @Override
+    public void load() throws IOException{
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
         BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
-		fileReader.readLine();
-		fileReader.readLine();
-		String fileLine;
-		//hotelData = new HashMap<String,ArrayList<RoomInfo>>();
-                    while ((fileLine = fileReader.readLine()) != null) {
-                            
-                            String [] data = fileLine.split(",", -1);
-                            String username= data[0];
-                            System.out.println(username);
-                            String  password = data[1];
-                            System.out.println(password);
-                            String email = data[2];
-                            accounts.add(new Customer(username,password,email));
-                   }
-                            fileReader.close();
-                        
-                    fileReader2.readLine();
-                    fileReader2.readLine();
-                    String fileLine1;
-                    while((fileLine1 = fileReader2.readLine()) != null){
-                        String [] data = fileLine1.split(",",-1);
-                        String username = data[0];
-                        String password = data[1];
-                        String email = data[2];
-                        accounts.add(new Supervisor(username,password,email));
-                    
-                }
-             }			
-                            
-			catch (Exception ex){
-			ex.printStackTrace();
-                        }
-		
-                       return accounts;
+        fileReader.readLine();
+        fileReader.readLine();
+        String fileLine;
+        //hotelData = new HashMap<String,ArrayList<RoomInfo>>();
+        while ((fileLine = fileReader.readLine()) != null) {                
+            String [] data = fileLine.split(",", -1);
+            String username= data[0];
+            System.out.println(username);
+            String  password = data[1];
+            System.out.println(password);
+            String email = data[2];
+            accounts.add(new Customer(username,password,email));
+        }
+        fileReader.close();
+
+        fileReader2.readLine();
+        fileReader2.readLine();
+        String fileLine1;
+        while((fileLine1 = fileReader2.readLine()) != null){
+            String [] data = fileLine1.split(",",-1);
+            String username = data[0];
+            String password = data[1];
+            String email = data[2];
+            accounts.add(new Supervisor(username,password,email));
+        }
+    }
+    
+    public List<Account> getAccounts() {
+        return accounts;
     }
 }

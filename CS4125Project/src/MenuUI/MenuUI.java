@@ -32,7 +32,8 @@ public class MenuUI {
         scan = new Scanner(System.in);
         users = new ArrayList<Account>();
         db = new AccountDB(users);
-        users = db.load();
+        db.load();
+        users = db.getAccounts();
         username = "";
         password = "";
         email = "";

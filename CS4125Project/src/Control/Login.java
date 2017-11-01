@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Login {
     ArrayList<Account> users;
-    private AccountDB account;
+    private AccountDB accountDB;
 
     // The only instance of the class
     private static Login instance;
@@ -33,9 +33,10 @@ public class Login {
     // Private so that it cannot be instantiated from the outside
     private Login() {
         users = new ArrayList();
-        account = new AccountDB();        
+        accountDB = new AccountDB();        
         try {
-            users.addAll(account.load());
+            accountDB.load();
+            users.addAll(accountDB.getAccounts());
         } 
         catch (IOException ex) {
             ex.printStackTrace();
