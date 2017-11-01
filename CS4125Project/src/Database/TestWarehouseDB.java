@@ -95,7 +95,7 @@ public class TestWarehouseDB {
             ex.printStackTrace();
         }
         
-        // print loaded warehouses
+        // print loaded stock items
         for (String siName : loadedStockItems.keySet()) {
             System.out.printf("%s,%.2f,%s,%s\n",
                     loadedStockItems.get(siName).getName(),

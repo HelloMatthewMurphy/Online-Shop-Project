@@ -58,8 +58,7 @@ public class MenuUI {
             String email = scan.nextLine();
             System.out.println("Enter your password please:");
             String password = scan.nextLine();
-            Login login = new Login(email,password);
-            bool = login.Validate(); 
+            bool = Login.getInstance().Validate(email, password); 
             if (bool == true){
                 showMenu();
             }

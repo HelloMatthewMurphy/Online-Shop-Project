@@ -34,10 +34,6 @@ public class AccountDB {
         this.accounts = accounts;
     }
     
-    public Account Login(Login login){
-        return new Account(login.getEmail(),login.getPassword());
-    }
-    
     public void setFileName(String file){
         filename = file;
     }
