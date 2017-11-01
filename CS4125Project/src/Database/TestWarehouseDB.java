@@ -54,7 +54,8 @@ public class TestWarehouseDB {
         List<Warehouse> loadedWarehouses = new ArrayList();
         
         try {
-            loadedWarehouses.addAll(db.load());
+            db.load();
+            loadedWarehouses.addAll(db.getWarehouses());
         }
         catch (IOException ex) {
             ex.printStackTrace();
@@ -89,7 +90,8 @@ public class TestWarehouseDB {
         HashMap<String, StockItem> loadedStockItems = null;
         
         try {
-            loadedStockItems = sidb.load();
+            sidb.load();
+            loadedStockItems = sidb.getStockItems();
         }
         catch (IOException ex) {
             ex.printStackTrace();

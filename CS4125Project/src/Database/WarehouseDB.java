@@ -20,23 +20,27 @@ import java.util.Map;
  *
  * @author Shane
  */
-public class WarehouseDB {
+public class WarehouseDB implements IDatabase {
     
     private String filename;
     private List<Warehouse> warehouses;
     
     public WarehouseDB() {
         filename = "";
+        warehouses = new ArrayList();
     }
     
     public WarehouseDB(List<Warehouse> warehouses) {
+        filename = "";
         this.warehouses = warehouses;
     }
     
+    @Override
     public void setFilename(String filename) {
         this.filename = filename;
     }
     
+    @Override
     public void save() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         writer.write("Location,Item name,Quantity\n");
@@ -65,7 +69,8 @@ public class WarehouseDB {
         System.out.println("wrote to file");
     }
     
-    public List<Warehouse> load() throws IOException {
+    @Override
+    public void load() throws IOException {
         
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
@@ -75,7 +80,7 @@ public class WarehouseDB {
         String previousWarehouseName = "";
         String currentWarehouseName = "";
         
-        List<Warehouse> warehouses = new ArrayList();
+        warehouses = new ArrayList();
         int currentWarehouseIndex = -1;
         
         while ((line = reader.readLine()) != null) {            
@@ -99,7 +104,9 @@ public class WarehouseDB {
             
             previousWarehouseName = currentWarehouseName;
         }
-        
+    }
+    
+    public List<Warehouse> getWarehouses() {
         return warehouses;
     }
 }
