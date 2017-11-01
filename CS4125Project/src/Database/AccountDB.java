@@ -8,6 +8,7 @@ package Database;
 import Control.Login;
 import User.Account;
 import User.Customer;
+import User.Supervisor;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -67,27 +68,27 @@ public class AccountDB {
 		fileReader.readLine();
 		String fileLine;
 		//hotelData = new HashMap<String,ArrayList<RoomInfo>>();
-		String username = "";
-                String password = "";
-                String email = "";
-		while ((fileLine = fileReader.readLine()) != null) {
-			String [] data = fileLine.split(",", -1);
-			username= data[0];
-                        System.out.println(username);
-			password = data[1];
-                        System.out.println(password);
-			email = data[2];
-			accounts.add(new Customer(username,password,email));
-			}
-			fileReader.close();
+                    while ((fileLine = fileReader.readLine()) != null) {
+                            
+                            String [] data = fileLine.split(",", -1);
+                            String username= data[0];
+                            System.out.println(username);
+                            String  password = data[1];
+                            System.out.println(password);
+                            String email = data[2];
+                            accounts.add(new Customer(username,password,email));
+                   }
+                            fileReader.close();
                         
-                fileReader2.readLine();
-                fileReader2.readLine();
-                String fileLine1 = "";
-                String username1 = "";
-                String password1 = "";
-                String email1 = "";
-                while((fileLine1 = fileReader2.readLine()) != null){
+                    fileReader2.readLine();
+                    fileReader2.readLine();
+                    String fileLine1;
+                    while((fileLine1 = fileReader2.readLine()) != null){
+                        String [] data = fileLine1.split(",",-1);
+                        String username = data[0];
+                        String password = data[1];
+                        String email = data[2];
+                        accounts.add(new Supervisor(username,password,email));
                     
                 }
              }			
