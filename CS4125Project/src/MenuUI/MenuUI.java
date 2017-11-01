@@ -90,7 +90,6 @@ public class MenuUI {
 
                         }
             }  
-                //users.add(new Customer(username, password, email));
                 AccountFactory factory = new AccountFactory();
                 users.add((Customer)factory.createAccount("customer", username, password, email));
                  for(int i = 0; i < users.size();i++){
