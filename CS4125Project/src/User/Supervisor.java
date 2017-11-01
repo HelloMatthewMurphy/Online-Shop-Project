@@ -17,20 +17,4 @@ public class Supervisor extends Account{
         super(name, password, email);
     }
     
-    public void buyStock(StockItem stock){
-        
-    }
-    
-    public void addDiscount(StockItem stock, double discount){
-        
-    }
-    
-    public String checkSales(){
-        String result = "";
-        return result;
-    }
-    
-    public void setUpAutoReorder(StockItem stock){
-        
-    }
 }
