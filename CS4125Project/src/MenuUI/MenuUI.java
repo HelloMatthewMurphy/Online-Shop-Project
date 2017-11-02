@@ -10,6 +10,7 @@ import Database.AccountDB;
 import User.Account;
 import User.AccountFactory;
 import User.Customer;
+import User.Supervisor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,9 +63,19 @@ public class MenuUI {
             System.out.println("Enter your password please:");
             String password = scan.nextLine();
             bool = Login.getInstance().Validate(email, password); 
-            if (bool == true){
-                showMenu();
-            }
+                if (bool == true){
+                    for(int i = 0; i < users.size();i++){
+                        if (users.get(i).getEmail().equals(email)){
+                            if(users.get(i) instanceof Customer){
+                                showCustomerMenu();
+                            }
+                            else if(users.get(i) instanceof Supervisor){
+                                showSupervisorMenu();
+                            }
+                        }
+                    }
+
+                }
             }
             
         }
@@ -112,7 +123,7 @@ public class MenuUI {
             
         }
     }
-    public void showMenu() throws IOException, InterruptedException{
+    public void showCustomerMenu() throws IOException, InterruptedException{
        System.out.println("Welcome " + username);
        System.out.println("L)ogout");
        String input = scan.nextLine();
@@ -125,6 +136,21 @@ public class MenuUI {
            TimeUnit.SECONDS.sleep(2);
            startSession();
        }
+    }
+    
+    public void showSupervisorMenu() throws InterruptedException, IOException{
+        System.out.println("Welcome " + username);
+        System.out.println("I AM A BANANANANA");
+        System.out.println("L)ogout");
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+        
+        if (input.equals("L")){
+            System.out.println("See you next time!");
+            TimeUnit.SECONDS.sleep(2);
+            startSession();
+        }
+        
     }
     
     

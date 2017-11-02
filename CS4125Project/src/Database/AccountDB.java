@@ -84,6 +84,7 @@ public class AccountDB implements IDatabase {
             String email = data[2];
             accounts.add(new Supervisor(username,password,email));
         }
+        fileReader2.close();
     }
     
     public List<Account> getAccounts() {
