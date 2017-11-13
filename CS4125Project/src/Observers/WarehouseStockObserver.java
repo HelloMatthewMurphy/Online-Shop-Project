@@ -19,7 +19,7 @@ public class WarehouseStockObserver implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        DBControler.getInstance().save(2);
+        DBControler.getInstance().save(DBControler.WAREHOUSE_DB);
     }
     
 }

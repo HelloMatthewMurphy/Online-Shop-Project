@@ -65,8 +65,6 @@ public class WarehouseDB implements IDatabase {
             
             writer.flush();
         }
-        
-        System.out.println("wrote to file");
     }
     
     @Override

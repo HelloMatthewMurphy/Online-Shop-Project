@@ -48,11 +48,10 @@ public class Shop extends Observable{
     private Customer account;
     
     private Shop() {
-        this.account = account;
         //warehouses = new ArrayList<Warehouse>();
         //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
         addObserver(new WarehouseStockObserver(this));
-        addObserver(new StockItemObserver(this));
+        addObserver (new StockItemObserver(this));
     }
     
     public static Shop getInstance(){
@@ -107,6 +106,7 @@ public class Shop extends Observable{
                 done = true;
             }
         }
+        setChanged();
         notifyObservers();
     }
     
@@ -122,17 +122,20 @@ public class Shop extends Observable{
                     done = true;
                 }
             }
+            setChanged();
             notifyObservers();
         }
     }
     
     public void addDiscount(){
+        setChanged();
         notifyObservers();
     }
     
     public void addWarehouse(Warehouse w){
         //Broken NullPointerException
         DBControler.getWarehouses().add(w);
+        setChanged();
         notifyObservers();
     }
 }

@@ -82,7 +82,6 @@ public class DBControler {
         } catch (IOException ex) {
             Logger.getLogger(DBControler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Saved to a DB");
     }
     
     public AccountDB getAccountDB(){
