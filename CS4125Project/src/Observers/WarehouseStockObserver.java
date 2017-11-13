@@ -2,12 +2,14 @@ package Observers;
 
 import Database.DBControler;
 import Services.Shop;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Matthew Murphy
  */
-public class WarehouseStockObserver extends Observer{
+public class WarehouseStockObserver implements Observer{
     
     private Shop shop;
 
@@ -16,7 +18,7 @@ public class WarehouseStockObserver extends Observer{
     }
 
     @Override
-    public void update() {
+    public void update(Observable o, Object arg) {
         DBControler.getInstance().save(2);
     }
     
