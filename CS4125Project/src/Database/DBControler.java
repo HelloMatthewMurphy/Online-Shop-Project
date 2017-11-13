@@ -96,4 +96,8 @@ public class DBControler {
     public WarehouseDB getWarehouseDB(){
         return wDB;
     }
+    
+    public static List<Warehouse> getWarehouses() {
+        return instance.wDB.getWarehouses();
+    }
 }
