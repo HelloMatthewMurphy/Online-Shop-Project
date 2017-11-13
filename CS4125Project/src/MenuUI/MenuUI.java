@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import Services.Shop;
 
 /**
  *
@@ -67,6 +68,8 @@ public class MenuUI {
                     for(int i = 0; i < users.size();i++){
                         if (users.get(i).getEmail().equals(email)){
                             if(users.get(i) instanceof Customer){
+                                Shop s = Shop.getInstance();
+                                s.setAccount((Customer)users.get(i));
                                 showCustomerMenu();
                             }
                             else if(users.get(i) instanceof Supervisor){
@@ -126,6 +129,8 @@ public class MenuUI {
     public void showCustomerMenu() throws IOException, InterruptedException{
        System.out.println("Welcome " + username);
        System.out.println("L)ogout");
+       System.out.println("C)heck Stock");
+       System.out.println("B)uy Items");
        String input = scan.nextLine();
        
        if(input.equals("L")){
@@ -135,6 +140,17 @@ public class MenuUI {
            System.out.println("\n");
            TimeUnit.SECONDS.sleep(2);
            startSession();
+       }
+       if(input.equals("C")){
+           System.out.println("A)scending");
+           System.out.println("D)escending");
+           Shop s = Shop.getInstance();
+           if(input.equals("A")){
+               
+           }
+           else if (input.equals("D")){
+                  
+           }
        }
     }
     

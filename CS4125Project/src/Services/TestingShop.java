@@ -29,7 +29,7 @@ public class TestingShop {
         w1.addStock(book.getName(), 30);
         w1.addStock(chair.getName(), 2);
         w2.addStock(bread.getName(), 9);
-        Shop s = new Shop(c);
+        Shop s = Shop.getInstance();
         s.addWarehouse(w1);
         s.addWarehouse(w2);
         print(s);

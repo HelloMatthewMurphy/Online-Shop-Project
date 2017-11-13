@@ -26,7 +26,7 @@ public class TestWarehouseDB {
         */
         
         Warehouse w1 = new Warehouse(new Location("Ireland", "Tulla, Co. Clare"), "one");
-        Warehouse w2 = new Warehouse(new Location("Spain", "420 puto street, gracias"), "two");
+        Warehouse w2 = new Warehouse(new Location("Spain", "Puto street, gracias"), "two");
         
         StockItem sweet = new StockItem("sweet", 1.99, "food", "a delicious treat");
         StockItem apple = new StockItem("apple", 0.49, "food", "a healthy snack");

@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import javafx.util.Pair;
 
 /**
  *
@@ -23,7 +25,29 @@ import java.util.Scanner;
  */
 public class Shop {
     
+<<<<<<< HEAD
+    public enum SortOrder {
+        NAME_DESC(true, false),
+        NAME_ASC(false, false),
+        QUANTITY_DESC(true, true),
+        QUANTITY_ASC(false, true);
+        
+        private boolean descending;
+        private boolean byQuantity;
+        
+        SortOrder(boolean descending, boolean byQuantity)
+        {
+            this.descending = descending;
+            this.byQuantity = byQuantity;
+        }
+        
+        public boolean getDescending() { return descending; }
+        public boolean getByQuantity() { return byQuantity; }
+    }
+    
+=======
     private static Shop instance;
+>>>>>>> d41d4fc4eb7d2c9ebb33424c6179a72562fa2637
     private StockItem item;
     private int quantity;
     private Customer account;
@@ -47,6 +71,28 @@ public class Shop {
     
     public void setAccount(Customer account){
         this.account = account;
+    }
+    
+    public List<Entry<String, Integer>> getSortedStock(SortOrder order)
+    {
+        Map<String, Integer> allStock = checkStock();
+        
+        List<Entry<String, Integer>> result = new ArrayList();
+        result.addAll(allStock.entrySet());
+        
+        // Use lambda expression to sort items
+        result.sort((e1, e2) -> {
+            int comp;
+            // Check whether to sort by name or quantity
+            if (order.byQuantity)
+                comp = e1.getKey().compareTo(e2.getKey());
+            else
+                comp = e1.getValue().compareTo(e2.getValue());
+            // Return the result, or the opposite (* -1) if in ascending order
+            return comp * (order.getDescending() ? 1 : -1);
+        });
+        
+        return result;
     }
     
     public Map<String, Integer> checkStock(){
