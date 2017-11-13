@@ -23,8 +23,8 @@ public class CS4125Project {
         Database.TestWarehouseDB.test();
         
         // TODO code application logic here
-        MenuUI menu = new MenuUI();
-        menu.startSession();
-        //TestingShop.test();
+        //MenuUI menu = new MenuUI();
+        //menu.startSession();
+        TestingShop.test();
     }
 }

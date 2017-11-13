@@ -7,17 +7,17 @@ import Services.Shop;
  *
  * @author Matthew Murphy
  */
-public class WarehouseStockObserver extends Observer{
+public class StockItemObserver extends Observer{
     
     private Shop shop;
 
-    public WarehouseStockObserver(Shop shop) {
+    public StockItemObserver(Shop shop) {
         this.shop = shop;
     }
 
     @Override
     public void update() {
-        DBControler.getInstance().save(2);
+        DBControler.getInstance().save(1);
     }
     
 }

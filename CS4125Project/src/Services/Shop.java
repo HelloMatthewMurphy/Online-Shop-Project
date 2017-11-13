@@ -3,6 +3,7 @@ package Services;
 //import Business.Account;
 import Database.DBControler;
 import Observers.Observer;
+import Observers.StockItemObserver;
 import Observers.WarehouseStockObserver;
 import Stock.StockItem;
 import Storage.Warehouse;
@@ -24,6 +25,7 @@ import javafx.util.Pair;
  */
 public class Shop {
     
+<<<<<<< HEAD
     public enum SortOrder {
         NAME_DESC(true, false),
         NAME_ASC(false, false),
@@ -43,18 +45,32 @@ public class Shop {
         public boolean getByQuantity() { return byQuantity; }
     }
     
+=======
+    private static Shop instance;
+>>>>>>> d41d4fc4eb7d2c9ebb33424c6179a72562fa2637
     private StockItem item;
     private int quantity;
     private Customer account;
-    private List<Warehouse> warehouses;
+    //private List<Warehouse> warehouses;
     private List<Observer> observers;
     
-    public Shop(Customer account){
+    private Shop(){
         this.account = account;
-        warehouses = new ArrayList<Warehouse>();
-        warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
+        //warehouses = new ArrayList<Warehouse>();
+        //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
         observers = new ArrayList<Observer>();
         observers.add(new WarehouseStockObserver(this));
+        observers.add(new StockItemObserver(this));
+    }
+    
+    public static Shop getInstance(){
+        if(instance == null)
+            instance = new Shop();
+        return instance;
+    }
+    
+    public void setAccount(Customer account){
+        this.account = account;
     }
     
     public List<Entry<String, Integer>> getSortedStock(SortOrder order)
@@ -82,8 +98,9 @@ public class Shop {
     public Map<String, Integer> checkStock(){
         Map<String, Integer> tempStock;
         Map<String, Integer> totalStock = new HashMap<String, Integer>();
-        for(int i = 0; i < warehouses.size(); i++){
-            tempStock = warehouses.get(i).checkStock();
+        
+        for(int i = 0; i < DBControler.getWarehouses().size(); i++){
+            tempStock = DBControler.getWarehouses().get(i).checkStock();
             // Loop through and check if item exists on totalStock.
             totalStock.putAll(tempStock);
         }
@@ -92,9 +109,9 @@ public class Shop {
     
     public void returnItem(StockItem item){
         boolean done = false;
-        for(int i = 0; i < warehouses.size() && !done; i++){
-            if(warehouses.get(i).hasItem(item.getName())){
-                warehouses.get(i).addStock(item.getName(), 1);
+        for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
+            if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
+                DBControler.getWarehouses().get(i).addStock(item.getName(), 1);
                 done = true;
             }
         }
@@ -107,9 +124,9 @@ public class Shop {
         purchaseHappened = pur.makePurchase(account.getLocation());
         if(purchaseHappened){
             boolean done = false;
-            for(int i = 0; i < warehouses.size() && !done; i++){
-                if(warehouses.get(i).hasItem(item.getName())){
-                    warehouses.get(i).buyStock(item.getName(), quantity);
+            for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
+                if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
+                    DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
                     done = true;
                 }
             }
@@ -119,10 +136,13 @@ public class Shop {
     
     public void addDiscount(){
         
+        updateAllObservers();
     }
     
     public void addWarehouse(Warehouse w){
-        warehouses.add(w);
+        //Broken NullPointerException
+        DBControler.getWarehouses().add(w);
+        updateAllObservers();
     }
     
     private void updateAllObservers(){

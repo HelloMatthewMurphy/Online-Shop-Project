@@ -3,10 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Shane/git/Online-Shop-Project/CS4125Project/src/Database/WarehouseDB.java</file>
             <file>file:/C:/Users/Shane/git/Online-Shop-Project/CS4125Project/src/Database/IDatabase.java</file>
             <file>file:/C:/Users/Shane/git/Online-Shop-Project/CS4125Project/src/cs4125project/CS4125Project.java</file>
             <file>file:/C:/Users/Shane/git/Online-Shop-Project/CS4125Project/src/Database/TestWarehouseDB.java</file>
+=======
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Services/TestingShop.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Database/DBControler.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Observers/WarehouseStockObserver.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Storage/Warehouse.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Services/Shop.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/cs4125project/CS4125Project.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Observers/StockItemObserver.java</file>
+>>>>>>> d41d4fc4eb7d2c9ebb33424c6179a72562fa2637
         </group>
     </open-files>
 </project-private>
