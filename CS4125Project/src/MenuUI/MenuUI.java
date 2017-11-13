@@ -155,7 +155,10 @@ public class MenuUI {
                }
            }
            else if (input.equals("D")){
-                  s.getSortedStock(Shop.SortOrder.QUANTITY_DESC);
+                ArrayList<Entry<String,Integer>> list = (ArrayList<Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.QUANTITY_DESC);
+               for(Entry<String,Integer> entry : list){
+                   System.out.println(entry.getKey());
+               }  
            }
        }
     }

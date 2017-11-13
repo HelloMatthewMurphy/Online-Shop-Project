@@ -5,6 +5,7 @@
  */
 package cs4125project;
 
+import MenuUI.MainMenuUI;
 import MenuUI.MenuUI;
 import Services.TestingShop;
 import java.io.IOException;
@@ -23,8 +24,8 @@ public class CS4125Project {
         //Database.TestWarehouseDB.test();
         
         // TODO code application logic here
-        MenuUI menu = new MenuUI();
-        menu.startSession();
+        MainMenuUI menu = new MainMenuUI();
+        menu.run();
         //TestingShop.test();
     }
 }
