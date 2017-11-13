@@ -22,6 +22,7 @@ import javafx.util.Pair;
  *
  * @author Matthew Murphy
  */
+
 public class Shop extends Observable{
     public enum SortOrder {
         NAME_DESC(true, false),
