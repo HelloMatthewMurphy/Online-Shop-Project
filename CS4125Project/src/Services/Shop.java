@@ -24,7 +24,6 @@ import javafx.util.Pair;
  * @author Matthew Murphy
  */
 public class Shop {
-    
     public enum SortOrder {
         NAME_DESC(true, false),
         NAME_ASC(false, false),
