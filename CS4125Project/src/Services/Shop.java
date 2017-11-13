@@ -25,7 +25,6 @@ import javafx.util.Pair;
  */
 public class Shop {
     
-<<<<<<< HEAD
     public enum SortOrder {
         NAME_DESC(true, false),
         NAME_ASC(false, false),
@@ -45,9 +44,7 @@ public class Shop {
         public boolean getByQuantity() { return byQuantity; }
     }
     
-=======
     private static Shop instance;
->>>>>>> d41d4fc4eb7d2c9ebb33424c6179a72562fa2637
     private StockItem item;
     private int quantity;
     private Customer account;
