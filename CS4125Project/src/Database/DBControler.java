@@ -98,6 +98,10 @@ public class DBControler {
     }
     
     public static List<Warehouse> getWarehouses() {
+        // Initialize instance if needed
+        if (instance == null)
+            getInstance();
+        
         return instance.wDB.getWarehouses();
     }
 }
