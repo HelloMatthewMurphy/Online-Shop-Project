@@ -23,7 +23,6 @@ import javafx.util.Pair;
  * @author Matthew Murphy
  */
 public class Shop extends Observable{
-
     public enum SortOrder {
         NAME_DESC(true, false),
         NAME_ASC(false, false),
@@ -48,7 +47,7 @@ public class Shop extends Observable{
     private int quantity;
     private Customer account;
     
-    private Shop(){
+    private Shop() {
         this.account = account;
         //warehouses = new ArrayList<Warehouse>();
         //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
