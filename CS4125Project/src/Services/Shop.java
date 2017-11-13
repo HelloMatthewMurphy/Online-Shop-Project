@@ -30,7 +30,7 @@ public class Shop {
     //private List<Warehouse> warehouses;
     private List<Observer> observers;
     
-    private Shop(Customer account){
+    private Shop(){
         this.account = account;
         //warehouses = new ArrayList<Warehouse>();
         //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
@@ -43,6 +43,10 @@ public class Shop {
         if(instance == null)
             instance = new Shop();
         return instance;
+    }
+    
+    public void setAccount(Customer account){
+        this.account = account;
     }
     
     public Map<String, Integer> checkStock(){
