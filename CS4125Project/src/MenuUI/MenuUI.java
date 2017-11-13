@@ -68,6 +68,8 @@ public class MenuUI {
                     for(int i = 0; i < users.size();i++){
                         if (users.get(i).getEmail().equals(email)){
                             if(users.get(i) instanceof Customer){
+                                Shop s = Shop.getInstance();
+                                s.setAccount((Customer)users.get(i));
                                 showCustomerMenu();
                             }
                             else if(users.get(i) instanceof Supervisor){
@@ -142,6 +144,7 @@ public class MenuUI {
        if(input.equals("C")){
            System.out.println("A)scending");
            System.out.println("D)escending");
+           Shop s = Shop.getInstance();
            if(input.equals("A")){
                
            }
