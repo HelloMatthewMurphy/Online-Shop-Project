@@ -51,7 +51,7 @@ public class Shop {
     //private List<Warehouse> warehouses;
     private List<Observer> observers;
     
-    private Shop(){
+    private Shop() {
         this.account = account;
         //warehouses = new ArrayList<Warehouse>();
         //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
