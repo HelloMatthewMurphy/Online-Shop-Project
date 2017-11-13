@@ -30,6 +30,7 @@ public class TestingShop {
         w1.addStock(chair.getName(), 2);
         w2.addStock(bread.getName(), 9);
         Shop s = Shop.getInstance();
+        s.setAccount(c);
         s.addWarehouse(w1);
         s.addWarehouse(w2);
         print(s);
