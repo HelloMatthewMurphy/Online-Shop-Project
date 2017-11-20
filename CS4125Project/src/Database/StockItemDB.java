@@ -74,4 +74,9 @@ public class StockItemDB implements IDatabase {
     public HashMap<String, StockItem> getStockItems() {
         return stockItems;
     }
+    
+    public StockItem getStockItemByName(String name){
+        return stockItems.get(name);
+    }
+            
 }

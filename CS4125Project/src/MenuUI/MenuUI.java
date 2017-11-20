@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import Services.Shop;
+import java.util.Map.Entry;
 
 /**
  *
@@ -144,12 +145,20 @@ public class MenuUI {
        if(input.equals("C")){
            System.out.println("A)scending");
            System.out.println("D)escending");
+           input = scan.nextLine();
            Shop s = Shop.getInstance();
+          
            if(input.equals("A")){
-               
+               ArrayList<Entry<String,Integer>> list = (ArrayList<Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.QUANTITY_ASC);
+               for(Entry<String,Integer> entry : list){
+                   System.out.println(entry.getKey());
+               }
            }
            else if (input.equals("D")){
-                  
+                ArrayList<Entry<String,Integer>> list = (ArrayList<Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.QUANTITY_DESC);
+               for(Entry<String,Integer> entry : list){
+                   System.out.println(entry.getKey());
+               }  
            }
        }
     }

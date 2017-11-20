@@ -2,7 +2,6 @@ package Services;
 
 //import Business.Account;
 import Database.DBControler;
-import Observers.Observer;
 import Observers.StockItemObserver;
 import Observers.WarehouseStockObserver;
 import Stock.StockItem;
@@ -11,7 +10,7 @@ import User.Customer;
 import Services.Purchase;
 import Storage.Location;
 import java.util.ArrayList;
-
+import java.util.Observable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,8 @@ import javafx.util.Pair;
  *
  * @author Matthew Murphy
  */
-public class Shop {
+
+public class Shop extends Observable{
     public enum SortOrder {
         NAME_DESC(true, false),
         NAME_ASC(false, false),
@@ -47,16 +47,12 @@ public class Shop {
     private StockItem item;
     private int quantity;
     private Customer account;
-    //private List<Warehouse> warehouses;
-    private List<Observer> observers;
     
     private Shop() {
-        this.account = account;
         //warehouses = new ArrayList<Warehouse>();
         //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
-        observers = new ArrayList<Observer>();
-        observers.add(new WarehouseStockObserver(this));
-        observers.add(new StockItemObserver(this));
+        addObserver(new WarehouseStockObserver(this));
+        addObserver (new StockItemObserver(this));
     }
     
     public static Shop getInstance(){
@@ -111,7 +107,8 @@ public class Shop {
                 done = true;
             }
         }
-        updateAllObservers();
+        setChanged();
+        notifyObservers();
     }
     
     public void makePurchase(StockItem item, int quantity){
@@ -126,27 +123,21 @@ public class Shop {
                     done = true;
                 }
             }
-            
-            
             updateAllObservers();
+            setChanged();
+            notifyObservers();
         }
     }
     
     public void addDiscount(){
-        
-        updateAllObservers();
+        setChanged();
+        notifyObservers();
     }
     
     public void addWarehouse(Warehouse w){
         //Broken NullPointerException
         DBControler.getWarehouses().add(w);
-        updateAllObservers();
+        setChanged();
+        notifyObservers();
     }
-    
-    private void updateAllObservers(){
-        for(Observer observer : observers) {
-            observer.update();
-        }
-    }
-    
 }

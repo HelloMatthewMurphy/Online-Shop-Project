@@ -43,8 +43,11 @@ public class AccountDB implements IDatabase {
     @Override
     public void save() throws IOException{
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));	
+        System.out.println("hI :)");
         writer.write("Username,Password,Email\n\n");
+        System.out.println(accounts.size());
         for (int i = 0; i < accounts.size();i++){
+            System.out.println(i);
             writer.write(String.valueOf(accounts.get(i).getUsername()));
             writer.write(",");
             writer.write(String.valueOf(accounts.get(i).getPassword()));
@@ -57,18 +60,17 @@ public class AccountDB implements IDatabase {
     
     @Override
     public void load() throws IOException {
+        System.out.println("running");
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
         BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
         fileReader.readLine();
         fileReader.readLine();
         String fileLine;
         //hotelData = new HashMap<String,ArrayList<RoomInfo>>();
-        while ((fileLine = fileReader.readLine()) != null) {                
+        while ((fileLine = fileReader.readLine()) != null) {  
             String [] data = fileLine.split(",", -1);
             String username= data[0];
-            System.out.println(username);
             String  password = data[1];
-            System.out.println(password);
             String email = data[2];
             accounts.add(new Customer(username,password,email));
         }
@@ -82,7 +84,6 @@ public class AccountDB implements IDatabase {
             String username = data[0];
             String password = data[1];
             String email = data[2];
-            accounts.add(new Supervisor(username,password,email));
         }
         fileReader2.close();
     }

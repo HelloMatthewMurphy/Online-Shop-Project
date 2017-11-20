@@ -5,6 +5,7 @@
  */
 package cs4125project;
 
+import MenuUI.MainMenuUI;
 import MenuUI.MenuUI;
 import Services.TestingShop;
 import java.io.IOException;
@@ -19,12 +20,12 @@ public class CS4125Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        
-        Database.TestWarehouseDB.test();        
+
+        //Database.TestWarehouseDB.test();
         
         // TODO code application logic here
-        //MenuUI menu = new MenuUI();
-        //menu.startSession();
-        TestingShop.test();
+        MainMenuUI menu = new MainMenuUI();
+        menu.run();
+        //TestingShop.test();
     }
 }
