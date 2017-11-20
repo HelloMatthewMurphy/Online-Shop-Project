@@ -16,6 +16,7 @@ public class DBControler {
     public static final int STCOKITEM_DB = 1;
     public static final int WAREHOUSE_DB = 2;
     public static final int ALL_DB = 3;
+    public static final int PURCHASE_DB = 4;
     
     private static DBControler instance;
     private AccountDB aDB;

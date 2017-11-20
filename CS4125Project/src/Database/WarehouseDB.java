@@ -108,5 +108,5 @@ public class WarehouseDB implements IDatabase {
     
     public List<Warehouse> getWarehouses() {
         return warehouses;
-    }
+    }   
 }

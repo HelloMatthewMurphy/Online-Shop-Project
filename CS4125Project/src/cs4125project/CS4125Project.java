@@ -20,7 +20,7 @@ public class CS4125Project {
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         
-        Database.TestWarehouseDB.test();
+        Database.TestWarehouseDB.test();        
         
         // TODO code application logic here
         //MenuUI menu = new MenuUI();

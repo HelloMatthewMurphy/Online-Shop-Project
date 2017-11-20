@@ -126,6 +126,8 @@ public class Shop {
                     done = true;
                 }
             }
+            
+            
             updateAllObservers();
         }
     }
