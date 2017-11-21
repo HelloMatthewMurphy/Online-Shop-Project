@@ -2,8 +2,7 @@ package Services;
 
 //import Business.Account;
 import Database.DBControler;
-import Observers.StockItemObserver;
-import Observers.WarehouseStockObserver;
+import Observers.*;
 import Stock.StockItem;
 import Storage.Warehouse;
 import User.Customer;
@@ -51,8 +50,9 @@ public class Shop extends Observable{
     private Shop() {
         //warehouses = new ArrayList<Warehouse>();
         //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
-        addObserver(new WarehouseStockObserver(this));
-        addObserver (new StockItemObserver(this));
+        addObserver(new WarehouseStockObserver());
+        addObserver(new StockItemObserver());
+        addObserver(new PurchaseObserver());
     }
     
     public static Shop getInstance(){
@@ -120,9 +120,13 @@ public class Shop extends Observable{
             for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
                 if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                     DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
+                    
+                    // Shane: add purchase to purchase database
+                    DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
                     done = true;
                 }
             }
+//            updateAllObservers();
             setChanged();
             notifyObservers();
         }

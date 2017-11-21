@@ -10,12 +10,6 @@ import java.util.Observer;
  * @author Matthew Murphy
  */
 public class WarehouseStockObserver implements Observer{
-    
-    private Shop shop;
-
-    public WarehouseStockObserver(Shop shop) {
-        this.shop = shop;
-    }
 
     @Override
     public void update(Observable o, Object arg) {

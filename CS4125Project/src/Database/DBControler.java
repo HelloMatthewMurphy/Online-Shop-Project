@@ -1,5 +1,6 @@
 package Database;
 
+import Stock.StockItem;
 import Storage.Warehouse;
 import java.io.IOException;
 import java.util.List;
@@ -16,25 +17,30 @@ public class DBControler {
     public static final int STCOKITEM_DB = 1;
     public static final int WAREHOUSE_DB = 2;
     public static final int ALL_DB = 3;
+    public static final int PURCHASE_DB = 4;
     
     private static DBControler instance;
     private AccountDB aDB;
     private StockItemDB sDB;
     private WarehouseDB wDB;
+    private PurchaseDB pDB;
     
     private DBControler(){
         aDB = new AccountDB();
         sDB = new StockItemDB();
         wDB = new WarehouseDB();
+        pDB = new PurchaseDB();
         
         aDB.setFilename("RegisteredUsers.csv");
         sDB.setFilename("stockiteminfo.csv");
         wDB.setFilename("warehouseinfo.csv");
+        pDB.setFilename("purchaseinfo.csv");
         
         try {
             aDB.load();
             sDB.load();
             wDB.load();
+            pDB.load();
         } catch (IOException ex) {
             Logger.getLogger(DBControler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,9 +61,12 @@ public class DBControler {
                 break;
                 case WAREHOUSE_DB:  wDB.load();  
                 break;
+                case PURCHASE_DB:   pDB.load();
+                break;
                 case ALL_DB:        aDB.load();
                                     sDB.load();
                                     wDB.load();
+                                    pDB.load();
                 break;
         }
         } catch (IOException ex) {
@@ -74,9 +83,12 @@ public class DBControler {
                 break;
                 case WAREHOUSE_DB:  wDB.save();  
                 break;
+                case PURCHASE_DB:   pDB.save();
+                break;
                 case ALL_DB:        aDB.save();
                                     sDB.save();
                                     wDB.save();
+                                    pDB.save();
                 break;
         }
         } catch (IOException ex) {
@@ -96,11 +108,15 @@ public class DBControler {
         return wDB;
     }
     
+    public PurchaseDB getPurchaseDB() {
+        return pDB;
+    }
+    
     public static List<Warehouse> getWarehouses() {
-        // Initialize instance if needed
-        if (instance == null)
-            getInstance();
-        
-        return instance.wDB.getWarehouses();
+        return getInstance().wDB.getWarehouses();
+    }
+    
+    public static StockItem getStockItemByName(String name) {
+        return getInstance().getStockItemDB().getStockItems().get(name);
     }
 }

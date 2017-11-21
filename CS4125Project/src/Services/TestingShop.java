@@ -33,6 +33,8 @@ public class TestingShop {
         //Testing returning item
         s.returnItem(stockItem);
         print(s);
+        
+        
     }
     
     private static void print(Shop s){

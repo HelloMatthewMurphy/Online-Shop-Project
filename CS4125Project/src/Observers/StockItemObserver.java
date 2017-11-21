@@ -11,16 +11,8 @@ import java.util.Observer;
  * @author Matthew Murphy
  */
 public class StockItemObserver implements Observer{
-    
-    private Shop shop;
-
-    public StockItemObserver(Shop shop) {
-        this.shop = shop;
-    }
-
     @Override
     public void update(Observable o, Object arg) {
-        DBControler.getInstance().save(1);
+        DBControler.getInstance().save(DBControler.STCOKITEM_DB);
     }
-    
 }
