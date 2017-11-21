@@ -121,7 +121,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
-     * @param args the command line arguments
+     * 
      */
 
             public void run() {
