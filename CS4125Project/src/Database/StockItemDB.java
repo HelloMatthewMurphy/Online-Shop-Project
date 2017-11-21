@@ -69,6 +69,8 @@ public class StockItemDB implements IDatabase {
             
             stockItems.put(data[0], si);
         }
+        
+        reader.close();
     }
     
     public HashMap<String, StockItem> getStockItems() {

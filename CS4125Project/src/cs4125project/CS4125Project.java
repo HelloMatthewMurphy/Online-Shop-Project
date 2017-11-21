@@ -24,8 +24,8 @@ public class CS4125Project {
         //Database.TestWarehouseDB.test();
         
         // TODO code application logic here
-        MainMenuUI menu = new MainMenuUI();
-        menu.run();
-        //TestingShop.test();
+        //MainMenuUI menu = new MainMenuUI();
+        //menu.run();
+        TestingShop.test();
     }
 }

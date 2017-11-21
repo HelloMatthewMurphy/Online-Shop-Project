@@ -41,7 +41,7 @@ public class PurchaseDB implements IDatabase {
     {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         // Write the headers
-        writer.write("Name,Quantity,Discount,Date");
+        writer.write("Name,Quantity,Discount,Date\n");
         
         for (Purchase purchase : purchases)
         {
@@ -56,6 +56,8 @@ public class PurchaseDB implements IDatabase {
         }
         
         writer.flush();
+        
+        System.out.println("purchase db saved");
     }
     
     @Override
@@ -83,9 +85,17 @@ public class PurchaseDB implements IDatabase {
             
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
-            StockItem si = 
-                    DBControler.getInstance().getStockItemDB().getStockItems().get(data[1]);
+//            StockItem si = 
+//                    DBControler.getInstance().getStockItemDB().getStockItems().get(data[1]);
+            StockItem si = DBControler.getStockItemByName(data[1]);
             purchases.add(new Purchase(si, quantity));
         }
+        
+        reader.close();
+    }
+    
+    public List<Purchase> getPurchases()
+    {
+        return purchases;
     }
 }
