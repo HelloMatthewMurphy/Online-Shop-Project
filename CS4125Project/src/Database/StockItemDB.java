@@ -39,7 +39,7 @@ public class StockItemDB implements IDatabase {
     @Override
     public void save() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
-        writer.write("Name,Price,Category,Description,Discount\n");
+        writer.write("Name,Price,Category,Description,Discount,\n");
         
         for (String siName : stockItems.keySet()) {
             String line = String.format("%s,%.2f,%s,%s,%.2f",
