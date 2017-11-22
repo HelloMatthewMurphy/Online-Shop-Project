@@ -9,6 +9,7 @@ import Database.DBControler;
 import Database.PurchaseDB;
 import Services.Purchase;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -92,7 +93,7 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
             rowData[0] = purchases.get(i).getItem().getName();
             rowData[1] = purchases.get(i).getQuantity();
             rowData[2] = purchases.get(i).getDiscount();
-            rowData[3] = purchases.get(i).getDate().getTime();
+            rowData[3] = purchases.get(i).getDate().get(Calendar.DATE)+"/"+purchases.get(i).getDate().get(Calendar.MONTH)+"/"+purchases.get(i).getDate().get(Calendar.YEAR);
             model.addRow(rowData);
         }
         
