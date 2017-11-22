@@ -64,7 +64,8 @@ public class StockItemDB implements IDatabase {
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             double price = Double.parseDouble(data[1]);
-            double discount = Double.parseDouble(data[4]);
+           // double discount = Double.parseDouble(data[4]);
+            double discount = 1;
             StockItem si = new StockItem(data[0], price, data[2], data[3], discount);
             
             stockItems.put(data[0], si);
