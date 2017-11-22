@@ -15,6 +15,7 @@ public class StockItem {
     private double price;
     private String category;
     private String description;
+    private double discount;
     
 /**
  * A constructor that sets values for the Stock Item
@@ -25,6 +26,7 @@ public class StockItem {
     public StockItem(String name, double price){
         this.name = name;
         this.price = price;
+        this.discount = 1;
         this.category = "";
         this.description = "";
     }
@@ -37,9 +39,10 @@ public class StockItem {
  * @param description A short description of the Stock Item
  * 
  */
-    public StockItem(String name, double price, String category, String description){
+    public StockItem(String name, double price, String category, String description, double discount){
         this.name = name;
         this.price = price;
+        this.discount = discount;
         this.category = category;
         this.description = description;
     }
@@ -59,7 +62,25 @@ public class StockItem {
  * 
  */    
     public double getPrice(){
-    return this.price;
+    return (this.price* this.discount);
+    }
+    
+    /**
+ *
+ * @param discount sets a discount for the Stock Item
+ * 
+ */ 
+    public void setDiscount(double discount){
+        this.discount = discount;
+    }
+    
+/**
+ *
+ * @return discount
+ * 
+ */ 
+    public double getDiscount(){
+        return this.discount;
     }
 
 /**

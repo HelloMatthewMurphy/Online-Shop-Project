@@ -28,9 +28,9 @@ public class TestWarehouseDB {
         Warehouse w1 = new Warehouse(new Location("Ireland", "Tulla, Co. Clare"), "one");
         Warehouse w2 = new Warehouse(new Location("Spain", "Puto street, gracias"), "two");
         
-        StockItem sweet = new StockItem("sweet", 1.99, "food", "a delicious treat");
-        StockItem apple = new StockItem("apple", 0.49, "food", "a healthy snack");
-        StockItem yeezy = new StockItem("yeezy", 199.99, "clothes", "a cool shoe");
+        StockItem sweet = new StockItem("sweet", 1.99, "food", "a delicious treat",1);
+        StockItem apple = new StockItem("apple", 0.49, "food", "a healthy snack", 1);
+        StockItem yeezy = new StockItem("yeezy", 199.99, "clothes", "a cool shoe", 1);
         
         w1.addStock("sweet", 20);
         w1.addStock("apple", 40);
