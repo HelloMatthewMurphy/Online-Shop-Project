@@ -169,4 +169,8 @@ public class Shop extends Observable{
         setChanged();
         notifyObservers();
     }
+    
+    public Customer getAccount(){
+        return account;
+    }
 }

@@ -32,38 +32,7 @@ public class Purchase {
     }
     
     public boolean makePurchase(String address){
-        CreditCardCo credit = new CreditCardCo();
-        Delivery delivery = null;
-        Scanner s = new Scanner(System.in);
-        System.out.println("What type of Delivery would you like?:");
-        boolean valid = false;
-        while(valid == false){
-            System.out.println("S)low");
-            System.out.println("R)egular");
-            System.out.println("P)remium");
-            System.out.println("\n");
-
-            String type = s.nextLine();
-            switch (type) {
-                case "S":
-                    delivery = new MoneySaver(new BasicDelivery());
-                    valid = true;
-                    break;
-                case "R":
-                    delivery = new BasicDelivery();
-                    valid = true;
-                    break;
-                case "P":
-                    delivery = new Premium(new BasicDelivery());
-                    valid = true;
-                    break;
-                default:
-                    break;
-            }
-            System.out.println(delivery.getPrice());
-            System.out.println(delivery.getDays());
-        }
-        
+        //I took everything to put in ui now there is nothing left but a lonely return - Matthew
         return true;
     }
     

@@ -7,6 +7,7 @@ package MenuUI;
 
 import Control.Login;
 import Database.AccountDB;
+import Database.DBControler;
 import User.Account;
 import User.AccountFactory;
 import User.Customer;
@@ -17,7 +18,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import Services.Shop;
+import ThirdParty.CreditCardCo;
+import ThirdParty.Delivery.BasicDelivery;
+import ThirdParty.Delivery.Delivery;
+import ThirdParty.Delivery.MoneySaver;
+import ThirdParty.Delivery.Premium;
+import java.util.Map;
 import java.util.Map.Entry;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -178,6 +186,83 @@ public class MenuUI {
         
     }
     
-    
+    public static void buyItemFromShop(String pickedItem){
+        Shop s = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        double price = 0;
+        int amountWanted = 0;
+        int amountAvailable = 0;
+        boolean donePickingamount = false;
+        for(int j = 0; j < list.size(); j++){
+            if(list.get(j).getKey().equals(pickedItem)){
+               amountAvailable = list.get(j).getValue();
+            }
+        }
+        
+        //Getting amount user wants
+        while(!donePickingamount){
+            Object howMuchWanted = JOptionPane.showInputDialog(null, 
+                                                       "There are " + amountAvailable + " " + pickedItem + "'s left in stock. How many would you like?", 
+                                                       "Stock", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null,
+                                                        null, 
+                                                        null);
+            amountWanted = Integer.parseInt(howMuchWanted.toString());
+            if(amountWanted <= amountAvailable)
+                donePickingamount = true;
+            else
+                JOptionPane.showMessageDialog(null,
+                                            "You can not buy that much, you can get a maximum of " + amountAvailable + ".",
+                                            "You cant have that much " + pickedItem + "'s",
+                                            JOptionPane.WARNING_MESSAGE);
+        }
+        price += DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem).getPrice() * amountWanted;
+        
+        //Getting delevery type
+        Delivery delivery = null;
+        boolean validD = false;
+        while(validD == false){
+            String[] delvTypesStrings = {"Slow", "Regular", "Premium"};
+            Object delvTypes = JOptionPane.showInputDialog(null, 
+                                                   "What type of Delivery would you like?", 
+                                                   "Stock", 
+                                                    JOptionPane.QUESTION_MESSAGE, 
+                                                    null,
+                                                    delvTypesStrings, 
+                                                    delvTypesStrings[2]);
+            String pickedDelv = delvTypes.toString();
+
+            switch (pickedDelv) {
+                case "Slow":
+                    delivery = new MoneySaver(new BasicDelivery());
+                    validD = true;
+                    break;
+                case "Regular":
+                    delivery = new BasicDelivery();
+                    validD = true;
+                    break;
+                case "Premium":
+                    delivery = new Premium(new BasicDelivery());
+                    validD = true;
+                    break;
+                default:
+                    break;
+            }
+            price += delivery.getPrice();
+            //delivery.getDays();
+        }
+        CreditCardCo credit = new CreditCardCo();
+        if(!pickedItem.equals("")){
+            s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted);
+            credit.makePurchase(s.getAccount(), price);
+            JOptionPane.showMessageDialog(null,
+                                            "Thanks for buying " + amountWanted + " " + pickedItem + "'s.\n" +
+                                                    "They will take " + delivery.getDays() + " day's to arrive!\n" +
+                                                    "The total cost was €" + price + ".",
+                                            "Purchase Complete!!!",
+                                            JOptionPane.PLAIN_MESSAGE);
+        }
+    }
         
 }
