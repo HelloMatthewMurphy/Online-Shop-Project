@@ -5,6 +5,7 @@
  */
 package cs4125project;
 
+import Database.DBControler;
 import MenuUI.MainMenuUI;
 import MenuUI.MenuUI;
 import Services.TestingShop;
@@ -22,6 +23,9 @@ public class CS4125Project {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         //Database.TestWarehouseDB.test();
+        
+        // Initialize and load DBs
+        DBControler.getInstance().load(DBControler.ALL_DB);
         
         // TODO code application logic here
         //MainMenuUI menu = new MainMenuUI();

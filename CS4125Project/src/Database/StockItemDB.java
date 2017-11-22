@@ -22,6 +22,7 @@ public class StockItemDB implements IDatabase {
     HashMap<String, StockItem> stockItems;
     
     public StockItemDB() {
+        System.out.println("AAAAAAAA Created StockItemDB");
         filename = "";
         stockItems = new HashMap();
     }
@@ -58,8 +59,6 @@ public class StockItemDB implements IDatabase {
         // Ignore the headers
         reader.readLine();
         
-        stockItems = new HashMap();
-        
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
@@ -69,6 +68,9 @@ public class StockItemDB implements IDatabase {
             
             stockItems.put(data[0], si);
         }
+        
+        System.out.println("Stockitem filename = " + filename);
+        System.out.println("loading stockitems, size = " + stockItems.size());
         
         reader.close();
     }

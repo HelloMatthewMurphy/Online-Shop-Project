@@ -40,7 +40,7 @@ public class TestWarehouseDB {
         warehouses.add(w1);
         warehouses.add(w2);
         
-        WarehouseDB db = new WarehouseDB(warehouses);
+        WarehouseDB db = DBControler.getInstance().getWarehouseDB();
         db.setFilename("warehouseinfo.csv");
         
         try {
@@ -72,7 +72,7 @@ public class TestWarehouseDB {
             Test StockItemDB
         */
         
-        StockItemDB sidb = new StockItemDB();
+        StockItemDB sidb = DBControler.getInstance().getStockItemDB();
         sidb.setFilename("stockiteminfo.csv");
         
         sidb.addStockItem(sweet);

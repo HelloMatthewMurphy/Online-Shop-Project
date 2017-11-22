@@ -10,6 +10,7 @@ import Storage.*;
 import Services.*;
 import Stock.*;
 import User.*;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 /**
@@ -34,7 +35,9 @@ public class TestingShop {
         s.returnItem(stockItem);
         print(s);
         
-        
+        GregorianCalendar start = new GregorianCalendar(1990, 2, 10);
+        GregorianCalendar end = new GregorianCalendar(2012, 2, 10);
+        s.getSales(start, end);
     }
     
     private static void print(Shop s){

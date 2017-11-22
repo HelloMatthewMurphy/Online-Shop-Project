@@ -21,10 +21,14 @@ public class Purchase {
     private GregorianCalendar date;
     
     public Purchase(StockItem item, int quantity){
+        this(item, quantity, new GregorianCalendar());
+    }
+    
+    public Purchase(StockItem item, int quantity, GregorianCalendar date){
         this.item = item;
         this.quantity = quantity;
         
-        date = new GregorianCalendar();
+        this.date = date;
     }
     
     public boolean makePurchase(String address){

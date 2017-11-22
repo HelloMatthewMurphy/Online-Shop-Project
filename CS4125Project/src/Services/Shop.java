@@ -9,6 +9,7 @@ import User.Customer;
 import Services.Purchase;
 import Storage.Location;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +106,9 @@ public class Shop extends Observable{
             if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                 DBControler.getWarehouses().get(i).addStock(item.getName(), 1);
                 done = true;
+                
+                Purchase pur = new Purchase(item, -1);
+                DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
             }
         }
         setChanged();
@@ -129,6 +133,28 @@ public class Shop extends Observable{
 //            updateAllObservers();
             setChanged();
             notifyObservers();
+        }
+    }
+    
+    public void getSales(GregorianCalendar start, GregorianCalendar end)
+    {
+        ArrayList<Purchase> purchases = new ArrayList();
+        purchases.addAll(DBControler.getInstance().getPurchaseDB().getPurchases());
+        
+        /* Remove entries from purchases which fall outside the date range*/
+        for (int i = 0; i < purchases.size(); )
+        {
+            GregorianCalendar date = purchases.get(i).getDate();
+            
+            System.out.println("compareto end = " + date.compareTo(end));
+            if (date.compareTo(start) < 0 || date.compareTo(end) > 0)
+                purchases.remove(i);
+            else
+                i++;
+        }
+        for (Purchase p: purchases) 
+        {
+            System.out.println(p.getItem().getName() + ", " + p.getDate().get(GregorianCalendar.DAY_OF_YEAR));
         }
     }
     

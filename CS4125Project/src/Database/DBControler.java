@@ -35,15 +35,6 @@ public class DBControler {
         sDB.setFilename("stockiteminfo.csv");
         wDB.setFilename("warehouseinfo.csv");
         pDB.setFilename("purchaseinfo.csv");
-        
-        try {
-            aDB.load();
-            sDB.load();
-            wDB.load();
-            pDB.load();
-        } catch (IOException ex) {
-            Logger.getLogger(DBControler.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     public static DBControler getInstance(){
@@ -113,10 +104,16 @@ public class DBControler {
     }
     
     public static List<Warehouse> getWarehouses() {
-        return getInstance().wDB.getWarehouses();
+        if (instance == null)
+            getInstance();
+        
+        return instance.wDB.getWarehouses();
     }
     
     public static StockItem getStockItemByName(String name) {
-        return getInstance().getStockItemDB().getStockItems().get(name);
+        if (instance == null)
+            getInstance();
+        
+        return instance.getStockItemDB().getStockItems().get(name);
     }
 }

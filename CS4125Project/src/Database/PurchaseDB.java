@@ -45,6 +45,7 @@ public class PurchaseDB implements IDatabase {
         
         for (Purchase purchase : purchases)
         {
+            System.out.println(purchase.getItem().getName());
             String line = String.format("%s,%d,%.2f,%d/%d/%d",
                 purchase.getItem().getName(),
                 purchase.getQuantity(),
@@ -63,6 +64,7 @@ public class PurchaseDB implements IDatabase {
     @Override
     public void load() throws IOException
     {
+        System.out.println("Loading purchases");
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
@@ -85,10 +87,10 @@ public class PurchaseDB implements IDatabase {
             
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
-//            StockItem si = 
-//                    DBControler.getInstance().getStockItemDB().getStockItems().get(data[1]);
-            StockItem si = DBControler.getStockItemByName(data[1]);
-            purchases.add(new Purchase(si, quantity));
+            System.out.println("Num of stockItems = " + DBControler.getInstance().getStockItemDB().getStockItems().size());
+            StockItem si = DBControler.getStockItemByName(data[0]);
+            System.out.println("siname = " + si.getName());
+            purchases.add(new Purchase(si, quantity, date));
         }
         
         reader.close();
