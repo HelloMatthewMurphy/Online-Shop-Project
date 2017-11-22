@@ -7,6 +7,7 @@ package MenuUI;
 
 import Services.Shop;
 import java.awt.BorderLayout;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -99,7 +100,6 @@ public class CustomerMenuUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JOptionPane.showMessageDialog(null, "See you next time!");
-        this.setVisible(false);
         try {
             new MainMenuUI().run();
         } catch (IOException ex) {

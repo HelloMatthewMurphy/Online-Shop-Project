@@ -28,8 +28,8 @@ public class CS4125Project {
         DBControler.getInstance().load(DBControler.ALL_DB);
         
         // TODO code application logic here
-        //MainMenuUI menu = new MainMenuUI();
-        //menu.run();
-        TestingShop.test();
+        MainMenuUI menu = new MainMenuUI();
+        menu.run();
+        //TestingShop.test();
     }
 }
