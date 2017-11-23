@@ -24,7 +24,9 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
      */
     private PurchaseDB db;
     private List<Purchase> purchases;
-    public PurchaseHistoryUI() {
+    private String username;
+    public PurchaseHistoryUI(String username) {
+        this.username = username;
         initComponents();
         db = DBControler.getInstance().getPurchaseDB();
         purchases = db.getPurchases();
@@ -47,10 +49,7 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
 
         purchaseHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Item", "Quantity", "Discount", "Date"
@@ -82,19 +81,23 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
         /* Create and display the form */
        
             public void run() {
-                new PurchaseHistoryUI().setVisible(true);
+                this.setVisible(true);
             }
      
     
     public void addRowsToTable(){
+        //System.out.println(username);
         DefaultTableModel model = (DefaultTableModel) purchaseHistory.getModel();
         Object rowData[] = new Object[4];
         for (int i = 0; i < purchases.size();i++){
+            System.out.println(purchases.get(i).getUsername());
+            if(username.equals(purchases.get(i).getUsername())){
             rowData[0] = purchases.get(i).getItem().getName();
             rowData[1] = purchases.get(i).getQuantity();
             rowData[2] = purchases.get(i).getDiscount();
             rowData[3] = purchases.get(i).getDate().get(Calendar.DATE)+"/"+purchases.get(i).getDate().get(Calendar.MONTH)+"/"+purchases.get(i).getDate().get(Calendar.YEAR);
             model.addRow(rowData);
+           }
         }
         
     }

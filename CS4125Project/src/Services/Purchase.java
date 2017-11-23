@@ -18,52 +18,22 @@ public class Purchase {
     private StockItem item;
     private int quantity;
     private double discount = 1;
+    private String username;
     private GregorianCalendar date;
     
-    public Purchase(StockItem item, int quantity){
-        this(item, quantity, new GregorianCalendar());
+    public Purchase(StockItem item, int quantity, String username){
+        this(item, quantity,username, new GregorianCalendar());
     }
     
-    public Purchase(StockItem item, int quantity, GregorianCalendar date){
+    public Purchase(StockItem item, int quantity,String username, GregorianCalendar date){
         this.item = item;
         this.quantity = quantity;
-        
+        this.username = username;
         this.date = date;
     }
     
     public boolean makePurchase(String address){
-        CreditCardCo credit = new CreditCardCo();
-        Delivery delivery = null;
-        Scanner s = new Scanner(System.in);
-        System.out.println("What type of Delivery would you like?:");
-        boolean valid = false;
-        while(valid == false){
-            System.out.println("S)low");
-            System.out.println("R)egular");
-            System.out.println("P)remium");
-            System.out.println("\n");
-
-            String type = s.nextLine();
-            switch (type) {
-                case "S":
-                    delivery = new MoneySaver(new BasicDelivery());
-                    valid = true;
-                    break;
-                case "R":
-                    delivery = new BasicDelivery();
-                    valid = true;
-                    break;
-                case "P":
-                    delivery = new Premium(new BasicDelivery());
-                    valid = true;
-                    break;
-                default:
-                    break;
-            }
-            System.out.println(delivery.getPrice());
-            System.out.println(delivery.getDays());
-        }
-        
+        //I took everything to put in ui now there is nothing left but a lonely return - Matthew
         return true;
     }
     
@@ -82,6 +52,9 @@ public class Purchase {
         return discount;
     }
     
+    public String getUsername(){
+        return username;
+    }
     public GregorianCalendar getDate()
     {
         return date;

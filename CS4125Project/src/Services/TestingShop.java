@@ -28,7 +28,7 @@ public class TestingShop {
         
         //Testing making purchace
         StockItem stockItem = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
-        s.makePurchase(stockItem, 2);
+        s.makePurchase(stockItem, 2, c.getUsername());
         print(s);
         
         //Testing returning item
@@ -37,7 +37,7 @@ public class TestingShop {
         
         GregorianCalendar start = new GregorianCalendar(1990, 2, 10);
         GregorianCalendar end = new GregorianCalendar(2012, 2, 10);
-        s.getSales(start, end);
+        //s.getPurchases(start, end, true);
     }
     
     private static void print(Shop s){

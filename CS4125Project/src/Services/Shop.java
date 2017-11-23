@@ -7,8 +7,10 @@ import Stock.StockItem;
 import Storage.Warehouse;
 import User.Customer;
 import Services.Purchase;
+import Services.PurchaseConstraints.PurchaseType;
 import Storage.Location;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.HashMap;
@@ -107,7 +109,7 @@ public class Shop extends Observable{
                 DBControler.getWarehouses().get(i).addStock(item.getName(), 1);
                 done = true;
                 
-                Purchase pur = new Purchase(item, -1);
+                Purchase pur = new Purchase(item, -1,this.getAccount().getUsername());
                 DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
             }
         }
@@ -115,8 +117,9 @@ public class Shop extends Observable{
         notifyObservers();
     }
     
-    public void makePurchase(StockItem item, int quantity){
-        Purchase pur = new Purchase(item, quantity);
+    public void makePurchase(StockItem item, int quantity, String username){
+        System.out.println(username+"weeeeee");
+        Purchase pur = new Purchase(item, quantity, username);
         boolean purchaseHappened = false;
         purchaseHappened = pur.makePurchase(account.getLocation());
         if(purchaseHappened){
@@ -126,6 +129,7 @@ public class Shop extends Observable{
                     DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
                     
                     // Shane: add purchase to purchase database
+                    System.out.println(pur.getUsername()+"GGGGGGG");
                     DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
                     done = true;
                 }
@@ -136,8 +140,22 @@ public class Shop extends Observable{
         }
     }
     
-    public void getSales(GregorianCalendar start, GregorianCalendar end)
+    /**
+     * Get the list of sales or returns which fall within the given date range
+     * @param start The date from which to start looking
+     * @param end The date where you look until
+     * @param getSales If true, return sales. If false, return returns
+     * @return The list of sales or returns which fall within the range
+     */
+//    public List<Purchase> getPurchases(GregorianCalendar start, GregorianCalendar end, boolean getSales)
+    public List<Purchase> getPurchases(PurchaseConstraints constraints)
     {
+        GregorianCalendar start = constraints.getStart();
+        GregorianCalendar end = constraints.getEnd();
+        boolean getSales = constraints.getType() == PurchaseType.SALES;
+        String itemName = constraints.getProduct();
+        String category = constraints.getCategory();
+        
         ArrayList<Purchase> purchases = new ArrayList();
         purchases.addAll(DBControler.getInstance().getPurchaseDB().getPurchases());
         
@@ -146,16 +164,31 @@ public class Shop extends Observable{
         {
             GregorianCalendar date = purchases.get(i).getDate();
             
-            System.out.println("compareto end = " + date.compareTo(end));
-            if (date.compareTo(start) < 0 || date.compareTo(end) > 0)
-                purchases.remove(i);
-            else
+            // Check to see if the purchase matches the type that we are looking for
+            boolean matchType = purchases.get(i).getQuantity() > 0 == getSales;
+            
+            int cmpStart = start.get(Calendar.YEAR) * 12 + start.get(Calendar.MONTH);
+            int cmpEnd = end.get(Calendar.YEAR) * 12 + end.get(Calendar.MONTH);
+            int cmpDate = date.get(Calendar.YEAR) * 12 + date.get(Calendar.MONTH);
+            
+            boolean inRange = cmpDate >= cmpStart && cmpDate <= cmpEnd;
+            
+            boolean isName = (itemName == null 
+                    || itemName.equals(purchases.get(i).getItem().getName()));
+            
+            boolean isCategory = (category == null)
+                    || category.equals(purchases.get(i).getItem().getCategory());
+            
+            System.out.println(purchases.get(i).getItem().getName() + ", range = (" + start.get(Calendar.YEAR) + ", " + end.get(Calendar.YEAR) + ") " + cmpDate);
+            
+            // Remove entries if needed
+            if (matchType && inRange && isName && isCategory)
                 i++;
+            else
+                purchases.remove(i);
         }
-        for (Purchase p: purchases) 
-        {
-            System.out.println(p.getItem().getName() + ", " + p.getDate().get(GregorianCalendar.DAY_OF_YEAR));
-        }
+        
+        return purchases;
     }
     
     public void addDiscount(){
@@ -168,5 +201,9 @@ public class Shop extends Observable{
         DBControler.getWarehouses().add(w);
         setChanged();
         notifyObservers();
+    }
+    
+    public Customer getAccount(){
+        return account;
     }
 }
