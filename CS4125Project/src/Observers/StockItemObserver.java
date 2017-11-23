@@ -13,6 +13,6 @@ import java.util.Observer;
 public class StockItemObserver implements Observer{
     @Override
     public void update(Observable o, Object arg) {
-        DBControler.getInstance().save(DBControler.STCOKITEM_DB);
+        DBControler.getInstance().save(DBControler.STOCKITEM_DB);
     }
 }
