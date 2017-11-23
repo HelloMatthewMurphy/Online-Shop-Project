@@ -258,7 +258,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     itemNames[0]);
         pickedItem = itemList.toString();
         Object howMuch = JOptionPane.showInputDialog(null, 
-                                                   "Pick item you would like to return.", 
+                                                   "How many?", 
                                                    "Return Stock", 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
