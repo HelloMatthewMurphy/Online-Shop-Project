@@ -23,6 +23,7 @@ import java.util.List;
 public class WarehouseDB implements IDatabase {
     
     private static final String BUP_PATH = "./backups/";
+    private static final String BUP_PREFIX = "WH_";
     private static final int MAX_BACKUPS = 5;
     
     private String filename;
@@ -43,23 +44,31 @@ public class WarehouseDB implements IDatabase {
         this.filename = filename;
     }
     
+    public void loadBackup(int backupNum) throws IOException {
+        if (backupNum > MAX_BACKUPS)
+            backupNum = MAX_BACKUPS;
+        
+        String loadFilename = BUP_PREFIX + String.format("%03d", backupNum);
+        loadFile(new File(BUP_PATH, loadFilename).getPath());
+    }
+    
     @Override
     public void save() throws IOException {
-        saveFile();
+        saveFile(filename);
         shiftBackupFiles();
-        saveFile("000");
+        saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());
     }
     
     /**
-     * Rename warehouseinfo.csv.bup00 to warehouseinfo.csv.bup01 etc
+     * Rename WH_000 to WH_001 etc.
      */
-    public void shiftBackupFiles() {
+    private void shiftBackupFiles() {
         File dir = new File(BUP_PATH);
         ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
         
         // Remove all non-files (folders) from the arraylist
         for (int i = 0; i < filesInDir.size(); ) {
-            if (!filesInDir.get(i).isFile())
+            if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
                 filesInDir.remove(i);
             else
                 i++;
@@ -73,20 +82,16 @@ public class WarehouseDB implements IDatabase {
         // Print out all files
         for (int i = 0; i < filesInDir.size(); i++) {            
             String oldFilename = filesInDir.get(i).getName();
-            int id = Integer.parseInt(oldFilename);
-            String newFilename = String.format("%03d", id + 1);
+            int id = Integer.parseInt(oldFilename.substring(BUP_PREFIX.length()));
+            String newFilename = BUP_PREFIX + String.format("%03d", id + 1);
             
-            if (newFilename.equals(String.format("%03d", MAX_BACKUPS)))
+            if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
                 filesInDir.get(i).delete();
             else
                 filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
         }
         
         System.out.println(filesInDir);
-    }
-    
-    private void saveFile() throws IOException {
-        saveFile(filename);
     }
     
     private void saveFile(String filename) throws IOException {
@@ -113,11 +118,11 @@ public class WarehouseDB implements IDatabase {
             
             writer.flush();
         }
+        
+        writer.close();
     }
     
-    @Override
-    public void load() throws IOException {
-        
+    private void loadFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
@@ -150,6 +155,12 @@ public class WarehouseDB implements IDatabase {
             
             previousWarehouseName = currentWarehouseName;
         }
+        reader.close();
+    }
+    
+    @Override
+    public void load() throws IOException {
+        loadFile(filename);
     }
     
     public List<Warehouse> getWarehouses() {

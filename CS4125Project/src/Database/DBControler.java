@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class DBControler {
     
     public static final int ACCOUNT_DB = 0;
-    public static final int STCOKITEM_DB = 1;
+    public static final int STOCKITEM_DB = 1;
     public static final int WAREHOUSE_DB = 2;
     public static final int ALL_DB = 3;
     public static final int PURCHASE_DB = 4;
@@ -48,7 +48,7 @@ public class DBControler {
             switch (loading){
                 case ACCOUNT_DB:    aDB.load();  
                 break;
-                case STCOKITEM_DB:  sDB.load();  
+                case STOCKITEM_DB:  sDB.load();  
                 break;
                 case WAREHOUSE_DB:  wDB.load();  
                 break;
@@ -70,7 +70,7 @@ public class DBControler {
             switch (saving){
                 case ACCOUNT_DB:    aDB.save();  
                 break;
-                case STCOKITEM_DB:  sDB.save();  
+                case STOCKITEM_DB:  sDB.save();  
                 break;
                 case WAREHOUSE_DB:  wDB.save();  
                 break;

@@ -102,14 +102,14 @@ public class Shop extends Observable{
         return totalStock;
     }
     
-    public void returnItem(StockItem item){
+    public void returnItem(StockItem item, int quantity){
         boolean done = false;
         for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
             if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                 DBControler.getWarehouses().get(i).addStock(item.getName(), 1);
                 done = true;
                 
-                Purchase pur = new Purchase(item, -1);
+                Purchase pur = new Purchase(item, (-1)*quantity,this.getAccount().getUsername());
                 DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
             }
         }
@@ -117,8 +117,9 @@ public class Shop extends Observable{
         notifyObservers();
     }
     
-    public void makePurchase(StockItem item, int quantity){
-        Purchase pur = new Purchase(item, quantity);
+    public void makePurchase(StockItem item, int quantity, String username){
+        System.out.println(username+"weeeeee");
+        Purchase pur = new Purchase(item, quantity, username);
         boolean purchaseHappened = false;
         purchaseHappened = pur.makePurchase(account.getLocation());
         if(purchaseHappened){
@@ -128,6 +129,7 @@ public class Shop extends Observable{
                     DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
                     
                     // Shane: add purchase to purchase database
+                    System.out.println(pur.getUsername()+"GGGGGGG");
                     DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
                     done = true;
                 }
@@ -199,5 +201,9 @@ public class Shop extends Observable{
         DBControler.getWarehouses().add(w);
         setChanged();
         notifyObservers();
+    }
+    
+    public Customer getAccount(){
+        return account;
     }
 }

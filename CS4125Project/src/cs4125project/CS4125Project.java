@@ -10,6 +10,7 @@ import MenuUI.MainMenuUI;
 import MenuUI.MenuUI;
 import MenuUI.ShopAnalysisUI;
 import Services.TestingShop;
+import Storage.Warehouse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +39,11 @@ public class CS4125Project {
         //new ShopAnalysisUI().setVisible(true);
         //TestingShop.test();
         
+        //DBControler.getInstance().getPurchaseDB().loadBackup(1);
+        for (Warehouse wh : DBControler.getInstance().getWarehouseDB().getWarehouses()) {
+            for (String siName : wh.checkStock().keySet())
+                System.out.println(siName + ", " + wh.checkStock().get(siName));
+        }
         //DBControler.getInstance().getWarehouseDB().shiftBackupFiles();
     }
 }

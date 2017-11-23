@@ -5,10 +5,20 @@
  */
 package ThirdParty;
 
+import User.Account;
+
 /**
  *
  * @author Jack
  */
 public class CreditCardCo {
+    
+    public CreditCardCo(){
+        
+    }
+    
+    public boolean makePurchase(Account account, double ammount){
+        return true;
+    }
     
 }
