@@ -8,7 +8,7 @@ package Database;
 import java.io.IOException;
 
 /**
- *
+ * Every database implements IDatabase
  * @author Shane
  */
 public interface IDatabase {

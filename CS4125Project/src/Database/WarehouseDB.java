@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * A database that holds warehouse information.
  * @author Shane
  */
 public class WarehouseDB implements IDatabase {
@@ -25,21 +25,34 @@ public class WarehouseDB implements IDatabase {
     private String filename;
     private List<Warehouse> warehouses;
     
+    /**
+     * A constructor sets filename and a blank ArrayList for accounts
+     */
     public WarehouseDB() {
         filename = "";
         warehouses = new ArrayList();
     }
     
+    /**
+     * A constructor sets filename and a ArrayList for warehouses
+     * @param warehouses An ArrayList of warehouses
+     */
     public WarehouseDB(List<Warehouse> warehouses) {
         filename = "";
         this.warehouses = warehouses;
     }
     
+    /**
+     *@param  filename sets name of filename
+     */ 
     @Override
     public void setFilename(String filename) {
         this.filename = filename;
     }
     
+    /**
+     * saves Warehouses to a CSV file
+     */
     @Override
     public void save() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
@@ -66,7 +79,9 @@ public class WarehouseDB implements IDatabase {
             writer.flush();
         }
     }
-    
+    /**
+     * Creates Warehouses and adds them to a DB
+     */ 
     @Override
     public void load() throws IOException {
         
@@ -104,6 +119,9 @@ public class WarehouseDB implements IDatabase {
         }
     }
     
+    /**
+     * @return warehouses
+     */ 
     public List<Warehouse> getWarehouses() {
         return warehouses;
     }   

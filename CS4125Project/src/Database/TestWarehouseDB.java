@@ -14,11 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
+ *  Creates testWarehouses and populates them.
  * @author Shane
  */
 public class TestWarehouseDB {
     
+    /**
+     *  Creates testWarehouses and populates them.
+     * 
+     */
     public static void test() {
         
         /* 

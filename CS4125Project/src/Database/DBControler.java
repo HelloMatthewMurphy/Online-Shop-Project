@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Creates an instance of each database for the system to use.
  * @author Matthew Murphy
  */
 public class DBControler {
@@ -25,6 +25,11 @@ public class DBControler {
     private WarehouseDB wDB;
     private PurchaseDB pDB;
     
+    /**
+     * A constructor sets filename for each database
+     * Creates an instance of each database
+     * 
+     */
     private DBControler(){
         aDB = new AccountDB();
         sDB = new StockItemDB();
@@ -37,12 +42,18 @@ public class DBControler {
         pDB.setFilename("purchaseinfo.csv");
     }
     
+    /**
+     * Creates an instance of DBController
+     */
     public static DBControler getInstance(){
         if(instance == null)
             instance = new DBControler();
         return instance;
     }
     
+    /**
+     * @param loading loads a database depending an int
+     */ 
     public void load(int loading){
         try {
             switch (loading){
@@ -65,6 +76,9 @@ public class DBControler {
         }
     }
     
+     /**
+     * @param saving Depending on the int passed in a different database will be saved.
+     */ 
     public void save(int saving){
         try {
             switch (saving){
@@ -87,22 +101,37 @@ public class DBControler {
         }
     }
     
+     /**
+     * @return AccountDB
+     */ 
     public AccountDB getAccountDB(){
         return aDB;
     }
     
+    /**
+     * @return StockItemDB
+     */ 
     public StockItemDB getStockItemDB(){
         return sDB;
     }
     
+    /**
+     * @return WareHouseDB
+     */ 
     public WarehouseDB getWarehouseDB(){
         return wDB;
     }
     
+    /**
+     * @return PurchaseDB
+     */ 
     public PurchaseDB getPurchaseDB() {
         return pDB;
     }
     
+    /**
+     * @return List Warehouse
+     */ 
     public static List<Warehouse> getWarehouses() {
         if (instance == null)
             getInstance();
@@ -110,6 +139,9 @@ public class DBControler {
         return instance.wDB.getWarehouses();
     }
     
+    /**
+     * @return StockItem
+     */ 
     public static StockItem getStockItemByName(String name) {
         if (instance == null)
             getInstance();

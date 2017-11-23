@@ -12,8 +12,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+
 /**
- *
+ *A database that holds all types of StockItems
  * @author Shane
  */
 public class StockItemDB implements IDatabase {
@@ -21,21 +22,33 @@ public class StockItemDB implements IDatabase {
     String filename;
     HashMap<String, StockItem> stockItems;
     
+    /**
+     * A constructor sets filename and a hashmap of StockItems
+     */
     public StockItemDB() {
         System.out.println("AAAAAAAA Created StockItemDB");
         filename = "";
         stockItems = new HashMap();
     }
     
+    /**
+     * @param stockItem added to stockItem hashmap
+     */
     public void addStockItem(StockItem stockItem) {
         stockItems.put(stockItem.getName(), stockItem);
     }
     
+    /**
+     *@param  filename sets name of filename
+     */ 
     @Override
     public void setFilename(String filename) {
         this.filename = filename;
     }
     
+    /**
+     * saves StockItems to a CSV file
+     */ 
     @Override
     public void save() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
@@ -54,6 +67,9 @@ public class StockItemDB implements IDatabase {
         writer.flush();
     }
     
+    /**
+     * Creates StockItem and adds them to a DB
+     */ 
     @Override
     public void load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -75,11 +91,16 @@ public class StockItemDB implements IDatabase {
         
         reader.close();
     }
-    
+    /**
+     * @return stockItems
+     */ 
     public HashMap<String, StockItem> getStockItems() {
         return stockItems;
     }
     
+    /**
+     * @return stockItem
+     */
     public StockItem getStockItemByName(String name){
         return stockItems.get(name);
     }

@@ -26,16 +26,25 @@ public class PurchaseDB implements IDatabase {
     private String filename;
     private List<Purchase> purchases;
     
+    /**
+     * A constructor sets filename and a blank ArrayList for purchases
+     */
     public PurchaseDB() {
         filename = "";
         purchases = new ArrayList();
     }
     
+    /**
+     *@param  filename sets name of filename
+     */ 
     @Override
     public void setFilename(String filename) {
         this.filename = filename;
     }
     
+    /**
+     * saves Purchases to a CSV file
+     */
     @Override
     public void save() throws IOException
     {
@@ -61,6 +70,9 @@ public class PurchaseDB implements IDatabase {
         System.out.println("purchase db saved");
     }
     
+    /**
+     * Creates an ArrayList of purchases and adds them to a DB from a CSV file
+     */ 
     @Override
     public void load() throws IOException
     {
@@ -98,7 +110,9 @@ public class PurchaseDB implements IDatabase {
         
         reader.close();
     }
-    
+    /**
+     * @return  List of Purchases
+     */ 
     public List<Purchase> getPurchases()
     {
         return purchases;

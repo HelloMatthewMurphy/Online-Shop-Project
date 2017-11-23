@@ -75,6 +75,7 @@ public class AccountDB implements IDatabase {
         }
         writer.close();
     }
+    
      /**
      * Creates Accounts and adds them to a DB from a RegisteredUsers.csv
      */ 
