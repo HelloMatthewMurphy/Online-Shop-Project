@@ -274,7 +274,6 @@ public class MainMenuUI extends javax.swing.JFrame {
                             if(users.get(i) instanceof Customer){
                                 Shop s = Shop.getInstance();
                                 s.setAccount((Customer)users.get(i));
-                                System.out.println(username+"Killme");
                                 new CustomerMenuUI(users.get(i).getUsername()).run();
                                 this.setVisible(false);
                                 
