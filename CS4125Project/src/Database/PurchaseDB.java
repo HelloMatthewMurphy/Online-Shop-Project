@@ -45,7 +45,6 @@ public class PurchaseDB implements IDatabase {
         
         for (Purchase purchase : purchases)
         {
-            System.out.println(purchase.getItem().getName());
             String line = String.format("%s,%d,%.2f,%d/%d/%d,%s",
                 purchase.getItem().getName(),
                 purchase.getQuantity(),
