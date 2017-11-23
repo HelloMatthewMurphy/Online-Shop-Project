@@ -39,14 +39,15 @@ public class StockItemDB implements IDatabase {
     @Override
     public void save() throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
-        writer.write("Name,Price,Category,Description\n");
+        writer.write("Name,Price,Category,Description,Discount,\n");
         
         for (String siName : stockItems.keySet()) {
-            String line = String.format("%s,%.2f,%s,%s",
+            String line = String.format("%s,%.2f,%s,%s,%.2f",
                     siName,
                     stockItems.get(siName).getPrice(),
                     stockItems.get(siName).getCategory(),
-                    stockItems.get(siName).getDescription());
+                    stockItems.get(siName).getDescription(),
+                    stockItems.get(siName).getDiscount());
             writer.write(line + "\n");
         }
         
@@ -63,8 +64,9 @@ public class StockItemDB implements IDatabase {
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             double price = Double.parseDouble(data[1]);
-            
-            StockItem si = new StockItem(data[0], price, data[2], data[3]);
+           // double discount = Double.parseDouble(data[4]);
+            double discount = 1;
+            StockItem si = new StockItem(data[0], price, data[2], data[3], discount);
             
             stockItems.put(data[0], si);
         }

@@ -53,6 +53,13 @@ public class AccountDB implements IDatabase {
             writer.write(String.valueOf(accounts.get(i).getPassword()));
             writer.write(",");
             writer.write(String.valueOf(accounts.get(i).getEmail()));
+            writer.write(",");
+            if(accounts.get(i) instanceof Supervisor){
+                writer.write("S");
+            }
+            else if(accounts.get(i) instanceof Customer){
+                writer.write("C");
+            }
             writer.write("\n");
         }
         writer.close();
@@ -60,6 +67,216 @@ public class AccountDB implements IDatabase {
     
     @Override
     public void load() throws IOException {
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         System.out.println("running");
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
         BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
@@ -72,20 +289,17 @@ public class AccountDB implements IDatabase {
             String username= data[0];
             String  password = data[1];
             String email = data[2];
-            accounts.add(new Customer(username,password,email));
+            String type = data[3];
+            if (type.equals("S")){
+                accounts.add(new Supervisor(username,password,email));
+                System.out.println("Supervisor");
+            }
+            else if (type.equals("C")){
+                System.out.println("Customer");
+                accounts.add(new Customer(username,password,email));
+            }
         }
         fileReader.close();
-
-        fileReader2.readLine();
-        fileReader2.readLine();
-        String fileLine1;
-        while((fileLine1 = fileReader2.readLine()) != null){
-            String [] data = fileLine1.split(",",-1);
-            String username = data[0];
-            String password = data[1];
-            String email = data[2];
-        }
-        fileReader2.close();
     }
     
     public List<Account> getAccounts() {

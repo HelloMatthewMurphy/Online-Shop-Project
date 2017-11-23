@@ -37,5 +37,6 @@ public class CS4125Project {
         //TestingShop.test();
         
         new ShopAnalysisUI().setVisible(true);
+        //TestingShop.test();
     }
 }
