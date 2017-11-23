@@ -44,6 +44,7 @@ public class PurchaseDB implements IDatabase {
     
     /**
      * saves Purchases to a CSV file
+     * @throws IOException
      */
     @Override
     public void save() throws IOException
@@ -72,6 +73,7 @@ public class PurchaseDB implements IDatabase {
     
     /**
      * Creates an ArrayList of purchases and adds them to a DB from a CSV file
+     * @throws IOException
      */ 
     @Override
     public void load() throws IOException

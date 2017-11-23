@@ -48,6 +48,7 @@ public class StockItemDB implements IDatabase {
     
     /**
      * saves StockItems to a CSV file
+     * @throws IOException
      */ 
     @Override
     public void save() throws IOException {
@@ -69,6 +70,7 @@ public class StockItemDB implements IDatabase {
     
     /**
      * Creates StockItem and adds them to a DB
+     * @throws IOException
      */ 
     @Override
     public void load() throws IOException {
@@ -104,5 +106,5 @@ public class StockItemDB implements IDatabase {
     public StockItem getStockItemByName(String name){
         return stockItems.get(name);
     }
-            
+      
 }

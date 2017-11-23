@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * A database that holds all users information
  * @author Brian
+ * 
  */
 public class AccountDB implements IDatabase {
     
@@ -50,6 +51,7 @@ public class AccountDB implements IDatabase {
     
     /**
      * saves Accounts to a CSV file
+     * @throws IOException
      */ 
     @Override
     public void save() throws IOException{
@@ -78,6 +80,7 @@ public class AccountDB implements IDatabase {
     
      /**
      * Creates Accounts and adds them to a DB from a RegisteredUsers.csv
+     * @throws IOException
      */ 
     @Override
     public void load() throws IOException {

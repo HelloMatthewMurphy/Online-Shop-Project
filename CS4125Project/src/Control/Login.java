@@ -55,6 +55,7 @@ public class Login {
     * @param email users email.
     * @param password users password.
     * @return validated
+    * @throws InterruptedException
     * 
     */
     public boolean Validate(String email, String password) throws InterruptedException {
