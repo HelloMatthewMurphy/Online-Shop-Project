@@ -51,6 +51,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        //jScrollPane1 = new javax.swing.JScrollPane();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,8 +71,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Welcome!");
-
-        jButton3.setText("Check Stocks");
+        jButton3.setText("Check Purchases");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -103,6 +103,9 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
@@ -175,6 +178,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     itemNames[0]);
         pickedItem = itemList.toString();
         //Show info on item
+        new PurchaseHistoryUI().run();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

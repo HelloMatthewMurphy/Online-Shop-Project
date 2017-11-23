@@ -1,4 +1,4 @@
-Name,Price,Category,Description
-yeezy,199.99,clothes,a cool shoe
-apple,0.49,food,a healthy snack
-sweet,1.99,food,a delicious treat
+Name,Price,Category,Description,Discount
+yeezy,199.99,clothes,a cool shoe,1
+apple,0.49,food,a healthy snack,1
+sweet,1.99,food,a delicious treat,1
