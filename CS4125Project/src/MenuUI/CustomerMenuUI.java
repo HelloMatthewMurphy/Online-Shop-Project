@@ -7,6 +7,7 @@ package MenuUI;
 
 import Database.DBControler;
 import Services.Shop;
+import Stock.StockItem;
 import ThirdParty.CreditCardCo;
 import ThirdParty.Delivery.BasicDelivery;
 import ThirdParty.Delivery.MoneySaver;
@@ -15,6 +16,8 @@ import ThirdParty.Delivery.Delivery;
 import java.awt.BorderLayout;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -144,15 +147,16 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    //Check stock
+    //Buy stock
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Shop s = Shop.getInstance();
+        NumberFormat formatter = new DecimalFormat("#0.00");
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
         
         int i = 0;
         String[] itemNames = new String[list.size()];
         for(Map.Entry<String,Integer> entry : list){
-            itemNames[i] = entry.getKey() + " -€" + DBControler.getInstance().getStockItemDB().getStockItemByName(entry.getKey()).getPrice();
+            itemNames[i] = entry.getKey() + " - €" + formatter.format(DBControler.getInstance().getStockItemDB().getStockItemByName(entry.getKey()).getPrice());
             i++;
         }
         
@@ -171,6 +175,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         MenuUI.buyItemFromShop(pickedItem);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //Check Stock
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Shop s = Shop.getInstance();
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
@@ -194,8 +199,17 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     itemNames[0]);
         pickedItem = itemList.toString();
         //Show info on item
+        StockItem stock = DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem);
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        JOptionPane.showMessageDialog(null,
+                                    "Item Name: " + pickedItem + "\n" +
+                                            "Price: €" + formatter.format(stock.getPrice()) + "\n" +
+                                            "Description: " + stock.getDescription() + "\n",
+                                    "Info on " + pickedItem,
+                                    JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    //View purchases
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.out.println(username+"banana");
         new PurchaseHistoryUI(username).run();

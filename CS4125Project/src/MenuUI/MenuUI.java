@@ -23,6 +23,8 @@ import ThirdParty.Delivery.BasicDelivery;
 import ThirdParty.Delivery.Delivery;
 import ThirdParty.Delivery.MoneySaver;
 import ThirdParty.Delivery.Premium;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Map;
 import java.util.Map.Entry;
 import javax.swing.JOptionPane;
@@ -253,14 +255,14 @@ public class MenuUI {
             //delivery.getDays();
         }
         CreditCardCo credit = new CreditCardCo();
-        System.out.println(s.getAccount().getUsername()+"Qwerty");
+        NumberFormat formatter = new DecimalFormat("#0.00");
         if(!pickedItem.equals("")){
             s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername());
             credit.makePurchase(s.getAccount(), price);
             JOptionPane.showMessageDialog(null,
                                             "Thanks for buying " + amountWanted + " " + pickedItem + "'s.\n" +
                                                     "They will take " + delivery.getDays() + " day's to arrive!\n" +
-                                                    "The total cost was €" + price + ".",
+                                                    "The total cost was €" + formatter.format(price) + ".",
                                             "Purchase Complete!!!",
                                             JOptionPane.PLAIN_MESSAGE);
         }
