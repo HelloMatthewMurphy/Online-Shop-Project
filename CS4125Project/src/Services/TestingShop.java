@@ -37,7 +37,7 @@ public class TestingShop {
         
         GregorianCalendar start = new GregorianCalendar(1990, 2, 10);
         GregorianCalendar end = new GregorianCalendar(2012, 2, 10);
-        s.getSales(start, end);
+        //s.getPurchases(start, end, true);
     }
     
     private static void print(Shop s){
