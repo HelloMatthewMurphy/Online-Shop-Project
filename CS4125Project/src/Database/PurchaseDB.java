@@ -89,9 +89,10 @@ public class PurchaseDB implements IDatabase {
             
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
-            System.out.println("Num of stockItems = " + DBControler.getInstance().getStockItemDB().getStockItems().size());
+            System.out.println("Line = " + line);
+            //System.out.println("Num of stockItems = " + DBControler.getInstance().getStockItemDB().getStockItems().size());
             StockItem si = DBControler.getStockItemByName(data[0]);
-            System.out.println("siname = " + si.getName());
+            System.out.println("siname = " + si.getCategory());
             purchases.add(new Purchase(si, quantity, username, date));
         }
         
