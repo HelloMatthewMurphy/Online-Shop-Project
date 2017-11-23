@@ -8,8 +8,12 @@ package cs4125project;
 import Database.DBControler;
 import MenuUI.MainMenuUI;
 import MenuUI.MenuUI;
+import MenuUI.ShopAnalysisUI;
 import Services.TestingShop;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -28,8 +32,11 @@ public class CS4125Project {
         DBControler.getInstance().load(DBControler.ALL_DB);
         
         // TODO code application logic here
-        MainMenuUI menu = new MainMenuUI();
-        menu.run();
+        //MainMenuUI menu = new MainMenuUI();
+        //menu.run();
+        //TestingShop.test();
+        
+        new ShopAnalysisUI().setVisible(true);
         //TestingShop.test();
     }
 }
