@@ -102,14 +102,14 @@ public class Shop extends Observable{
         return totalStock;
     }
     
-    public void returnItem(StockItem item){
+    public void returnItem(StockItem item, int quantity){
         boolean done = false;
         for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
             if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                 DBControler.getWarehouses().get(i).addStock(item.getName(), 1);
                 done = true;
                 
-                Purchase pur = new Purchase(item, -1,this.getAccount().getUsername());
+                Purchase pur = new Purchase(item, (-1)*quantity,this.getAccount().getUsername());
                 DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
             }
         }

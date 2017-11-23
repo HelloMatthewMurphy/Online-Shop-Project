@@ -32,7 +32,7 @@ public class TestingShop {
         print(s);
         
         //Testing returning item
-        s.returnItem(stockItem);
+        s.returnItem(stockItem, 1);
         print(s);
         
         GregorianCalendar start = new GregorianCalendar(1990, 2, 10);
