@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
+ * A database that holds warehouse information.
  * @author Shane
  */
 public class WarehouseDB implements IDatabase {
@@ -29,16 +29,26 @@ public class WarehouseDB implements IDatabase {
     private String filename;
     private List<Warehouse> warehouses;
     
+    /**
+     * A constructor sets filename and a blank ArrayList for accounts
+     */
     public WarehouseDB() {
         filename = "";
         warehouses = new ArrayList();
     }
     
+    /**
+     * A constructor sets filename and a ArrayList for warehouses
+     * @param warehouses An ArrayList of warehouses
+     */
     public WarehouseDB(List<Warehouse> warehouses) {
         filename = "";
         this.warehouses = warehouses;
     }
     
+    /**
+     *@param  filename sets name of filename
+     */ 
     @Override
     public void setFilename(String filename) {
         this.filename = filename;
@@ -52,6 +62,10 @@ public class WarehouseDB implements IDatabase {
         loadFile(new File(BUP_PATH, loadFilename).getPath());
     }
     
+    /**
+     * saves Warehouses to a CSV file
+     * @throws IOException
+     */
     @Override
     public void save() throws IOException {
         saveFile(filename);
@@ -121,8 +135,18 @@ public class WarehouseDB implements IDatabase {
         
         writer.close();
     }
+<<<<<<< HEAD
     
     private void loadFile(String filename) throws IOException {
+=======
+    /**
+     * Creates Warehouses and adds them to a DB
+     * @throws IOException
+     */ 
+    @Override
+    public void load() throws IOException {
+        
+>>>>>>> c1c8d101df0585315c8b9c84fdaafaab4677cb82
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
@@ -163,6 +187,9 @@ public class WarehouseDB implements IDatabase {
         loadFile(filename);
     }
     
+    /**
+     * @return warehouses
+     */ 
     public List<Warehouse> getWarehouses() {
         return warehouses;
     }   

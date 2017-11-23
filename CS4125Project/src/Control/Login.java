@@ -22,7 +22,10 @@ public class Login {
     // The only instance of the class
     private static Login instance;
     
-    // Get the single instance of the class
+    /**
+     * Get the single instance of the class
+     * 
+     */
     public static Login getInstance() {
         // Craete it if needed
         if (instance == null)
@@ -30,7 +33,10 @@ public class Login {
         return instance;
     }
     
-    // Private so that it cannot be instantiated from the outside
+    /**
+     * Private so that it cannot be instantiated from the outside
+     * 
+     */
     private Login() {
         users = new ArrayList();
         accountDB = new AccountDB();        
@@ -43,6 +49,15 @@ public class Login {
         }
     }
     
+    /**
+    * 
+    * Checks if the user exists on the system
+    * @param email users email.
+    * @param password users password.
+    * @return validated
+    * @throws InterruptedException
+    * 
+    */
     public boolean Validate(String email, String password) throws InterruptedException {
         
         boolean validated = false;
