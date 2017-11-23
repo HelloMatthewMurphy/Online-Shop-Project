@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A database that holds all users information
  * @author Brian
  */
 public class AccountDB implements IDatabase {
@@ -25,21 +25,32 @@ public class AccountDB implements IDatabase {
     private String filename;
     private List<Account> accounts;
     
+    /**
+     * A constructor sets filename and a blank ArrayList for accounts
+     */
     public AccountDB(){
         filename = "";
         accounts = new ArrayList<Account>();
     }
-    
+    /**
+     * A constructor sets filename and a ArrayList for accounts
+     * @param accounts An ArrayList of accounts
+     */    
     public AccountDB(List<Account> accounts){
         filename = "";
         this.accounts = accounts;
     }
-    
+    /**
+     *@param  file sets name of filename
+     */ 
     @Override
     public void setFilename(String file){
         filename = file;
     }
     
+    /**
+     * saves Accounts to a CSV file
+     */ 
     @Override
     public void save() throws IOException{
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));	
@@ -64,219 +75,11 @@ public class AccountDB implements IDatabase {
         }
         writer.close();
     }
-    
+     /**
+     * Creates Accounts and adds them to a DB from a RegisteredUsers.csv
+     */ 
     @Override
     public void load() throws IOException {
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         System.out.println("running");
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
         BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
