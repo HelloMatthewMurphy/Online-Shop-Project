@@ -46,13 +46,14 @@ public class PurchaseDB implements IDatabase {
         for (Purchase purchase : purchases)
         {
             System.out.println(purchase.getItem().getName());
-            String line = String.format("%s,%d,%.2f,%d/%d/%d",
+            String line = String.format("%s,%d,%.2f,%d/%d/%d,%s",
                 purchase.getItem().getName(),
                 purchase.getQuantity(),
                 purchase.getDiscount(),
                 purchase.getDate().get(Calendar.DATE),
                 purchase.getDate().get(Calendar.MONTH) + 1,
-                purchase.getDate().get(Calendar.YEAR));
+                purchase.getDate().get(Calendar.YEAR),
+                purchase.getUsername());
             writer.write(line + "\n");
         }
         
@@ -85,12 +86,14 @@ public class PurchaseDB implements IDatabase {
             int month = Integer.parseInt(dateString.split("/")[1]);
             int year = Integer.parseInt(dateString.split("/")[2]);
             
+            String username = data[4];
+            
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
             System.out.println("Num of stockItems = " + DBControler.getInstance().getStockItemDB().getStockItems().size());
             StockItem si = DBControler.getStockItemByName(data[0]);
             System.out.println("siname = " + si.getName());
-            purchases.add(new Purchase(si, quantity, date));
+            purchases.add(new Purchase(si, quantity, username, date));
         }
         
         reader.close();

@@ -253,8 +253,9 @@ public class MenuUI {
             //delivery.getDays();
         }
         CreditCardCo credit = new CreditCardCo();
+        System.out.println(s.getAccount().getUsername()+"Qwerty");
         if(!pickedItem.equals("")){
-            s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted);
+            s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername());
             credit.makePurchase(s.getAccount(), price);
             JOptionPane.showMessageDialog(null,
                                             "Thanks for buying " + amountWanted + " " + pickedItem + "'s.\n" +

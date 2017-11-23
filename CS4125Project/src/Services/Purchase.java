@@ -18,16 +18,17 @@ public class Purchase {
     private StockItem item;
     private int quantity;
     private double discount = 1;
+    private String username;
     private GregorianCalendar date;
     
-    public Purchase(StockItem item, int quantity){
-        this(item, quantity, new GregorianCalendar());
+    public Purchase(StockItem item, int quantity, String username){
+        this(item, quantity,username, new GregorianCalendar());
     }
     
-    public Purchase(StockItem item, int quantity, GregorianCalendar date){
+    public Purchase(StockItem item, int quantity,String username, GregorianCalendar date){
         this.item = item;
         this.quantity = quantity;
-        
+        this.username = username;
         this.date = date;
     }
     
@@ -51,6 +52,9 @@ public class Purchase {
         return discount;
     }
     
+    public String getUsername(){
+        return username;
+    }
     public GregorianCalendar getDate()
     {
         return date;
