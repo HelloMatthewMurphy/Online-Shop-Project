@@ -101,7 +101,7 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
             rowData[0] = purchases.get(i).getItem().getName();
             rowData[1] = purchases.get(i).getQuantity();
             rowData[2] = purchases.get(i).getDiscount();
-            rowData[3] = purchases.get(i).getDate().get(Calendar.DATE)+"/"+purchases.get(i).getDate().get(Calendar.MONTH)+"/"+purchases.get(i).getDate().get(Calendar.YEAR);
+            rowData[3] = purchases.get(i).getDate().get(Calendar.DATE)+"/"+(purchases.get(i).getDate().get(Calendar.MONTH)+1)+"/"+purchases.get(i).getDate().get(Calendar.YEAR);
             model.addRow(rowData);
            }
         }
