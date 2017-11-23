@@ -6,6 +6,8 @@
 package MenuUI;
 
 import Database.DBControler;
+import Database.PurchaseDB;
+import Services.Purchase;
 import Services.Shop;
 import Stock.StockItem;
 import ThirdParty.CreditCardCo;
@@ -19,6 +21,8 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -28,6 +32,7 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -59,6 +64,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +98,13 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setText("Return Item");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,11 +123,15 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                             .addGap(28, 28, 28)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(147, 147, 147)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jButton4)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jToggleButton1))
+                            .addComponent(jButton4))))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,13 +141,15 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jToggleButton1)
+                .addGap(11, 11, 11)
                 .addComponent(jButton1)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,6 +233,69 @@ public class CustomerMenuUI extends javax.swing.JFrame {
          new PurchaseHistoryUI(username).run();
          this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+    
+    //Return Item
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        Shop s = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        
+        String[] itemNames = new String[list.size()];
+        int i = 0;
+        for(Map.Entry<String,Integer> entry : list){
+            itemNames[i] = entry.getKey();
+            i++;
+        }
+        
+        //Picking item
+        String pickedItem = "";
+        int amount = 0;
+        Object itemList = JOptionPane.showInputDialog(null, 
+                                                   "Pick item you would like to return.", 
+                                                   "Return Stock", 
+                                                    JOptionPane.QUESTION_MESSAGE, 
+                                                    null,
+                                                    itemNames, 
+                                                    itemNames[0]);
+        pickedItem = itemList.toString();
+        Object howMuch = JOptionPane.showInputDialog(null, 
+                                                   "Pick item you would like to return.", 
+                                                   "Return Stock", 
+                                                    JOptionPane.QUESTION_MESSAGE, 
+                                                    null,
+                                                    null, 
+                                                    null);
+        amount = Integer.parseInt(howMuch.toString());
+        s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount);
+        
+        /*Shop s = Shop.getInstance();
+        PurchaseDB db = DBControler.getInstance().getPurchaseDB();
+        List<Purchase> purchases = db.getPurchases();
+        List<Purchase> myPurchases = new ArrayList<Purchase>();
+        for(int i = 0; i < purchases.size(); i++){
+            if(username.equals(purchases.get(i).getUsername()))
+                myPurchases.add(purchases.get(i));
+        }
+        Object rowData[] = new Object[myPurchases.size()];
+        for (int i = 0; i < myPurchases.size();i++){
+                rowData[i] = myPurchases.get(i).getItem().getName() + " " +
+                            myPurchases.get(i).getQuantity() + " " +
+                            myPurchases.get(i).getDiscount() + " " +
+                            myPurchases.get(i).getDate().get(Calendar.DATE)+"/"+purchases.get(i).getDate().get(Calendar.MONTH)+"/"+purchases.get(i).getDate().get(Calendar.YEAR);
+        }
+        Object itemList = JOptionPane.showInputDialog(null, 
+                                                   "Pick an order you would like return.", 
+                                                   "Return", 
+                                                    JOptionPane.QUESTION_MESSAGE, 
+                                                    null,
+                                                    rowData, 
+                                                    rowData[0]);
+        String toReturn = "";
+        if(!itemList.toString().isEmpty()){
+            toReturn = itemList.toString();
+            String[] toReturnSplit = toReturn.split(" ");
+            s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(toReturnSplit[0]), Integer.parseInt(toReturnSplit[1]));
+        }*/
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * 
@@ -231,5 +313,6 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

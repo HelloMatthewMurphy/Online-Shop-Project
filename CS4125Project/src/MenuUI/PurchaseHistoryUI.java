@@ -56,6 +56,12 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(purchaseHistory);
+        if (purchaseHistory.getColumnModel().getColumnCount() > 0) {
+            purchaseHistory.getColumnModel().getColumn(0).setHeaderValue("Item");
+            purchaseHistory.getColumnModel().getColumn(1).setHeaderValue("Quantity");
+            purchaseHistory.getColumnModel().getColumn(2).setHeaderValue("Discount");
+            purchaseHistory.getColumnModel().getColumn(3).setHeaderValue("Date");
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
