@@ -116,7 +116,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addSupervisorActionPerformed
 
     private void addDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDiscountActionPerformed
-        
+        new AddDiscountUI().run();
     }//GEN-LAST:event_addDiscountActionPerformed
 
     /**

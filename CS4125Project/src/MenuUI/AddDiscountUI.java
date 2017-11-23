@@ -5,12 +5,19 @@
  */
 package MenuUI;
 
+import Database.StockItemDB;
+import Services.Shop;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  *
  * @author Jack
  */
 public class AddDiscountUI extends javax.swing.JFrame {
 
+    StockItemDB db;
     /**
      * Creates new form AddDiscountUI
      */
@@ -97,47 +104,31 @@ public class AddDiscountUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void discountValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discountValueActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:,
     }//GEN-LAST:event_discountValueActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_submitActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddDiscountUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddDiscountUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddDiscountUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddDiscountUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    public void setComboBox() throws SQLException{
+        Shop s = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        
+        int i = 0;
+        String[] itemNames = new String[list.size()];
+        for(Map.Entry<String,Integer> entry : list){
+            itemNames[i] = entry.getKey();
+            i++;
         }
-        //</editor-fold>
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(itemNames));
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddDiscountUI().setVisible(true);
-            }
-        });
     }
+    
+    public void run() {
+                this.setVisible(true);
+            }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField discountValue;
