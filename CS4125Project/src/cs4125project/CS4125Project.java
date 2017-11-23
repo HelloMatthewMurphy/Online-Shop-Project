@@ -30,13 +30,14 @@ public class CS4125Project {
         
         // Initialize and load DBs
         DBControler.getInstance().load(DBControler.ALL_DB);
-        
         // TODO code application logic here
-        //MainMenuUI menu = new MainMenuUI();
-        //menu.run();
+        MainMenuUI menu = new MainMenuUI();
+        menu.run();
         //TestingShop.test();
         
-        new ShopAnalysisUI().setVisible(true);
+        //new ShopAnalysisUI().setVisible(true);
         //TestingShop.test();
+        
+        //DBControler.getInstance().getWarehouseDB().shiftBackupFiles();
     }
 }

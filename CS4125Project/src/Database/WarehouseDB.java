@@ -5,22 +5,25 @@
  */
 package Database;
 
-import Stock.StockItem;
 import Storage.Warehouse;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  * @author Shane
  */
 public class WarehouseDB implements IDatabase {
+    
+    private static final String BUP_PATH = "./backups/";
+    private static final int MAX_BACKUPS = 5;
     
     private String filename;
     private List<Warehouse> warehouses;
@@ -42,6 +45,51 @@ public class WarehouseDB implements IDatabase {
     
     @Override
     public void save() throws IOException {
+        saveFile();
+        shiftBackupFiles();
+        saveFile("000");
+    }
+    
+    /**
+     * Rename warehouseinfo.csv.bup00 to warehouseinfo.csv.bup01 etc
+     */
+    public void shiftBackupFiles() {
+        File dir = new File(BUP_PATH);
+        ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
+        
+        // Remove all non-files (folders) from the arraylist
+        for (int i = 0; i < filesInDir.size(); ) {
+            if (!filesInDir.get(i).isFile())
+                filesInDir.remove(i);
+            else
+                i++;
+        }
+        
+        // Sort files by filename reverse alphabetically
+        filesInDir.sort((o1, o2) -> {
+            return -o1.getName().compareTo(o2.getName());
+        });
+        
+        // Print out all files
+        for (int i = 0; i < filesInDir.size(); i++) {            
+            String oldFilename = filesInDir.get(i).getName();
+            int id = Integer.parseInt(oldFilename);
+            String newFilename = String.format("%03d", id + 1);
+            
+            if (newFilename.equals(String.format("%03d", MAX_BACKUPS)))
+                filesInDir.get(i).delete();
+            else
+                filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
+        }
+        
+        System.out.println(filesInDir);
+    }
+    
+    private void saveFile() throws IOException {
+        saveFile(filename);
+    }
+    
+    private void saveFile(String filename) throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         writer.write("Location,Item name,Quantity\n");
         
@@ -81,7 +129,7 @@ public class WarehouseDB implements IDatabase {
         warehouses = new ArrayList();
         int currentWarehouseIndex = -1;
         
-        while ((line = reader.readLine()) != null) {            
+        while ((line = reader.readLine()) != null) {
             // Separate the data
             String[] data = line.split(",");
             

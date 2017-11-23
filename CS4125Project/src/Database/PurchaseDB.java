@@ -64,7 +64,7 @@ public class PurchaseDB implements IDatabase {
     @Override
     public void load() throws IOException
     {
-        System.out.println("Loading purchases");
+        System.out.println("Loading purchases from file: " + filename);
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
@@ -89,7 +89,7 @@ public class PurchaseDB implements IDatabase {
             
             System.out.println("Num of stockItems = " + DBControler.getInstance().getStockItemDB().getStockItems().size());
             StockItem si = DBControler.getStockItemByName(data[0]);
-            System.out.println("siname = " + si.getName());
+//            System.out.println("siname = " + si.getName());
             purchases.add(new Purchase(si, quantity, date));
         }
         
