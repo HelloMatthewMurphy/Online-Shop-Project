@@ -36,18 +36,23 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
                       <Component id="discountValue" min="-2" pref="114" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                       <Component id="submit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="discountText" min="-2" pref="183" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,7 +70,9 @@
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="submit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="115" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Component id="discountText" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace pref="65" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,6 +94,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -98,7 +108,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Discount amount in format (0.X = X% discount)"/>
+        <Property name="text" type="java.lang.String" value="Discount amount in format (XX% discount)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="submit">
@@ -108,6 +118,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="discountText">
     </Component>
   </SubComponents>
 </Form>

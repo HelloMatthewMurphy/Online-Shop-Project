@@ -7,6 +7,7 @@ package MenuUI;
 
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -116,7 +117,11 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addSupervisorActionPerformed
 
     private void addDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDiscountActionPerformed
-        new AddDiscountUI().run();
+        try {
+            new AddDiscountUI().run();
+        } catch (SQLException ex) {
+            Logger.getLogger(SupervisorMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_addDiscountActionPerformed
 
     /**
