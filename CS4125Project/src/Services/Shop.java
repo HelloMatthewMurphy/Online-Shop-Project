@@ -1,14 +1,11 @@
 package Services;
 
-//import Business.Account;
 import Database.DBControler;
 import Observers.*;
 import Stock.StockItem;
 import Storage.Warehouse;
 import User.Customer;
-import Services.Purchase;
 import Services.PurchaseConstraints.PurchaseType;
-import Storage.Location;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -17,8 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
-import javafx.util.Pair;
 
 /**
  * An object that handles 
@@ -59,8 +54,6 @@ public class Shop extends Observable{
      * Creates observers for warehouse, stockItem, Purchase
      */
     private Shop() {
-        //warehouses = new ArrayList<Warehouse>();
-        //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
         addObserver(new WarehouseStockObserver());
         addObserver(new StockItemObserver());
         addObserver(new PurchaseObserver());
@@ -152,7 +145,6 @@ public class Shop extends Observable{
      * @param username User making purchase.
      */
     public void makePurchase(StockItem item, int quantity, String username){
-        System.out.println(username+"weeeeee");
         Purchase pur = new Purchase(item, quantity, username);
         boolean purchaseHappened = false;
         purchaseHappened = pur.makePurchase(account.getLocation());
@@ -162,12 +154,10 @@ public class Shop extends Observable{
                 if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                     DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
                     
-                    // Shane: add purchase to purchase database
                     DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
                     done = true;
                 }
             }
-//            updateAllObservers();
             setChanged();
             notifyObservers();
         }
@@ -235,7 +225,6 @@ public class Shop extends Observable{
      * @param w A warehouse to be added to the warehouseDB
      */
     public void addWarehouse(Warehouse w){
-        //Broken NullPointerException
         DBControler.getWarehouses().add(w);
         setChanged();
         notifyObservers();
