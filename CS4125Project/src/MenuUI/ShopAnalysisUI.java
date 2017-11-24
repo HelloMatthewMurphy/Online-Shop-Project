@@ -33,11 +33,17 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         cbProduct.setEnabled(false);
     }
     
+    /**
+     * Updates combo boxes.
+     */
     private void updateComboBoxes() {
         updateCbCategories();
         updateCbProducts();
     }
     
+    /**
+     * Updates combobox categories
+     */
     private void updateCbCategories() {
         
         ArrayList<String> categories = new ArrayList();
@@ -54,6 +60,9 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
             cbCategory.addItem(category);
     }
     
+    /**
+     * Updates combobox categories.
+     */
     private void updateCbProducts() {
         
         ArrayList<String> products = new ArrayList();
@@ -333,6 +342,9 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         updateLists();
     }//GEN-LAST:event_bGetInfoActionPerformed
     
+    /**
+     * Updates lists.
+     */
     private void updateLists() {
         // Set up search constraints
         int startMonth = cbMonthStart.getSelectedIndex();

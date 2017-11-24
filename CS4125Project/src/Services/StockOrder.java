@@ -15,39 +15,6 @@ public class StockOrder {
      * 
      * @param item The item of the order.
      * @param quantity The amount of StockItem in the order.
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
      */
     public StockOrder(StockItem item, int quantity){
         this.item = item;

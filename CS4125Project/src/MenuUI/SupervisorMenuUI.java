@@ -139,8 +139,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addDiscountActionPerformed
 
-<<<<<<< HEAD
-=======
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             new ShopAnalysisUI().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -148,7 +147,6 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
->>>>>>> b90897a76de289515af78ef86981059c5c396f88
             public void run() {
                 this.setVisible(true);
             }
