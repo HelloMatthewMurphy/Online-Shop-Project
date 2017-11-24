@@ -1,7 +1,6 @@
 package Observers;
 
 import Database.DBControler;
-import Services.Shop;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,5 +14,4 @@ public class WarehouseStockObserver implements Observer{
     public void update(Observable o, Object arg) {
         DBControler.getInstance().save(DBControler.WAREHOUSE_DB);
     }
-    
 }
