@@ -163,7 +163,6 @@ public class Shop extends Observable{
                     DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
                     
                     // Shane: add purchase to purchase database
-                    System.out.println(pur.getUsername()+"GGGGGGG");
                     DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
                     done = true;
                 }

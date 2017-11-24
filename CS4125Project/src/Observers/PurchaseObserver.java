@@ -23,7 +23,6 @@ public class PurchaseObserver implements Observer
     */
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("purchase observer updated");
         DBControler.getInstance().save(DBControler.PURCHASE_DB);
     }
 }

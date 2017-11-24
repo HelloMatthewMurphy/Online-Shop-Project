@@ -5,22 +5,26 @@
  */
 package Database;
 
-import Stock.StockItem;
 import Storage.Warehouse;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A database that holds warehouse information.
  * @author Shane
  */
 public class WarehouseDB implements IDatabase {
+    
+    private static final String BUP_PATH = "./backups/";
+    private static final String BUP_PREFIX = "WH_";
+    private static final int MAX_BACKUPS = 5;
     
     private String filename;
     private List<Warehouse> warehouses;
@@ -50,12 +54,61 @@ public class WarehouseDB implements IDatabase {
         this.filename = filename;
     }
     
+    public void loadBackup(int backupNum) throws IOException {
+        if (backupNum > MAX_BACKUPS)
+            backupNum = MAX_BACKUPS;
+        
+        String loadFilename = BUP_PREFIX + String.format("%03d", backupNum);
+        loadFile(new File(BUP_PATH, loadFilename).getPath());
+    }
+    
     /**
      * saves Warehouses to a CSV file
      * @throws IOException
      */
     @Override
     public void save() throws IOException {
+        saveFile(filename);
+        shiftBackupFiles();
+        saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());
+    }
+    
+    /**
+     * Rename WH_000 to WH_001 etc.
+     */
+    private void shiftBackupFiles() {
+        File dir = new File(BUP_PATH);
+        ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
+        
+        // Remove all non-files (folders) from the arraylist
+        for (int i = 0; i < filesInDir.size(); ) {
+            if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
+                filesInDir.remove(i);
+            else
+                i++;
+        }
+        
+        // Sort files by filename reverse alphabetically
+        filesInDir.sort((o1, o2) -> {
+            return -o1.getName().compareTo(o2.getName());
+        });
+        
+        // Print out all files
+        for (int i = 0; i < filesInDir.size(); i++) {            
+            String oldFilename = filesInDir.get(i).getName();
+            int id = Integer.parseInt(oldFilename.substring(BUP_PREFIX.length()));
+            String newFilename = BUP_PREFIX + String.format("%03d", id + 1);
+            
+            if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
+                filesInDir.get(i).delete();
+            else
+                filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
+        }
+        
+        System.out.println(filesInDir);
+    }
+    
+    private void saveFile(String filename) throws IOException {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         writer.write("Location,Item name,Quantity\n");
         
@@ -79,14 +132,16 @@ public class WarehouseDB implements IDatabase {
             
             writer.flush();
         }
+        
+        writer.close();
     }
+    
+    
     /**
      * Creates Warehouses and adds them to a DB
      * @throws IOException
      */ 
-    @Override
-    public void load() throws IOException {
-        
+    private void loadFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
@@ -98,7 +153,7 @@ public class WarehouseDB implements IDatabase {
         warehouses = new ArrayList();
         int currentWarehouseIndex = -1;
         
-        while ((line = reader.readLine()) != null) {            
+        while ((line = reader.readLine()) != null) {
             // Separate the data
             String[] data = line.split(",");
             
@@ -119,6 +174,12 @@ public class WarehouseDB implements IDatabase {
             
             previousWarehouseName = currentWarehouseName;
         }
+        reader.close();
+    }
+    
+    @Override
+    public void load() throws IOException {
+        loadFile(filename);
     }
     
     /**

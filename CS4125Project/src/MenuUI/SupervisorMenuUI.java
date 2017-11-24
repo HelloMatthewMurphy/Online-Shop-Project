@@ -39,6 +39,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         addSupervisor = new javax.swing.JButton();
         addDiscount = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +66,13 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Check Sales and Returns");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,17 +90,24 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
                         .addGap(143, 143, 143))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(177, 177, 177))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(177, 177, 177))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(130, 130, 130))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(addDiscount)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(addSupervisor)
                 .addGap(18, 18, 18)
                 .addComponent(Logout)
@@ -124,6 +139,16 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addDiscountActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            new ShopAnalysisUI().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+>>>>>>> b90897a76de289515af78ef86981059c5c396f88
             public void run() {
                 this.setVisible(true);
             }
@@ -133,6 +158,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton Logout;
     private javax.swing.JButton addDiscount;
     private javax.swing.JButton addSupervisor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
