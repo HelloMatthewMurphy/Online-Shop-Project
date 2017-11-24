@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 public class AddDiscountUI extends javax.swing.JFrame {
 
     StockItemDB db;
+    Shop s = Shop.getInstance();
     /**
      * Creates new form AddDiscountUI
      * @throws SQLException
@@ -157,11 +158,7 @@ public class AddDiscountUI extends javax.swing.JFrame {
         if(!error){
         db.getStockItemByName((String)jComboBox1.getSelectedItem()).setDiscount(value);            
         
-        try {
-            db.save();
-        } catch (IOException ex) {
-            Logger.getLogger(AddDiscountUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        s.addDiscount();
         JOptionPane.showMessageDialog(null, "Discount updated!");
         }
     }//GEN-LAST:event_submitActionPerformed
@@ -203,7 +200,7 @@ public class AddDiscountUI extends javax.swing.JFrame {
     *
     */
     private void setFirstDiscountText(){
-        Shop s = Shop.getInstance();
+        
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
         
         int i = 0;
@@ -219,86 +216,7 @@ public class AddDiscountUI extends javax.swing.JFrame {
     }
     /**
     * Sets visible to true for the JFrame
-    *
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
+
     */
     public void run() {
                 this.setVisible(true);

@@ -21,11 +21,24 @@ public class PurchaseConstraints {
     private String product;
     private PurchaseType type;
     
+    /**
+    *
+    * @param start
+    * @param end
+    */
     public PurchaseConstraints(GregorianCalendar start, GregorianCalendar end, 
             PurchaseType type) {
         this(start, end, null, null, type);
     }
     
+    /**
+    *
+    * @param start
+    * @param end
+    * @param category
+    * @param product
+    * @param type
+    */
     public PurchaseConstraints(GregorianCalendar start, GregorianCalendar end, 
             String category, String product, PurchaseType type) {
         this.start = start;
@@ -35,22 +48,47 @@ public class PurchaseConstraints {
         this.type = type;
     }
     
+    /**
+    *
+    * @return start
+    * 
+    */
     public GregorianCalendar getStart() {
         return start;
     }
     
+    /**
+    *
+    * @return end
+    * 
+    */
     public GregorianCalendar getEnd() {
         return end;
     }
     
+    /**
+    *
+    * @return category
+    * 
+    */
     public String getCategory() {
         return category;
     }
     
+    /**
+    *
+    * @return product
+    * 
+    */
     public String getProduct() {
         return product;
     }
     
+    /**
+    *
+    * @return type
+    * 
+    */
     public PurchaseType getType() {
         return type;
     }

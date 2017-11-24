@@ -428,9 +428,6 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         ftfReturns.setText(String.format("€%.2f", returnsAmount));
         ftfIncome.setText(String.format("€%.2f", salesAmount - returnsAmount));
     }
-    /**
-     * @param args the command line arguments
-     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
