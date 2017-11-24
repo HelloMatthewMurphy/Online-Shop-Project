@@ -108,6 +108,7 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         tSales = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("The Hanger");
 
         jLabel2.setText("Start:");
 
