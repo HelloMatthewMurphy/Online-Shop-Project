@@ -6,20 +6,31 @@
 package ThirdParty.Delivery;
 
 /**
- *
+ * Fastest but most expensive delivery method.
  * @author Brian
  */
 public class Premium extends DeliveryDecorator {
     
-    
+    /**
+     * 
+     * @param delivery 
+     */
     public Premium(Delivery delivery){
         super(delivery);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public double getPrice(){
         return tempDelivery.getPrice()+10;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getDays(){
         return tempDelivery.getDays()-2;
     }

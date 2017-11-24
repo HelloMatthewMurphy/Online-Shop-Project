@@ -11,9 +11,21 @@ package ThirdParty.Delivery;
  */
 public interface Delivery {
     
+    /**
+     * 
+     * Deliveries that implement this class must have getType method.
+     */
     public String getType();
     
+    /**
+     * 
+     * Deliveries that implement this class must have getPrice method.
+     */
     public double getPrice();
     
+    /**
+     * 
+     * Deliveries that implement this class must have getDays method.
+     */
     public int getDays();
 }

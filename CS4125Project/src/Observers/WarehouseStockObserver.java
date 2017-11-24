@@ -10,6 +10,12 @@ import java.util.Observer;
  */
 public class WarehouseStockObserver implements Observer{
 
+    /**
+    *
+    * @param o
+    * @param arg
+    * 
+    */
     @Override
     public void update(Observable o, Object arg) {
         DBControler.getInstance().save(DBControler.WAREHOUSE_DB);

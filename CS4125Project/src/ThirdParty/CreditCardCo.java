@@ -8,15 +8,24 @@ package ThirdParty;
 import User.Account;
 
 /**
- *
+ * Third party creditcard company
  * @author Jack
  */
 public class CreditCardCo {
     
+    /**
+     * A empty constructor 
+     */
     public CreditCardCo(){
         
     }
     
+    /**
+     * 
+     * @param account users account
+     * @param ammount the ammount to be charged to the user
+     * @return true
+     */
     public boolean makePurchase(Account account, double ammount){
         return true;
     }
