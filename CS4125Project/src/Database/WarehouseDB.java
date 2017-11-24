@@ -135,18 +135,8 @@ public class WarehouseDB implements IDatabase {
         
         writer.close();
     }
-<<<<<<< HEAD
     
     private void loadFile(String filename) throws IOException {
-=======
-    /**
-     * Creates Warehouses and adds them to a DB
-     * @throws IOException
-     */ 
-    @Override
-    public void load() throws IOException {
-        
->>>>>>> c1c8d101df0585315c8b9c84fdaafaab4677cb82
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
