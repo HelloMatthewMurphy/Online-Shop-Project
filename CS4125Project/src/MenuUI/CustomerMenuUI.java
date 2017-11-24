@@ -231,7 +231,6 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     //View purchases
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
          new PurchaseHistoryUI(username).run();
-         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
     
     //Buying items
