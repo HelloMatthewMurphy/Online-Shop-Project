@@ -218,14 +218,24 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     itemNames, 
                                                     itemNames[0]);
         pickedItem = itemList.toString();
+        
+        //Gets amount left for stock chosen
+        int amountAvailable = 0;
+        for(int j = 0; j < list.size(); j++){
+            if(list.get(j).getKey().equals(pickedItem)){
+               amountAvailable = list.get(j).getValue();
+            }
+        }
+        
         //Show info on item
         StockItem stock = DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem);
         NumberFormat formatter = new DecimalFormat("#0.00");
         JOptionPane.showMessageDialog(null,
                                     "Item Name: " + pickedItem + "\n" +
                                             "Price: €" + formatter.format(stock.getPrice()) + "\n" +
-                                            "Description: " + stock.getDescription() + "\n",
-                                    "Info on " + pickedItem,
+                                            "Description: " + stock.getDescription() + "\n" +
+                                            "Quantity left: " + amountAvailable,
+                                            "Info on " + pickedItem,
                                     JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -346,35 +356,6 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     null);
         amount = Integer.parseInt(howMuch.toString());
         s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount);
-        
-        /*Shop s = Shop.getInstance();
-        PurchaseDB db = DBControler.getInstance().getPurchaseDB();
-        List<Purchase> purchases = db.getPurchases();
-        List<Purchase> myPurchases = new ArrayList<Purchase>();
-        for(int i = 0; i < purchases.size(); i++){
-            if(username.equals(purchases.get(i).getUsername()))
-                myPurchases.add(purchases.get(i));
-        }
-        Object rowData[] = new Object[myPurchases.size()];
-        for (int i = 0; i < myPurchases.size();i++){
-                rowData[i] = myPurchases.get(i).getItem().getName() + " " +
-                            myPurchases.get(i).getQuantity() + " " +
-                            myPurchases.get(i).getDiscount() + " " +
-                            myPurchases.get(i).getDate().get(Calendar.DATE)+"/"+purchases.get(i).getDate().get(Calendar.MONTH)+"/"+purchases.get(i).getDate().get(Calendar.YEAR);
-        }
-        Object itemList = JOptionPane.showInputDialog(null, 
-                                                   "Pick an order you would like return.", 
-                                                   "Return", 
-                                                    JOptionPane.QUESTION_MESSAGE, 
-                                                    null,
-                                                    rowData, 
-                                                    rowData[0]);
-        String toReturn = "";
-        if(!itemList.toString().isEmpty()){
-            toReturn = itemList.toString();
-            String[] toReturnSplit = toReturn.split(" ");
-            s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(toReturnSplit[0]), Integer.parseInt(toReturnSplit[1]));
-        }*/
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
