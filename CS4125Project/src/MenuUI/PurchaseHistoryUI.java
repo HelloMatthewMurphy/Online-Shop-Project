@@ -45,8 +45,6 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         purchaseHistory = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         purchaseHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
