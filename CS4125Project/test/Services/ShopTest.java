@@ -98,7 +98,7 @@ public class ShopTest {
     public void testMakePurchase() {
         System.out.println("makePurchase");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
-        int quantity = 2;
+        int quantity = 1;
         Shop instance = Shop.getInstance();
         instance.setAccount(new Customer("wow", "test", "testing"));
         instance.makePurchase(item, quantity, "wow");
