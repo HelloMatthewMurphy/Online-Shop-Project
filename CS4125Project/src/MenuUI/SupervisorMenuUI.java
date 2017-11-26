@@ -203,9 +203,6 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonRollbackActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
             public void run() {
                 this.setVisible(true);
             }

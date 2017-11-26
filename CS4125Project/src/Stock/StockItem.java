@@ -37,6 +37,7 @@ public class StockItem {
  * @param price Price of Stock Item
  * @param category A category that the Stock Item is set to
  * @param description A short description of the Stock Item
+ * @param discount a multiplier that changes the cost of the stock item
  * 
  */
     public StockItem(String name, double price, String category, String description, double discount){

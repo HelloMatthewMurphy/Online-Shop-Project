@@ -5,13 +5,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
-<<<<<<< HEAD
  *
  * @author Matthew Murphy
 =======
  * 
  * @author Matthew
->>>>>>> 634bac179c7fcde41eb87e4378c787a696f182d9
  */
 public class PurchaseObserver implements Observer
 {
