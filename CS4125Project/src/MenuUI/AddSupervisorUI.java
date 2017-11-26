@@ -59,8 +59,6 @@ public class AddSupervisorUI extends javax.swing.JFrame {
         RegisterEmail = new javax.swing.JTextField();
         RegisterPassword = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel1.setText("Create Supervisor Account");
 
         jButton1.setText("Register");
