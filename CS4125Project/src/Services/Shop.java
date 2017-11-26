@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * An object that handles 
+ * An object that allows user to check stock, buy and return items.
  * @author Matthew Murphy
  */
 

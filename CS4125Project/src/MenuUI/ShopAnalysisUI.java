@@ -115,7 +115,7 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tSales = new javax.swing.JTable();
 
-        setTitle("The Hanger");
+        setTitle("Frog");
 
         jLabel2.setText("Start:");
 
