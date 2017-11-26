@@ -33,11 +33,17 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         cbProduct.setEnabled(false);
     }
     
+    /**
+     * Updates combo boxes.
+     */
     private void updateComboBoxes() {
         updateCbCategories();
         updateCbProducts();
     }
     
+    /**
+     * Updates combobox categories
+     */
     private void updateCbCategories() {
         
         ArrayList<String> categories = new ArrayList();
@@ -54,6 +60,9 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
             cbCategory.addItem(category);
     }
     
+    /**
+     * Updates combobox categories.
+     */
     private void updateCbProducts() {
         
         ArrayList<String> products = new ArrayList();
@@ -108,6 +117,7 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         tSales = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("The Hanger");
 
         jLabel2.setText("Start:");
 
@@ -332,6 +342,9 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         updateLists();
     }//GEN-LAST:event_bGetInfoActionPerformed
     
+    /**
+     * Updates lists.
+     */
     private void updateLists() {
         // Set up search constraints
         int startMonth = cbMonthStart.getSelectedIndex();
@@ -396,9 +409,6 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         ftfReturns.setText(String.format("€%.2f", returnsAmount));
         ftfIncome.setText(String.format("€%.2f", salesAmount - returnsAmount));
     }
-    /**
-     * @param args the command line arguments
-     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

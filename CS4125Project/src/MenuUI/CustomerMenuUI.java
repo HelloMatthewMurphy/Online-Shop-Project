@@ -175,7 +175,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         int i = 0;
         String[] itemNames = new String[list.size()];
         for(Map.Entry<String,Integer> entry : list){
-            itemNames[i] = entry.getKey() + " - €" + formatter.format(DBControler.getInstance().getStockItemDB().getStockItemByName(entry.getKey()).getPrice());
+            itemNames[i] = entry.getKey() + " : €" + formatter.format(DBControler.getInstance().getStockItemDB().getStockItemByName(entry.getKey()).getPrice());
             i++;
         }
         
@@ -191,7 +191,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         String[] selectionSplit = itemList.toString().split(" ");
         pickedItem = selectionSplit[0]; 
         
-        MenuUI.buyItemFromShop(pickedItem);
+        buyItemFromShop(pickedItem);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //Check Stock
@@ -231,8 +231,87 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     //View purchases
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
          new PurchaseHistoryUI(username).run();
-         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+    
+    //Buying items
+    public void buyItemFromShop(String pickedItem){
+        Shop s = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        double price = 0;
+        int amountWanted = 0;
+        int amountAvailable = 0;
+        boolean donePickingamount = false;
+        for(int j = 0; j < list.size(); j++){
+            if(list.get(j).getKey().equals(pickedItem)){
+               amountAvailable = list.get(j).getValue();
+            }
+        }
+        
+        //Getting amount user wants
+        while(!donePickingamount){
+            Object howMuchWanted = JOptionPane.showInputDialog(null, 
+                                                       "There are " + amountAvailable + " " + pickedItem + "'s left in stock. How many would you like?", 
+                                                       "Stock", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null,
+                                                        null, 
+                                                        null);
+            amountWanted = Integer.parseInt(howMuchWanted.toString());
+            if(amountWanted <= amountAvailable)
+                donePickingamount = true;
+            else
+                JOptionPane.showMessageDialog(null,
+                                            "You can not buy that much, you can get a maximum of " + amountAvailable + ".",
+                                            "You cant have that much " + pickedItem + "'s",
+                                            JOptionPane.WARNING_MESSAGE);
+        }
+        price += DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem).getPrice() * amountWanted;
+        
+        //Getting delevery type
+        Delivery delivery = null;
+        boolean validD = false;
+        while(validD == false){
+            String[] delvTypesStrings = {"Slow", "Regular", "Premium"};
+            Object delvTypes = JOptionPane.showInputDialog(null, 
+                                                   "What type of Delivery would you like?", 
+                                                   "Stock", 
+                                                    JOptionPane.QUESTION_MESSAGE, 
+                                                    null,
+                                                    delvTypesStrings, 
+                                                    delvTypesStrings[2]);
+            String pickedDelv = delvTypes.toString();
+
+            switch (pickedDelv) {
+                case "Slow":
+                    delivery = new MoneySaver(new BasicDelivery());
+                    validD = true;
+                    break;
+                case "Regular":
+                    delivery = new BasicDelivery();
+                    validD = true;
+                    break;
+                case "Premium":
+                    delivery = new Premium(new BasicDelivery());
+                    validD = true;
+                    break;
+                default:
+                    break;
+            }
+            price += delivery.getPrice();
+        }
+        CreditCardCo credit = new CreditCardCo();
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        if(!pickedItem.equals("")){
+            s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername());
+            credit.makePurchase(s.getAccount(), price);
+            JOptionPane.showMessageDialog(null,
+                                            "Thanks for buying " + amountWanted + " " + pickedItem + "'s.\n" +
+                                                    "They will take " + delivery.getDays() + " day's to arrive!\n" +
+                                                    "The total cost was €" + formatter.format(price) + ".",
+                                            "Purchase Complete!!!",
+                                            JOptionPane.PLAIN_MESSAGE);
+        }
+    }
     
     //Return Item
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

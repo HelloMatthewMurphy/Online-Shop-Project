@@ -1,14 +1,11 @@
 package Services;
 
-//import Business.Account;
 import Database.DBControler;
 import Observers.*;
 import Stock.StockItem;
 import Storage.Warehouse;
 import User.Customer;
-import Services.Purchase;
 import Services.PurchaseConstraints.PurchaseType;
-import Storage.Location;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -17,11 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
-import javafx.util.Pair;
 
 /**
- *
+ * An object that handles 
  * @author Matthew Murphy
  */
 
@@ -35,6 +30,11 @@ public class Shop extends Observable{
         private boolean descending;
         private boolean byQuantity;
         
+    /**
+     * Sets a descending boolean, and byQuantity boolean
+     * @param descending A boolean which determines if the order is ascending or descending
+     * @param byQuantity A boolean which determines if the order is based of quantity
+     */
         SortOrder(boolean descending, boolean byQuantity)
         {
             this.descending = descending;
@@ -50,24 +50,35 @@ public class Shop extends Observable{
     private int quantity;
     private Customer account;
     
+    /**
+     * Creates observers for warehouse, stockItem, Purchase
+     */
     private Shop() {
-        //warehouses = new ArrayList<Warehouse>();
-        //warehouses.addAll(DBControler.getInstance().getWarehouseDB().getWarehouses());
         addObserver(new WarehouseStockObserver());
         addObserver(new StockItemObserver());
         addObserver(new PurchaseObserver());
     }
-    
+    /**
+     * 
+     * @return instance
+     */
     public static Shop getInstance(){
         if(instance == null)
             instance = new Shop();
         return instance;
     }
-    
+    /**
+     * 
+     * @param account Sets the shop account to the current user
+     */
     public void setAccount(Customer account){
         this.account = account;
     }
-    
+    /**
+     * 
+     * @param order passes the sorted stock
+     * @return result
+     */
     public List<Entry<String, Integer>> getSortedStock(SortOrder order)
     {
         Map<String, Integer> allStock = checkStock();
@@ -90,6 +101,11 @@ public class Shop extends Observable{
         return result;
     }
     
+    /**
+     * 
+     * @return totalStock
+     */
+    
     public Map<String, Integer> checkStock(){
         Map<String, Integer> tempStock;
         Map<String, Integer> totalStock = new HashMap<String, Integer>();
@@ -102,6 +118,11 @@ public class Shop extends Observable{
         return totalStock;
     }
     
+    /**
+     * 
+     * @param item Item to be returned.
+     * @param quantity The amount of the item to be returned.
+     */
     public void returnItem(StockItem item, int quantity){
         boolean done = false;
         for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
@@ -117,8 +138,13 @@ public class Shop extends Observable{
         notifyObservers();
     }
     
+    /**
+     * 
+     * @param item Item to be bought.
+     * @param quantity amount of item to be bought.
+     * @param username User making purchase.
+     */
     public void makePurchase(StockItem item, int quantity, String username){
-        System.out.println(username+"weeeeee");
         Purchase pur = new Purchase(item, quantity, username);
         boolean purchaseHappened = false;
         purchaseHappened = pur.makePurchase(account.getLocation());
@@ -128,13 +154,10 @@ public class Shop extends Observable{
                 if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                     DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
                     
-                    // Shane: add purchase to purchase database
-                    System.out.println(pur.getUsername()+"GGGGGGG");
                     DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
                     done = true;
                 }
             }
-//            updateAllObservers();
             setChanged();
             notifyObservers();
         }
@@ -142,10 +165,8 @@ public class Shop extends Observable{
     
     /**
      * Get the list of sales or returns which fall within the given date range
-     * @param start The date from which to start looking
-     * @param end The date where you look until
-     * @param getSales If true, return sales. If false, return returns
-     * @return The list of sales or returns which fall within the range
+     * @param constraints 
+     * @return purchases The list of sales or returns which fall within the range
      */
 //    public List<Purchase> getPurchases(GregorianCalendar start, GregorianCalendar end, boolean getSales)
     public List<Purchase> getPurchases(PurchaseConstraints constraints)
@@ -191,18 +212,28 @@ public class Shop extends Observable{
         return purchases;
     }
     
+    /**
+     * Updates database when discount is made.
+     */
     public void addDiscount(){
         setChanged();
         notifyObservers();
     }
     
+    /**
+     * 
+     * @param w A warehouse to be added to the warehouseDB
+     */
     public void addWarehouse(Warehouse w){
-        //Broken NullPointerException
         DBControler.getWarehouses().add(w);
         setChanged();
         notifyObservers();
     }
     
+    /**
+     * 
+     * @return account
+     */
     public Customer getAccount(){
         return account;
     }

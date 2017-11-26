@@ -178,9 +178,6 @@ public class AddSupervisorUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RegisterUsernameActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
             public void run() {
                 this.setVisible(true);
             }

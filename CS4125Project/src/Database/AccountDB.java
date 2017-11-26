@@ -108,7 +108,10 @@ public class AccountDB implements IDatabase {
         }
         fileReader.close();
     }
-    
+    /**
+     * 
+     * @return accounts
+     */
     public List<Account> getAccounts() {
         return accounts;
     }

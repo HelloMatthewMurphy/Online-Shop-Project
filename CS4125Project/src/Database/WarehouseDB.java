@@ -176,6 +176,10 @@ public class WarehouseDB implements IDatabase {
         writer.close();
     }
     
+    /**
+     * Creates Warehouses and adds them to a DB
+     * @throws IOException
+     */ 
     private void loadFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers

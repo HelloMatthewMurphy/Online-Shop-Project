@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Database/DBControler.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Database/WarehouseDB.java</file>
             <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/MenuUI/CustomerMenuUI.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Observers/WarehouseStockObserver.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Storage/Warehouse.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Observers/PurchaseObserver.java</file>
             <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Services/Shop.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Stock/StockItem.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/test/Services/ShopTest.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/User/Customer.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Observers/StockItemObserver.java</file>
             <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/MenuUI/MenuUI.java</file>
-            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Services/Purchase.java</file>
+            <file>file:/C:/Users/Ryan%20Murphy/Documents/GitHub/Online-Shop-Project/CS4125Project/src/Control/Login.java</file>
         </group>
     </open-files>
 </project-private>

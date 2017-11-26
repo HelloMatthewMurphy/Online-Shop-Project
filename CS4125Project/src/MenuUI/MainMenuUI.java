@@ -69,6 +69,7 @@ public class MainMenuUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("The Hanger");
 
         LoginButton.setText("Login");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -286,7 +287,7 @@ public class MainMenuUI extends javax.swing.JFrame {
                     }
 
                 }
-                else JOptionPane.showMessageDialog(null,"wrong details retard");
+                else JOptionPane.showMessageDialog(null,"Invalid combination of email and password.");
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void RegisterUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterUsernameActionPerformed
