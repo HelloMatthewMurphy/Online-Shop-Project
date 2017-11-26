@@ -12,8 +12,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -60,6 +63,43 @@ public class WarehouseDB implements IDatabase {
         
         String loadFilename = BUP_PREFIX + String.format("%03d", backupNum);
         loadFile(new File(BUP_PATH, loadFilename).getPath());
+    }
+    
+    public ArrayList<GregorianCalendar> getBackupTimes() throws IOException {
+        File dir = new File(BUP_PATH);
+        ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
+        
+        // Remove all non-files (folders) from the arraylist, and ones which are
+        // not relevant to this type
+        System.out.println(filesInDir.size());
+        
+        for (int i = 0; i < filesInDir.size(); ) {
+            System.out.println(filesInDir);
+            if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
+                filesInDir.remove(i);
+            else
+                i++;
+        }
+        
+        //HashMap<String, GregorianCalendar> result = new HashMap();
+        ArrayList<GregorianCalendar> result = new ArrayList();
+        
+        // Sort files by filename alphabetically
+        filesInDir.sort((o1, o2) -> {
+            return o1.getName().compareTo(o2.getName());
+        });
+        
+        // Get Dates
+        for (File file : filesInDir) {
+            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+            long ms = attr.creationTime().toMillis();
+            GregorianCalendar date = new GregorianCalendar();
+            date.setTimeInMillis(ms);
+            
+            result.add(date);
+        }
+        
+        return null;
     }
     
     /**
