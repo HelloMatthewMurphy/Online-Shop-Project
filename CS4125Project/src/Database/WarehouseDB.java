@@ -99,7 +99,7 @@ public class WarehouseDB implements IDatabase {
             result.add(date);
         }
         
-        return null;
+        return result;
     }
     
     /**

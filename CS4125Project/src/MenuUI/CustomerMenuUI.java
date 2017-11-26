@@ -175,6 +175,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         int i = 0;
         String[] itemNames = new String[list.size()];
         for(Map.Entry<String,Integer> entry : list){
+            System.out.println("name = " + entry.getKey());
             itemNames[i] = entry.getKey() + " : €" + formatter.format(DBControler.getInstance().getStockItemDB().getStockItemByName(entry.getKey()).getPrice());
             i++;
         }

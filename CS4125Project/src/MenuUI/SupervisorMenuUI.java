@@ -5,9 +5,13 @@
  */
 package MenuUI;
 
+import Database.DBControler;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -40,6 +44,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
         addSupervisor = new javax.swing.JButton();
         addDiscount = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        buttonRollback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +78,13 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
             }
         });
 
+        buttonRollback.setText("Rollback Databses (BE CAREFUL!)");
+        buttonRollback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRollbackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,9 +96,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
                         .addComponent(Logout)
                         .addGap(170, 170, 170))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addSupervisor))
+                        .addComponent(addDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -97,17 +107,25 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(130, 130, 130))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(addSupervisor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonRollback, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(addDiscount)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonRollback)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addSupervisor)
                 .addGap(18, 18, 18)
                 .addComponent(Logout)
@@ -144,6 +162,47 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
             new ShopAnalysisUI().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void buttonRollbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRollbackActionPerformed
+        ArrayList<GregorianCalendar> backupDates = null;
+        try {
+            backupDates = DBControler.getInstance().getWarehouseDB().getBackupTimes();
+        }
+        catch (IOException ex) {
+            return;
+        }
+                
+        String message = "Please enter a value from 0 to " + (backupDates.size() - 1) + ", corresponding to the backup you which to use\n";
+        for (int i = 0; i < backupDates.size(); i++) {
+            GregorianCalendar date = backupDates.get(i);
+            int day = date.get(Calendar.DAY_OF_MONTH);
+            int month = date.get(Calendar.MONTH) + 1;
+            int year = date.get(Calendar.YEAR);
+            int hour = date.get(Calendar.HOUR_OF_DAY);
+            int minute = date.get(Calendar.MINUTE);
+            int second = date.get(Calendar.SECOND);
+            message += String.format("%2d:\tCreated on %02d/%02d/%02d at %02d:%02d:%02d\n",
+                    i, day, month, year, hour, minute, second);
+        }
+        String input = JOptionPane.showInputDialog(message);
+        
+        int backupId = Integer.parseInt(input);
+        
+        if (backupId >= 0 && backupId < backupDates.size()) {
+            try {
+                DBControler.getInstance().getPurchaseDB().loadBackup(backupId);
+                DBControler.getInstance().getWarehouseDB().loadBackup(backupId);
+                
+                JOptionPane.showMessageDialog(null, "Successfully rolled back databases");
+            }
+            catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error, could not rollback databases");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please enter a value from 0 to " + (backupDates.size() - 1));
+        }
+    }//GEN-LAST:event_buttonRollbackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -156,6 +215,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton Logout;
     private javax.swing.JButton addDiscount;
     private javax.swing.JButton addSupervisor;
+    private javax.swing.JButton buttonRollback;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

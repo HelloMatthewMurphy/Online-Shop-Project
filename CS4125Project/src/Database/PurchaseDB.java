@@ -85,7 +85,7 @@ public class PurchaseDB implements IDatabase {
             result.add(date);
         }
         
-        return null;
+        return result;
     }
     
     public void loadBackup(int backupNum) throws IOException {
