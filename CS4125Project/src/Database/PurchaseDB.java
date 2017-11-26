@@ -146,6 +146,7 @@ public class PurchaseDB implements IDatabase {
     @Override
     public void save() throws IOException
     {
+        System.out.println("-----SAVING PURCHASES-----");
         saveFile(filename);
         shiftBackupFiles();
         saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());

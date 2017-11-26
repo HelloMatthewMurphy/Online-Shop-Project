@@ -92,7 +92,7 @@ public class WarehouseDB implements IDatabase {
         // Get Dates
         for (File file : filesInDir) {
             BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-            long ms = attr.creationTime().toMillis();
+            long ms = attr.lastModifiedTime().toMillis();
             GregorianCalendar date = new GregorianCalendar();
             date.setTimeInMillis(ms);
             
@@ -111,6 +111,9 @@ public class WarehouseDB implements IDatabase {
         saveFile(filename);
         shiftBackupFiles();
         saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());
+        
+        
+        System.out.println("----SAVING WAREHOUSES-----");
     }
     
     /**
