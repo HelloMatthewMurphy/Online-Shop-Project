@@ -57,10 +57,8 @@ public class PurchaseDB implements IDatabase {
         
         // Remove all non-files (folders) from the arraylist, and ones which are
         // not relevant to this type
-        System.out.println(filesInDir.size());
         
         for (int i = 0; i < filesInDir.size(); ) {
-            System.out.println(filesInDir);
             if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
                 filesInDir.remove(i);
             else
@@ -107,10 +105,8 @@ public class PurchaseDB implements IDatabase {
         
         // Remove all non-files (folders) from the arraylist, and ones which are
         // not relevant to this type
-        System.out.println(filesInDir.size());
         
         for (int i = 0; i < filesInDir.size(); ) {
-            System.out.println(filesInDir);
             if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
                 filesInDir.remove(i);
             else
@@ -128,15 +124,11 @@ public class PurchaseDB implements IDatabase {
             int id = Integer.parseInt(oldFilename.substring(BUP_PREFIX.length()));
             String newFilename = BUP_PREFIX + String.format("%03d", id + 1);
             
-            System.out.println("\t" + newFilename);
             
             if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
                 filesInDir.get(i).delete();
-            else
-                System.out.println(filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename)));
         }
         
-        System.out.println(filesInDir);
     }
     
     /**
@@ -146,7 +138,6 @@ public class PurchaseDB implements IDatabase {
     @Override
     public void save() throws IOException
     {
-        System.out.println("-----SAVING PURCHASES-----");
         saveFile(filename);
         shiftBackupFiles();
         saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());
@@ -173,7 +164,6 @@ public class PurchaseDB implements IDatabase {
         
         writer.flush();
         
-        System.out.println("purchase db saved");
         
         writer.close();
     }
@@ -190,7 +180,6 @@ public class PurchaseDB implements IDatabase {
     
     private void loadFile(String filename) throws IOException
     {
-        System.out.println("Loading purchases from file: " + filename);
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
         reader.readLine();
@@ -215,10 +204,7 @@ public class PurchaseDB implements IDatabase {
             
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
-            System.out.println("Line = " + line);
-            //System.out.println("Num of stockItems = " + DBControler.getInstance().getStockItemDB().getStockItems().size());
             StockItem si = DBControler.getStockItemByName(data[0]);
-            System.out.println("siname = " + si.getCategory());
             purchases.add(new Purchase(si, quantity, username, date));
         }
         

@@ -69,7 +69,6 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         
         for (StockItem si : DBControler.getInstance().getStockItemDB().getStockItems().values()) {
             
-            System.out.println(si.getCategory() + ", " + cbCategory.getSelectedItem());
             
             if (!products.contains(si.getName()) 
                     && si.getCategory().equals(cbCategory.getSelectedItem()))
@@ -323,14 +322,13 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
-        System.out.println(cbCategory.getSelectedItem());
         updateCbProducts();
         
         cbProduct.setEnabled(!cbCategory.getSelectedItem().equals("-- any --"));
     }//GEN-LAST:event_cbCategoryActionPerformed
 
     private void cbProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductActionPerformed
-        System.out.println(cbProduct.getSelectedItem());
+
     }//GEN-LAST:event_cbProductActionPerformed
 
     private void ftfStartYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfStartYearActionPerformed

@@ -35,7 +35,6 @@ public class AddSupervisorUI extends javax.swing.JFrame {
         scan = new Scanner(System.in);
         db = DBControler.getInstance().getAccountDB();
         users = db.getAccounts();
-        System.out.println(users.size());
         username = "";
         password = "";
         email = "";
@@ -138,13 +137,10 @@ public class AddSupervisorUI extends javax.swing.JFrame {
         boolean valid = false;
             while (valid == false){
                 username = RegisterUsername.getText();
-                System.out.println(username);
                 RegisterUsername.setText("");
                 password = RegisterPassword.getText();
-                System.out.println(password);
                 RegisterPassword.setText("");
                 email = RegisterEmail.getText();
-                System.out.println(email);
                 RegisterEmail.setText("");
                 
                     if(users.isEmpty()){
@@ -162,7 +158,6 @@ public class AddSupervisorUI extends javax.swing.JFrame {
             }  
                 AccountFactory factory = new AccountFactory();
                 users.add((Supervisor)factory.createAccount("supervisor", username, password, email));
-               System.out.println(users.size());
                 try{
                 db.save();
                 JOptionPane.showMessageDialog(null,"Successfully Registered!");

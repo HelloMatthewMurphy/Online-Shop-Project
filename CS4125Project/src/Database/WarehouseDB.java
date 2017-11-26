@@ -71,10 +71,8 @@ public class WarehouseDB implements IDatabase {
         
         // Remove all non-files (folders) from the arraylist, and ones which are
         // not relevant to this type
-        System.out.println(filesInDir.size());
         
         for (int i = 0; i < filesInDir.size(); ) {
-            System.out.println(filesInDir);
             if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
                 filesInDir.remove(i);
             else
@@ -113,7 +111,6 @@ public class WarehouseDB implements IDatabase {
         saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());
         
         
-        System.out.println("----SAVING WAREHOUSES-----");
     }
     
     /**
@@ -148,7 +145,6 @@ public class WarehouseDB implements IDatabase {
                 filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
         }
         
-        System.out.println(filesInDir);
     }
     
     private void saveFile(String filename) throws IOException {

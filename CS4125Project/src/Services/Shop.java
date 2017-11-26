@@ -200,7 +200,6 @@ public class Shop extends Observable{
             boolean isCategory = (category == null)
                     || category.equals(purchases.get(i).getItem().getCategory());
             
-            System.out.println(purchases.get(i).getItem().getName() + ", range = (" + start.get(Calendar.YEAR) + ", " + end.get(Calendar.YEAR) + ") " + cmpDate);
             
             // Remove entries if needed
             if (matchType && inRange && isName && isCategory)

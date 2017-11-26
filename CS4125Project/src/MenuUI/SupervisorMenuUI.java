@@ -78,7 +78,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
             }
         });
 
-        buttonRollback.setText("Rollback Databses (BE CAREFUL!)");
+        buttonRollback.setText("Rollback Databases (BE CAREFUL!)");
         buttonRollback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRollbackActionPerformed(evt);

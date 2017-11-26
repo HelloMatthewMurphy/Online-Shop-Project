@@ -66,9 +66,7 @@ public class TestWarehouseDB {
         
         // print loaded warehouses
         for (Warehouse wh : loadedWarehouses) {
-            System.out.println("NAME: " + wh.getName());
             for (String siName : wh.checkStock().keySet()) {
-                System.out.println(siName + "\t" + wh.checkStock().get(siName));
             }
         }
         
@@ -101,12 +99,5 @@ public class TestWarehouseDB {
         }
         
         // print loaded stock items
-        for (String siName : loadedStockItems.keySet()) {
-            System.out.printf("%s,%.2f,%s,%s\n",
-                    loadedStockItems.get(siName).getName(),
-                    loadedStockItems.get(siName).getPrice(),
-                    loadedStockItems.get(siName).getCategory(),
-                    loadedStockItems.get(siName).getDescription());
-        }
     }
 }

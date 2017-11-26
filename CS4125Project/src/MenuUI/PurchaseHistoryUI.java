@@ -87,11 +87,9 @@ public class PurchaseHistoryUI extends javax.swing.JFrame {
      
     
     public void addRowsToTable(){
-        //System.out.println(username);
         DefaultTableModel model = (DefaultTableModel) purchaseHistory.getModel();
         Object rowData[] = new Object[4];
         for (int i = 0; i < purchases.size();i++){
-            System.out.println(purchases.get(i).getUsername());
             if(username.equals(purchases.get(i).getUsername())){
             rowData[0] = purchases.get(i).getItem().getName();
             rowData[1] = purchases.get(i).getQuantity();

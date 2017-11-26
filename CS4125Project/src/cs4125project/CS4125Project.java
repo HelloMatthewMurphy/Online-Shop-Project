@@ -34,15 +34,5 @@ public class CS4125Project {
         // TODO code application logic here
         MainMenuUI menu = new MainMenuUI();
         menu.run();
-        //TestingShop.test();
-        
-        //new ShopAnalysisUI().setVisible(true);
-        //TestingShop.test();
-        
-        for (Warehouse wh : DBControler.getInstance().getWarehouseDB().getWarehouses()) {
-            for (String siName : wh.checkStock().keySet())
-                System.out.println(siName + ", " + wh.checkStock().get(siName));
-        }
-        //DBControler.getInstance().getWarehouseDB().shiftBackupFiles();
     }
 }

@@ -56,11 +56,8 @@ public class AccountDB implements IDatabase {
     @Override
     public void save() throws IOException{
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));	
-        System.out.println("hI :)");
         writer.write("Username,Password,Email\n\n");
-        System.out.println(accounts.size());
         for (int i = 0; i < accounts.size();i++){
-            System.out.println(i);
             writer.write(String.valueOf(accounts.get(i).getUsername()));
             writer.write(",");
             writer.write(String.valueOf(accounts.get(i).getPassword()));
@@ -84,7 +81,6 @@ public class AccountDB implements IDatabase {
      */ 
     @Override
     public void load() throws IOException {
-        System.out.println("running");
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
         BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
         fileReader.readLine();
@@ -99,10 +95,8 @@ public class AccountDB implements IDatabase {
             String type = data[3];
             if (type.equals("S")){
                 accounts.add(new Supervisor(username,password,email));
-                System.out.println("Supervisor");
             }
             else if (type.equals("C")){
-                System.out.println("Customer");
                 accounts.add(new Customer(username,password,email));
             }
         }

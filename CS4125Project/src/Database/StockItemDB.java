@@ -33,7 +33,6 @@ public class StockItemDB implements IDatabase {
      * A constructor sets filename and a hashmap of StockItems
      */
     public StockItemDB() {
-        System.out.println("AAAAAAAA Created StockItemDB");
         filename = "";
         stockItems = new HashMap();
     }
@@ -70,10 +69,8 @@ public class StockItemDB implements IDatabase {
         
         // Remove all non-files (folders) from the arraylist, and ones which are
         // not relevant to this type
-        System.out.println(filesInDir.size());
         
         for (int i = 0; i < filesInDir.size(); ) {
-            System.out.println(filesInDir);
             if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
                 filesInDir.remove(i);
             else
@@ -91,15 +88,11 @@ public class StockItemDB implements IDatabase {
             int id = Integer.parseInt(oldFilename.substring(BUP_PREFIX.length()));
             String newFilename = BUP_PREFIX + String.format("%03d", id + 1);
             
-            System.out.println("\t" + newFilename);
             
             if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
                 filesInDir.get(i).delete();
-            else
-                System.out.println(filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename)));
-        }
+                        }
         
-        System.out.println(filesInDir);
     }
     
     /**
@@ -154,8 +147,6 @@ public class StockItemDB implements IDatabase {
             stockItems.put(data[0], si);
         }
         
-        System.out.println("Stockitem filename = " + filename);
-        System.out.println("loading stockitems, size = " + stockItems.size());
         
         reader.close();        
     }
