@@ -146,21 +146,26 @@ public class Shop extends Observable{
      */
     public void makePurchase(StockItem item, int quantity, String username){
         Purchase pur = new Purchase(item, quantity, username);
-        boolean purchaseHappened = false;
-        purchaseHappened = pur.makePurchase(account.getLocation());
-        if(purchaseHappened){
-            boolean done = false;
-            for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
-                if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
-                    DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
-                    
-                    DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
-                    done = true;
+        //Precondition - you can not purchace a negative.
+        if(quantity > 0){
+            boolean purchaseHappened = false;
+            purchaseHappened = pur.makePurchase(account.getLocation());
+            if(purchaseHappened){
+                boolean done = false;
+                for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
+                    if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
+                        DBControler.getWarehouses().get(i).buyStock(item.getName(), quantity);
+
+                        DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
+                        done = true;
+                    }
                 }
+                setChanged();
+                notifyObservers();
             }
-            setChanged();
-            notifyObservers();
         }
+        //Postcondition - the purchace must of been from the user logged in.
+        assert pur.getUsername().equals(account.getUsername());
     }
     
     /**
@@ -168,7 +173,6 @@ public class Shop extends Observable{
      * @param constraints 
      * @return purchases The list of sales or returns which fall within the range
      */
-//    public List<Purchase> getPurchases(GregorianCalendar start, GregorianCalendar end, boolean getSales)
     public List<Purchase> getPurchases(PurchaseConstraints constraints)
     {
         GregorianCalendar start = constraints.getStart();
