@@ -236,6 +236,7 @@ public class MainMenuUI extends javax.swing.JFrame {
                 try{
                 db.save();
                 JOptionPane.showMessageDialog(null,"Successfully Registered!");
+                users = db.getAccounts();
                 }catch(IOException e){
                     
                 }
