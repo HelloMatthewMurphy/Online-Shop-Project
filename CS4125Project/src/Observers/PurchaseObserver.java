@@ -7,9 +7,6 @@ import java.util.Observer;
 /**
  *
  * @author Matthew Murphy
-=======
- * 
- * @author Matthew
  */
 public class PurchaseObserver implements Observer
 {
