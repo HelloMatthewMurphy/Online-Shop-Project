@@ -51,8 +51,10 @@ CS4125Project/nb-configuration.xml
 
 # Misc
 *.swp
+private.properties
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
-CS4125Project/stockiteminfo.csv
+CS4125Project/*.csv
 CS4125Project/src/MenuUI/SupervisorMenuUI.java
+CS4125Project/backups/
