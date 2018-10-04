@@ -73,6 +73,7 @@ public class DBControler {
         }
         } catch (IOException ex) {
             Logger.getLogger(DBControler.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         }
     }
     
@@ -98,6 +99,7 @@ public class DBControler {
         }
         } catch (IOException ex) {
             Logger.getLogger(DBControler.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         }
     }
     
