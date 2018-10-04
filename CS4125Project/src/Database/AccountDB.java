@@ -82,15 +82,13 @@ public class AccountDB implements IDatabase {
     @Override
     public void load() throws IOException {
         BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
-        BufferedReader fileReader2 = new BufferedReader (new FileReader("Supervisors.csv"));
         fileReader.readLine();
         fileReader.readLine();
         String fileLine;
-        //hotelData = new HashMap<String,ArrayList<RoomInfo>>();
         while ((fileLine = fileReader.readLine()) != null) {  
             String [] data = fileLine.split(",", -1);
             String username= data[0];
-            String  password = data[1];
+            String password = data[1];
             String email = data[2];
             String type = data[3];
             if (type.equals("S")){
