@@ -333,6 +333,11 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             controler.ExecuteCommand(controler.numCommands-1);
             /*
             s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername());
+=======
+            if (!s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername()))
+                return;
+            else
+>>>>>>> finish implementation of Bridge Design Pattern
             credit.makePurchase(s.getAccount(), price);
             JOptionPane.showMessageDialog(null,
                                             "Thanks for buying " + amountWanted + " " + pickedItem + "'s.\n" +
@@ -379,10 +384,17 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     // checkout
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new CheckoutUI().run();
+    }
+    /*
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+            PaymentSetupUI paymentMenu = new PaymentSetupUI(Shop.getInstance().getAccount().getPaymentType());
+            paymentMenu.run();  
+>>>>>>> finish implementation of Bridge Design Pattern
     }//GEN-LAST:event_jButton5ActionPerformed
-
+/*
     /**
      * 
      */
