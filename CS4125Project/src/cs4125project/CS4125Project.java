@@ -19,6 +19,7 @@ public class CS4125Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, InterruptedException {
+
         DBControler.getInstance().load(DBControler.ALL_DB);
         // TODO code application logic here
         MainMenuUI menu = new MainMenuUI();
