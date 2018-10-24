@@ -6,6 +6,7 @@
 package User;
 
 import Storage.Location;
+import ThirdParty.Payment.*;
 
 /**
  *
@@ -13,10 +14,12 @@ import Storage.Location;
  */
 public class Customer extends Account{
     Location location;
+    Payment payment_type;
     
     public Customer(String name, String password, String email){
         super(name, password, email);
         this.location = new Location(); 
+        this.payment_type = null;
     }
     
     public void setLoc(String country, String address){
@@ -26,6 +29,14 @@ public class Customer extends Account{
     
     public String getLocation(){
         return location.getAddress();
+    }
+    
+    public void setPaymentType(Payment payment) {
+        payment_type = payment;
+    }
+    
+    public Payment getPaymentType() {
+        return payment_type;
     }
     
 }

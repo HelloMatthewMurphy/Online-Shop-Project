@@ -1,5 +1,6 @@
 package Services;
 
+import MenuUI.PaymentSetupUI;
 import Stock.StockItem;
 import ThirdParty.*;
 import ThirdParty.Delivery.BasicDelivery;
@@ -8,6 +9,7 @@ import ThirdParty.Delivery.MoneySaver;
 import ThirdParty.Delivery.Premium;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import ThirdParty.Payment.*;
 
 /**
  * Creates a receipt of purchases made.
@@ -53,7 +55,15 @@ public class Purchase {
     * @return true
     * 
     */
-    public boolean makePurchase(String address){
+
+    public boolean makePurchase(String address, Payment payment){
+        //I took everything to put in ui now there is nothing left but a lonely return - Matthew
+        System.out.println(address);
+        if (payment == null) {
+            PaymentSetupUI paymentMenu = new PaymentSetupUI(payment);
+            paymentMenu.run();       
+        }
+        payment.MakePayment();
         return true;
     }
     
