@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package MenuUI;
+import Services.Shop;
 import ThirdParty.Payment.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -198,6 +199,7 @@ public class PaymentSetupUI extends javax.swing.JFrame {
             return;
         }
         paymentType._IPaymentSystem = temp;
+        Shop.getInstance().getAccount().setPaymentType(paymentType);
         paymentType.MakePayment();
         this.dispose();          
     }//GEN-LAST:event_SubmitButtonActionPerformed

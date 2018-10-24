@@ -10,6 +10,7 @@ import ThirdParty.Delivery.Premium;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import ThirdParty.Payment.*;
+import javax.swing.JOptionPane;
 
 /**
  * Creates a receipt of purchases made.
@@ -55,15 +56,14 @@ public class Purchase {
     * @return true
     * 
     */
-    
-    public boolean makePurchase(String address, Payment payment){
+
+    public boolean makePurchase(String address){
         //I took everything to put in ui now there is nothing left but a lonely return - Matthew
-        System.out.println(address);
-        if (payment == null) {
-            PaymentSetupUI paymentMenu = new PaymentSetupUI(payment);
-            paymentMenu.run();       
+        //System.out.println(address);
+        if (Shop.getInstance().getAccount().getPaymentType() == null) {
+            JOptionPane.showMessageDialog(null, "Error - there is no payment method set for this account");
+            return false;
         }
-        payment.MakePayment();
         return true;
     }
     
