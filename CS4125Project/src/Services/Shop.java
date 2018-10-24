@@ -144,12 +144,12 @@ public class Shop extends Observable{
      * @param quantity amount of item to be bought.
      * @param username User making purchase.
      */
-    public void makePurchase(StockItem item, int quantity, String username){
+    public boolean makePurchase(StockItem item, int quantity, String username){
         Purchase pur = new Purchase(item, quantity, username);
         //Precondition - you can not purchace a negative.
         if(quantity > 0){
             boolean purchaseHappened = false;
-            purchaseHappened = pur.makePurchase(account.getLocation(), account.getPaymentType());
+            purchaseHappened = pur.makePurchase(account.getLocation());
             if(purchaseHappened){
                 boolean done = false;
                 for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
@@ -163,9 +163,11 @@ public class Shop extends Observable{
                 setChanged();
                 notifyObservers();
             }
+            else return false;
         }
         //Postcondition - the purchace must of been from the user logged in.
         assert pur.getUsername().equals(account.getUsername());
+        return true;
     }
     
     /**
