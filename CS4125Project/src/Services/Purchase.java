@@ -55,7 +55,7 @@ public class Purchase {
     * @return true
     * 
     */
-
+    
     public boolean makePurchase(String address, Payment payment){
         //I took everything to put in ui now there is nothing left but a lonely return - Matthew
         System.out.println(address);
