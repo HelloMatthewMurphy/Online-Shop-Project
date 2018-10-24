@@ -149,7 +149,7 @@ public class Shop extends Observable{
         //Precondition - you can not purchace a negative.
         if(quantity > 0){
             boolean purchaseHappened = false;
-            purchaseHappened = pur.makePurchase(account.getLocation(), account.getPaymentType());
+            purchaseHappened = pur.makePurchase(account.getLocation());
             if(purchaseHappened){
                 boolean done = false;
                 for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
