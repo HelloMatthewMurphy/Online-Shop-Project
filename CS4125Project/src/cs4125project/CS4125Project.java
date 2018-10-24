@@ -26,26 +26,6 @@ public class CS4125Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        
-        // Initialize and load DBs
-        Payment pay = new CardPayment();
-        // pay.setBillingAddress("Hello");
-        //System.out.println(pay.getBillingAddress());
-        pay._IPaymentSystem = new AIBPaymentSystem();
-        pay.MakePayment();
-        pay._IPaymentSystem = new BOIPaymentSystem();
-        pay.MakePayment();
-        
-        
-        Payment payment;
-        payment = null;
-        
-        PaymentSetupUI paymentMenu = new PaymentSetupUI(payment);
-        paymentMenu.run();       
-        
-        if (payment != null) {
-            payment.MakePayment();
-        }        
         DBControler.getInstance().load(DBControler.ALL_DB);
         // TODO code application logic here
         MainMenuUI menu = new MainMenuUI();
