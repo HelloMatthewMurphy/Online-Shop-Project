@@ -91,7 +91,7 @@ public class StockItemDB implements IDatabase {
             
             if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
                 filesInDir.get(i).delete();
-                        }
+        }
         
     }
     
@@ -146,7 +146,6 @@ public class StockItemDB implements IDatabase {
             
             stockItems.put(data[0], si);
         }
-        
         
         reader.close();        
     }
