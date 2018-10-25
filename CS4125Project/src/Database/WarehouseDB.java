@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -25,19 +26,13 @@ import java.util.List;
  */
 public class WarehouseDB implements IDatabase {
     
-    private static final String BUP_PATH = "./backups/";
-    private static final String BUP_PREFIX = "WH_";
-    private static final int MAX_BACKUPS = 5;
-    
-    private String filename;
-    private List<Warehouse> warehouses;
+    private WarehouseDBLegacy warehouseDBLegacy;
     
     /**
      * A constructor sets filename and a blank ArrayList for accounts
      */
     public WarehouseDB() {
-        filename = "";
-        warehouses = new ArrayList();
+        warehouseDBLegacy = new WarehouseDBLegacy();
     }
     
     /**
@@ -45,8 +40,7 @@ public class WarehouseDB implements IDatabase {
      * @param warehouses An ArrayList of warehouses
      */
     public WarehouseDB(List<Warehouse> warehouses) {
-        filename = "";
-        this.warehouses = warehouses;
+        warehouseDBLegacy = new WarehouseDBLegacy(warehouses);
     }
     
     /**
@@ -54,47 +48,29 @@ public class WarehouseDB implements IDatabase {
      */ 
     @Override
     public void setFilename(String filename) {
-        this.filename = filename;
+        warehouseDBLegacy.setFilename(filename);
     }
     
     public void loadBackup(int backupNum) throws IOException {
-        if (backupNum > MAX_BACKUPS)
-            backupNum = MAX_BACKUPS;
-        
-        String loadFilename = BUP_PREFIX + String.format("%03d", backupNum);
-        loadFile(new File(BUP_PATH, loadFilename).getPath());
+        warehouseDBLegacy.loadBackup(backupNum);
     }
     
-    public ArrayList<GregorianCalendar> getBackupTimes() throws IOException {
-        File dir = new File(BUP_PATH);
-        ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
+    public String[] getBackupTimeStrings() throws IOException {
+        ArrayList<GregorianCalendar> backupTimes = warehouseDBLegacy.getBackupTimes();
         
-        // Remove all non-files (folders) from the arraylist, and ones which are
-        // not relevant to this type
+        String[] result = new String[backupTimes.size()];
         
-        for (int i = 0; i < filesInDir.size(); ) {
-            if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
-                filesInDir.remove(i);
-            else
-                i++;
-        }
-        
-        //HashMap<String, GregorianCalendar> result = new HashMap();
-        ArrayList<GregorianCalendar> result = new ArrayList();
-        
-        // Sort files by filename alphabetically
-        filesInDir.sort((o1, o2) -> {
-            return o1.getName().compareTo(o2.getName());
-        });
-        
-        // Get Dates
-        for (File file : filesInDir) {
-            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-            long ms = attr.lastModifiedTime().toMillis();
-            GregorianCalendar date = new GregorianCalendar();
-            date.setTimeInMillis(ms);
-            
-            result.add(date);
+        for (int i = 0; i < backupTimes.size(); i++)
+        {
+            GregorianCalendar date = backupTimes.get(i);
+            int day = date.get(Calendar.DAY_OF_MONTH);
+                int month = date.get(Calendar.MONTH) + 1;
+                int year = date.get(Calendar.YEAR);
+                int hour = date.get(Calendar.HOUR_OF_DAY);
+                int minute = date.get(Calendar.MINUTE);
+                int second = date.get(Calendar.SECOND);
+                result[i] = String.format("%2d:\tCreated on %02d/%02d/%02d at %02d:%02d:%02d\n",
+                        i, day, month, year, hour, minute, second);
         }
         
         return result;
@@ -106,124 +82,18 @@ public class WarehouseDB implements IDatabase {
      */
     @Override
     public void save() throws IOException {
-        saveFile(filename);
-        shiftBackupFiles();
-        saveFile(new File(BUP_PATH, BUP_PREFIX + "000").getPath());
-        
-        
-    }
-    
-    /**
-     * Rename WH_000 to WH_001 etc.
-     */
-    private void shiftBackupFiles() {
-        File dir = new File(BUP_PATH);
-        ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
-        
-        // Remove all non-files (folders) from the arraylist
-        for (int i = 0; i < filesInDir.size(); ) {
-            if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
-                filesInDir.remove(i);
-            else
-                i++;
-        }
-        
-        // Sort files by filename reverse alphabetically
-        filesInDir.sort((o1, o2) -> {
-            return -o1.getName().compareTo(o2.getName());
-        });
-        
-        // Print out all files
-        for (int i = 0; i < filesInDir.size(); i++) {            
-            String oldFilename = filesInDir.get(i).getName();
-            int id = Integer.parseInt(oldFilename.substring(BUP_PREFIX.length()));
-            String newFilename = BUP_PREFIX + String.format("%03d", id + 1);
-            
-            if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
-                filesInDir.get(i).delete();
-            else
-                filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
-        }
-        
-    }
-    
-    private void saveFile(String filename) throws IOException {
-        PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
-        writer.write("Location,Item name,Quantity\n");
-        
-        // For every warehouse
-        for (Warehouse wh : warehouses) {
-            
-            // Write the name of the warehouse
-            writer.write(wh.getName());
-            
-            boolean firstItem = true;            
-            // For every item in stock
-            for (String siName : wh.checkStock().keySet()) {
-                // Write item name and quantity to file
-                
-                String line = String.format(",%s,%s",
-                        siName,
-                        wh.checkStock().get(siName));
-                writer.write((firstItem ? "" : " ") + line + "\n");
-                firstItem = false;
-            }
-            
-            writer.flush();
-        }
-        
-        writer.close();
-    }
-    
-    /**
-     * Creates Warehouses and adds them to a DB
-     * @throws IOException
-     */ 
-    private void loadFile(String filename) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
-        // Ignore the headers
-        reader.readLine();
-        
-        String line;
-        String previousWarehouseName = "";
-        String currentWarehouseName = "";
-        
-        warehouses = new ArrayList();
-        int currentWarehouseIndex = -1;
-        
-        while ((line = reader.readLine()) != null) {
-            // Separate the data
-            String[] data = line.split(",");
-            
-            // Check to see if it is the first item for that warehouse
-            if (!data[0].equals(" ")) {
-                currentWarehouseName = data[0];
-            }
-            
-            // If the reader comes accross a new warehouse
-            if (!currentWarehouseName.equals(previousWarehouseName)) {
-                warehouses.add(new Warehouse(null, data[0]));
-                currentWarehouseIndex++;
-            }
-            
-            // add data to warehouse
-            int quantity = Integer.parseInt(data[2]);
-            warehouses.get(currentWarehouseIndex).addStock(data[1], quantity);
-            
-            previousWarehouseName = currentWarehouseName;
-        }
-        reader.close();
+        warehouseDBLegacy.save();
     }
     
     @Override
     public void load() throws IOException {
-        loadFile(filename);
+        warehouseDBLegacy.load();
     }
     
     /**
      * @return warehouses
      */ 
     public List<Warehouse> getWarehouses() {
-        return warehouses;
+        return warehouseDBLegacy.getWarehouses();
     }   
 }
