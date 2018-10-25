@@ -163,31 +163,26 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonRollbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRollbackActionPerformed
-        ArrayList<GregorianCalendar> backupDates = null;
+        String[] backupDateStrings;
         try {
-            backupDates = DBControler.getInstance().getWarehouseDB().getBackupTimes();
+            backupDateStrings = DBControler.getInstance().getWarehouseDB().getBackupTimeStrings();
         }
         catch (IOException ex) {
             return;
         }
+        
+        int numBackups = backupDateStrings.length;
                 
-        String message = "Please enter a value from 0 to " + (backupDates.size() - 1) + ", corresponding to the backup you which to use\n";
-        for (int i = 0; i < backupDates.size(); i++) {
-            GregorianCalendar date = backupDates.get(i);
-            int day = date.get(Calendar.DAY_OF_MONTH);
-            int month = date.get(Calendar.MONTH) + 1;
-            int year = date.get(Calendar.YEAR);
-            int hour = date.get(Calendar.HOUR_OF_DAY);
-            int minute = date.get(Calendar.MINUTE);
-            int second = date.get(Calendar.SECOND);
-            message += String.format("%2d:\tCreated on %02d/%02d/%02d at %02d:%02d:%02d\n",
-                    i, day, month, year, hour, minute, second);
+        String message = "Please enter a value from 0 to " + (numBackups - 1) + ", corresponding to the backup you which to use\n";
+        for (String dateString : backupDateStrings)
+        {
+            message += dateString + "\n";
         }
         String input = JOptionPane.showInputDialog(message);
         
         int backupId = Integer.parseInt(input);
         
-        if (backupId >= 0 && backupId < backupDates.size()) {
+        if (backupId >= 0 && backupId < numBackups) {
             try {
                 DBControler.getInstance().getPurchaseDB().loadBackup(backupId);
                 DBControler.getInstance().getWarehouseDB().loadBackup(backupId);
@@ -199,13 +194,13 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
             }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Please enter a value from 0 to " + (backupDates.size() - 1));
+            JOptionPane.showMessageDialog(null, "Please enter a value from 0 to " + (numBackups - 1));
         }
     }//GEN-LAST:event_buttonRollbackActionPerformed
 
-            public void run() {
-                this.setVisible(true);
-            }
+    public void run() {
+        this.setVisible(true);
+    }
       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
