@@ -51,41 +51,6 @@ public class PurchaseDB implements IDatabase {
         this.filename = filename;
     }
     
-    public ArrayList<GregorianCalendar> getBackupTimes() throws IOException {
-        File dir = new File(BUP_PATH);
-        ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
-        
-        // Remove all non-files (folders) from the arraylist, and ones which are
-        // not relevant to this type
-        
-        for (int i = 0; i < filesInDir.size(); ) {
-            if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
-                filesInDir.remove(i);
-            else
-                i++;
-        }
-        
-        //HashMap<String, GregorianCalendar> result = new HashMap();
-        ArrayList<GregorianCalendar> result = new ArrayList();
-        
-        // Sort files by filename alphabetically
-        filesInDir.sort((o1, o2) -> {
-            return o1.getName().compareTo(o2.getName());
-        });
-        
-        // Get Dates
-        for (File file : filesInDir) {
-            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-            long ms = attr.creationTime().toMillis();
-            GregorianCalendar date = new GregorianCalendar();
-            date.setTimeInMillis(ms);
-            
-            result.add(date);
-        }
-        
-        return result;
-    }
-    
     public void loadBackup(int backupNum) throws IOException {
         if (backupNum > MAX_BACKUPS)
             backupNum = MAX_BACKUPS;
