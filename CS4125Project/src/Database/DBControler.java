@@ -22,7 +22,7 @@ public class DBControler {
     private static DBControler instance;
     private AccountDB aDB;
     private StockItemDB sDB;
-    private WarehouseDB wDB;
+    private WarehouseDBLegacy wDB;
     private PurchaseDB pDB;
     
     /**
@@ -33,7 +33,7 @@ public class DBControler {
     private DBControler(){
         aDB = new AccountDB();
         sDB = new StockItemDB();
-        wDB = new WarehouseDB();
+        wDB = new WarehouseDBLegacy();
         pDB = new PurchaseDB();
         
         aDB.setFilename("RegisteredUsers.csv");
@@ -120,7 +120,7 @@ public class DBControler {
     /**
      * @return WareHouseDB
      */ 
-    public WarehouseDB getWarehouseDB(){
+    public WarehouseDBLegacy getWarehouseDB(){
         return wDB;
     }
     
