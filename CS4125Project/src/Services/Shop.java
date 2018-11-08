@@ -122,15 +122,16 @@ public class Shop extends Observable{
      * 
      * @param item Item to be returned.
      * @param quantity The amount of the item to be returned.
+     * @param currency The currency to be refunded in
      */
-    public void returnItem(StockItem item, int quantity){
+    public void returnItem(StockItem item, int quantity, Money.Currency currency){
         boolean done = false;
         for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
             if(DBControler.getWarehouses().get(i).hasItem(item.getName())){
                 DBControler.getWarehouses().get(i).addStock(item.getName(), 1);
                 done = true;
                 
-                Purchase pur = new Purchase(item, (-1)*quantity,this.getAccount().getUsername());
+                Purchase pur = new Purchase(item, (-1)*quantity,this.getAccount().getUsername(), currency);
                 DBControler.getInstance().getPurchaseDB().getPurchases().add(pur);
             }
         }
@@ -143,10 +144,11 @@ public class Shop extends Observable{
      * @param item Item to be bought.
      * @param quantity amount of item to be bought.
      * @param username User making purchase.
+     * @param currency The currency to make the purchase in
      */
-    public boolean makePurchase(StockItem item, int quantity, String username){
-        Purchase pur = new Purchase(item, quantity, username);
-        //Precondition - you can not purchace a negative.
+    public boolean makePurchase(StockItem item, int quantity, String username, Money.Currency currency){
+        Purchase pur = new Purchase(item, quantity, username, currency);
+        //Precondition - you can not purchase a negative.
         if(quantity > 0){
             boolean purchaseHappened = false;
             purchaseHappened = pur.makePurchase(account.getLocation());
@@ -163,7 +165,8 @@ public class Shop extends Observable{
                 setChanged();
                 notifyObservers();
             }
-            else return false;
+            else
+                return false;
         }
         //Postcondition - the purchace must of been from the user logged in.
         assert pur.getUsername().equals(account.getUsername());
