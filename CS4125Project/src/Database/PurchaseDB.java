@@ -5,6 +5,7 @@
  */
 package Database;
 
+import Services.Money;
 import Services.Purchase;
 import Stock.StockItem;
 import java.io.BufferedReader;
@@ -112,14 +113,15 @@ public class PurchaseDB implements IDatabase {
     {   
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         // Write the headers
-        writer.write("Name,Quantity,Discount,Date\n");
+        writer.write("Name,Quantity,Discount,Currency,Date\n");
         
         for (Purchase purchase : purchases)
         {
-            String line = String.format("%s,%d,%.2f,%d/%d/%d,%s",
+            String line = String.format("%s,%d,%.2f,%s,%d/%d/%d,%s",
                 purchase.getItem().getName(),
                 purchase.getQuantity(),
                 purchase.getDiscount(),
+                purchase.getMoney().getCurrency().name(),
                 purchase.getDate().get(Calendar.DATE),
                 purchase.getDate().get(Calendar.MONTH) + 1,
                 purchase.getDate().get(Calendar.YEAR),
@@ -159,18 +161,21 @@ public class PurchaseDB implements IDatabase {
             int quantity = Integer.parseInt(data[1]);
             double discount = Double.parseDouble(data[2]);
             
-            String dateString = data[3];
+            String currencyStr = data[3];
+            Money.Currency currency = Money.Currency.valueOf(currencyStr);
+            
+            String dateString = data[4];
             
             int day = Integer.parseInt(dateString.split("/")[0]);
             int month = Integer.parseInt(dateString.split("/")[1]);
             int year = Integer.parseInt(dateString.split("/")[2]);
             
-            String username = data[4];
+            String username = data[5];
             
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
             StockItem si = DBControler.getStockItemByName(data[0]);
-            purchases.add(new Purchase(si, quantity, username, date));
+            purchases.add(new Purchase(si, quantity, username, currency, date));
         }
         
         reader.close();
