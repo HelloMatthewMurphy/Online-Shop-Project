@@ -23,6 +23,7 @@ public class Purchase {
     private double discount = 1;
     private String username;
     private GregorianCalendar date;
+    private Money money;
     
     /**
     * A constructor that initializes purchase values
@@ -31,8 +32,8 @@ public class Purchase {
     * @param username The user that bought the item
     * 
     */
-    public Purchase(StockItem item, int quantity, String username){
-        this(item, quantity,username, new GregorianCalendar());
+    public Purchase(StockItem item, int quantity, String username, Money.Currency currency){
+        this(item, quantity,username, currency, new GregorianCalendar());
     }
     
     /**
@@ -43,11 +44,14 @@ public class Purchase {
     * @param date The date of purchase
     * 
     */
-    public Purchase(StockItem item, int quantity,String username, GregorianCalendar date){
+    public Purchase(StockItem item, int quantity,String username, Money.Currency currency, GregorianCalendar date){
         this.item = item;
         this.quantity = quantity;
         this.username = username;
         this.date = date;
+        
+        double amountEur = getCost();
+        this.money = new Money(currency, currency.getFromEuroRate() * amountEur);
     }
     
     /**
@@ -112,5 +116,27 @@ public class Purchase {
     public GregorianCalendar getDate()
     {
         return date;
+    }
+    
+    /**
+     * @return the cost of this purchase
+     */
+    public double getCost() {
+        return quantity * item.getPrice() * discount;
+    }
+    
+    /**
+     * @return the cost of the purchase in the currency used, with the
+     * currency's symbol in front of it
+     */
+    public String getCostString() {
+        return money.toString();
+    }
+    
+    /**
+    * @return the money of the purchase
+    */
+    public Money getMoney() {
+        return money;
     }
 }

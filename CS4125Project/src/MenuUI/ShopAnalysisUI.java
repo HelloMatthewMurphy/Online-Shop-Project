@@ -188,11 +188,11 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity Returned", "Date Returned"
+                "Product Name", "Quantity Returned", "Cost", "Date Returned"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -206,11 +206,11 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity Bought", "Date Bought"
+                "Product Name", "Quantity Bought", "Cost", "Date Bought"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -388,7 +388,7 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         // Add Sales to table
         for (Purchase p : sales) {
             String readableDate = new SimpleDateFormat("dd/MM/yyyy").format(p.getDate().getTime());
-            Object[] row = { p.getItem().getName(), p.getQuantity(), readableDate};
+            Object[] row = { p.getItem().getName(), p.getQuantity(), p.getCostString(), readableDate};
             tmSales.addRow(row);
             salesAmount += p.getQuantity() * p.getItem().getPrice() * p.getDiscount();
         }
@@ -396,7 +396,7 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         // Add returns to table
         for (Purchase p : returns) {
             String readableDate = new SimpleDateFormat("dd/MM/yyyy").format(p.getDate().getTime());
-            Object[] row = { p.getItem().getName(), -p.getQuantity(), readableDate};
+            Object[] row = { p.getItem().getName(), -p.getQuantity(), p.getCostString(), readableDate};
             tmReturns.addRow(row);            
             returnsAmount += -p.getQuantity() * p.getItem().getPrice() * p.getDiscount();
         }

@@ -8,6 +8,7 @@ package MenuUI;
 import Database.DBControler;
 import Database.PurchaseDB;
 import Services.BuyItemCommand;
+import Services.Money;
 import Services.Purchase;
 import Services.Shop;
 import Services.ShopControl;
@@ -36,6 +37,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.CCSTATE;
 
 /**
  *
@@ -196,18 +198,59 @@ public class CustomerMenuUI extends javax.swing.JFrame {
 
     //Buy stock
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Shop s = Shop.getInstance();
-        NumberFormat formatter = new DecimalFormat("#0.00");
-        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
-        
-        int i = 0;
-        String[] itemNames = new String[list.size()];
-        for(Map.Entry<String,Integer> entry : list){
-            itemNames[i] = entry.getKey() + " : €" + formatter.format(DBControler.getInstance().getStockItemDB().getStockItemByName(entry.getKey()).getPrice());
-            i++;
+        // Get user to pick currency
+        String validCurrencyNames[] = new String[Money.Currency.values().length];
+        StringBuilder validCurrenciesStr = new StringBuilder();
+        for (int i = 0; i < Money.Currency.values().length; i++) {
+            validCurrencyNames[i] = Money.Currency.values()[i].name();
+            validCurrenciesStr.append(validCurrencyNames[i]);
+            if (i < Money.Currency.values().length - 1) {
+                validCurrenciesStr.append(", ");
+            }
         }
         
+        boolean validChoice = false;
+        String currencyChoiceStr;
+        do
+        {
+            Object choice = JOptionPane.showInputDialog(null,
+                    String.format(
+                        "Which currency would you like to pay in? Options are: %s",
+                         validCurrenciesStr
+                    ),
+                    "Currency",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null, 
+                    null, 
+                    null);
+            currencyChoiceStr = String.valueOf(choice);
+            
+            // Check if choice is valid
+            for (int i = 0; i < validCurrencyNames.length && !validChoice; i++) {
+                if (currencyChoiceStr.equals(validCurrencyNames[i])) {
+                    validChoice = true;
+                }
+            }
+            
+            if (!validChoice) {
+                JOptionPane.showMessageDialog(null, 
+                    String.format("%s is an invalid choice", currencyChoiceStr),
+                    "Invalid Choice",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        } while(!validChoice);
+        Money.Currency currency = Money.Currency.valueOf(currencyChoiceStr);
+        
         //Picking item
+        Shop s = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        
+        String[] itemNames = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName(list.get(i).getKey());
+            itemNames[i] = String.format("%s : %c%.2f", list.get(i).getKey(), currency.getSymbol(), item.getPrice() * currency.getFromEuroRate());
+        }
+        
         String pickedItem = "";
         Object itemList = JOptionPane.showInputDialog(null, 
                                                    "Pick item you would like to buy.", 
@@ -219,7 +262,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         String[] selectionSplit = itemList.toString().split(" ");
         pickedItem = selectionSplit[0]; 
         
-        buyItemFromShop(pickedItem);
+        buyItemFromShop(pickedItem, currency);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //Check Stock
@@ -256,14 +299,14 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
         //Show info on item
         StockItem stock = DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem);
-        NumberFormat formatter = new DecimalFormat("#0.00");
         JOptionPane.showMessageDialog(null,
-                                    "Item Name: " + pickedItem + "\n" +
-                                            "Price: €" + formatter.format(stock.getPrice()) + "\n" +
-                                            "Description: " + stock.getDescription() + "\n" +
-                                            "Quantity left: " + amountAvailable,
-                                            "Info on " + pickedItem,
-                                    JOptionPane.WARNING_MESSAGE);
+                                        String.format("Item Name: %s\n" +
+                                                      "Price: %c%.2f\n" +
+                                                      "Quantity left: %d\n",
+                                                       pickedItem, Money.Currency.EUR.getSymbol(),
+                                                       stock.getPrice(), amountAvailable),
+                                        String.format("Info on %s", pickedItem),
+                                        JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     //View purchases
@@ -272,7 +315,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
     
     //Buying items
-    public void buyItemFromShop(String pickedItem){
+    public void buyItemFromShop(String pickedItem, Money.Currency currency){
         Shop s = Shop.getInstance();
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
         double price = 0;
@@ -338,26 +381,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             price += delivery.getPrice();
         }
         CreditCardCo credit = new CreditCardCo();
-        NumberFormat formatter = new DecimalFormat("#0.00");
         if(!pickedItem.equals("")){
             ShopControl controler = ShopControl.GetInstance();
             controler.AddCommand(new BuyItemCommand(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername()));
             controler.ExecuteCommand(controler.numCommands-1);
-            /*
-            s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername());
-=======
-            if (!s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername()))
-                return;
-            else
->>>>>>> finish implementation of Bridge Design Pattern
-            credit.makePurchase(s.getAccount(), price);
-            JOptionPane.showMessageDialog(null,
-                                            "Thanks for buying " + amountWanted + " " + pickedItem + "'s.\n" +
-                                                    "They will take " + delivery.getDays() + " day's to arrive!\n" +
-                                                    "The total cost was €" + formatter.format(price) + ".",
-                                            "Purchase Complete!!!",
-                                            JOptionPane.PLAIN_MESSAGE);
-            */
         }
     }
     
@@ -367,32 +394,72 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
         
         String[] itemNames = new String[list.size()];
-        int i = 0;
-        for(Map.Entry<String,Integer> entry : list){
-            itemNames[i] = entry.getKey();
-            i++;
+        for (int i = 0; i < list.size(); i++) {
+            itemNames[i] = list.get(i).getKey();
         }
         
         //Picking item
-        String pickedItem = "";
-        int amount = 0;
-        Object itemList = JOptionPane.showInputDialog(null, 
+        Object itemChoice = JOptionPane.showInputDialog(null, 
                                                    "Pick item you would like to return.", 
                                                    "Return Stock", 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     itemNames, 
                                                     itemNames[0]);
-        pickedItem = itemList.toString();
-        Object howMuch = JOptionPane.showInputDialog(null, 
+        String pickedItem = itemChoice.toString();
+        Object quantityChoice = JOptionPane.showInputDialog(null, 
                                                    "How many?", 
                                                    "Return Stock", 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     null, 
                                                     null);
-        amount = Integer.parseInt(howMuch.toString());
-        s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount);
+        int amount = Integer.parseInt(quantityChoice.toString());
+        
+        // Choose currency to refund in
+        String validCurrencyNames[] = new String[Money.Currency.values().length];
+        StringBuilder validCurrenciesStr = new StringBuilder();
+        for (int i = 0; i < Money.Currency.values().length; i++) {
+            validCurrencyNames[i] = Money.Currency.values()[i].name();
+            validCurrenciesStr.append(validCurrencyNames[i]);
+            if (i < Money.Currency.values().length - 1) {
+                validCurrenciesStr.append(", ");
+            }
+        }
+        
+        boolean validChoice = false;
+        String currencyChoiceStr;
+        do
+        {
+            Object choice = JOptionPane.showInputDialog(null,
+                    String.format(
+                        "Which currency would you like to be refunded in? Options are: %s",
+                         validCurrenciesStr
+                    ),
+                    "Currency",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null, 
+                    null, 
+                    null);
+            currencyChoiceStr = String.valueOf(choice);
+            
+            // Check if choice is valid
+            for (int i = 0; i < validCurrencyNames.length && !validChoice; i++) {
+                if (currencyChoiceStr.equals(validCurrencyNames[i])) {
+                    validChoice = true;
+                }
+            }
+            
+            if (!validChoice) {
+                JOptionPane.showMessageDialog(null, 
+                    String.format("%s is an invalid choice", currencyChoiceStr),
+                    "Invalid Choice",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        } while(!validChoice);
+        Money.Currency currency = Money.Currency.valueOf(currencyChoiceStr);
+        
+        s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount, currency);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     // checkout
