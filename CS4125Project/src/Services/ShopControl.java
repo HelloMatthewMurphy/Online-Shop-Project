@@ -36,8 +36,10 @@ public class ShopControl {
     }
     
     public void Undo(){
-        Command commandToUndo = undoCommands.pop();
-        commandToUndo.Undo();
+        if(undoCommands.size() > 0){
+            Command commandToUndo = undoCommands.pop();
+            commandToUndo.Undo();
+        }
     }
     
     public void ExecuteCommand(int commandNum){

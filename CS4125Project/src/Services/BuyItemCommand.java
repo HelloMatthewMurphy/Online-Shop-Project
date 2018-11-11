@@ -13,29 +13,25 @@ import Services.Purchase;
  */
 public class BuyItemCommand implements Command{
 
-    private StockItem stockItem;
-    private int quantity;
-    private String username;
+    private Purchase purchase;
     private ShoppingBasket shoppingBasket;
     
     // Concrete Command
     public BuyItemCommand(StockItem stockItem, int quantity, String username){
-        this.stockItem = stockItem;
-        this.quantity = quantity;
-        this.username =  username;
+        purchase = new Purchase(stockItem, quantity, username);
         this.shoppingBasket = ShoppingBasket.GetInstance();
     }
     
     @Override
     public void execute() {
-        shoppingBasket.AddToBasket(new Purchase(stockItem, quantity, username));
-        System.out.println("You just bought: " + stockItem.getName());
+        shoppingBasket.AddToBasket(purchase);
+        System.out.println("You just bought: " + purchase.getItem().getName());
     }
 
     @Override
     public void Undo() {
-        shoppingBasket.RemoveFromBasket(stockItem);
-        System.out.println("You just undone: " + stockItem.getName());
+        shoppingBasket.RemoveFromBasket(purchase);
+        System.out.println("You just undone: " + purchase.getItem().getName());
     }
     
 }
