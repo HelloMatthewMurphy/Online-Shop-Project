@@ -5,6 +5,7 @@
  */
 package Services;
 import Stock.StockItem;
+import Services.Purchase;
 
 /**
  *
@@ -13,17 +14,21 @@ import Stock.StockItem;
 public class BuyItemCommand implements Command{
 
     private StockItem stockItem;
+    private int quantity;
+    private String username;
     private ShoppingBasket shoppingBasket;
     
     // Concrete Command
-    public BuyItemCommand(StockItem stockItem, ShoppingBasket shoppingBasket){
+    public BuyItemCommand(StockItem stockItem, int quantity, String username){
         this.stockItem = stockItem;
-        this.shoppingBasket = shoppingBasket;
+        this.quantity = quantity;
+        this.username =  username;
+        this.shoppingBasket = ShoppingBasket.GetInstance();
     }
     
     @Override
     public void execute() {
-        shoppingBasket.AddToBasket(stockItem);
+        shoppingBasket.AddToBasket(new Purchase(stockItem, quantity, username));
         System.out.println("You just bought: " + stockItem.getName());
     }
 
