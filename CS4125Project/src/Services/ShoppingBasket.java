@@ -32,6 +32,10 @@ public class ShoppingBasket {
         basket.add(item);
     }
     
+    public void ClearBasket(){
+        basket.clear();
+    }
+    
     public void RemoveFromBasket(StockItem item){
         basket.remove(item);
     }

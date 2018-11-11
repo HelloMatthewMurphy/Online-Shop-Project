@@ -6,11 +6,13 @@
 package MenuUI;
 
 import Services.Purchase;
+import Services.Shop;
 import Services.ShoppingBasket;
 import Stock.StockItem;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,13 +32,16 @@ public class CheckoutUI extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) itemsInBasket.getModel();
         Object rowData[] = new Object[4];
+        float total = 0;
         for (int i = 0; i < items.size();i++){
             rowData[0] = items.get(i).getItem().getName();
             rowData[1] = items.get(i).getQuantity();
             rowData[2] = items.get(i).getItem().getPrice();
+            total += items.get(i).getItem().getPrice();
             rowData[3] = new JButton();
             model.addRow(rowData);
         }
+        totalCost.setText("Total: " + total);
     }
 
     /**
@@ -51,6 +56,7 @@ public class CheckoutUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemsInBasket = new javax.swing.JTable();
+        totalCost = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,12 +85,15 @@ public class CheckoutUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(itemsInBasket);
 
+        totalCost.setText("Total: €0.00");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(totalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
@@ -94,7 +103,11 @@ public class CheckoutUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(totalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -103,7 +116,12 @@ public class CheckoutUI extends javax.swing.JFrame {
 
     // checkout
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+        Shop s = Shop.getInstance();
+        for (int i = 0; i < items.size(); i++){
+            s.makePurchase(items.get(i).getItem(), items.get(i).getQuantity(), items.get(i).getUsername());
+        }
+        this.setVisible(false);
+        ShoppingBasket.GetInstance().ClearBasket();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /* Create and display the form */
@@ -116,5 +134,6 @@ public class CheckoutUI extends javax.swing.JFrame {
     private javax.swing.JTable itemsInBasket;
     private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel totalCost;
     // End of variables declaration//GEN-END:variables
 }
