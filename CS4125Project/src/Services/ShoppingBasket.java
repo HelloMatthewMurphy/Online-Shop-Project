@@ -10,18 +10,25 @@ import java.util.ArrayList;
 
 /**
  *
- * @author hello
+ * @author Matthew
  */
 public class ShoppingBasket {
     
-    private ArrayList<StockItem> basket = new ArrayList<StockItem>();
+    private ArrayList<Purchase> basket = new ArrayList<Purchase>();
+    private static ShoppingBasket instance;
     
     // Receiver
-    public ShoppingBasket(){
+    private ShoppingBasket(){
         
     }
     
-    public void AddToBasket(StockItem item){
+    public static ShoppingBasket GetInstance(){
+        if(instance == null)
+            instance = new ShoppingBasket();
+        return instance;
+    }
+    
+    public void AddToBasket(Purchase item){
         basket.add(item);
     }
     
@@ -30,9 +37,14 @@ public class ShoppingBasket {
     }
     
     public void PrintOutShoppingBasket(){
-        for(int i = 0; i < basket.size(); i--){
-            System.out.println(basket.get(i).getName() + " + ");
+        System.out.println("You have " + basket.size() + " items.");
+        for(int i = 0; i < basket.size(); i++){
+            System.out.println(basket.get(i).getItem().getName());
         }
+    }
+    
+    public ArrayList<Purchase> GetBasketContents(){
+        return basket;
     }
     
 }

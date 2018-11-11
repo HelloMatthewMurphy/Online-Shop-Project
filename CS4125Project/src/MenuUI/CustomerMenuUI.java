@@ -7,8 +7,11 @@ package MenuUI;
 
 import Database.DBControler;
 import Database.PurchaseDB;
+import Services.BuyItemCommand;
 import Services.Purchase;
 import Services.Shop;
+import Services.ShopControl;
+import Services.ShoppingBasket;
 import Stock.StockItem;
 import ThirdParty.CreditCardCo;
 import ThirdParty.Delivery.BasicDelivery;
@@ -65,6 +68,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +109,13 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Checkout");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,21 +129,24 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(138, 138, 138)
-                                .addComponent(jButton3)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton5)
+                                    .addComponent(jButton3))))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addGap(124, 124, 124)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jToggleButton1))
-                            .addComponent(jButton4))))
-                .addContainerGap(146, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton1))
+                                    .addComponent(jToggleButton1))))))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,14 +156,16 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -312,6 +328,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         CreditCardCo credit = new CreditCardCo();
         NumberFormat formatter = new DecimalFormat("#0.00");
         if(!pickedItem.equals("")){
+            ShopControl controler = ShopControl.GetInstance();
+            controler.AddCommand(new BuyItemCommand(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername()));
+            controler.ExecuteCommand(controler.numCommands-1);
+            /*
             s.makePurchase(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername());
             credit.makePurchase(s.getAccount(), price);
             JOptionPane.showMessageDialog(null,
@@ -320,6 +340,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     "The total cost was €" + formatter.format(price) + ".",
                                             "Purchase Complete!!!",
                                             JOptionPane.PLAIN_MESSAGE);
+            */
         }
     }
     
@@ -357,6 +378,33 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    // checkout
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        System.out.println("WOW");
+        ShoppingBasket.GetInstance().PrintOutShoppingBasket();
+        
+        new CheckoutUI().run();
+        
+        /*
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        
+        String[] itemNames = new String[list.size()];
+        int i = 0;
+        for(Map.Entry<String,Integer> entry : list){
+            itemNames[i] = entry.getKey() ;
+            i++;
+        }
+        
+        Object itemList = JOptionPane.showInputDialog(null, 
+                                                   "Pick item you would like to buy.", 
+                                                   "Buy Stock", 
+                                                    JOptionPane.QUESTION_MESSAGE, 
+                                                    null,
+                                                    itemNames, 
+                                                    itemNames[0]);
+        */
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * 
      */
@@ -371,6 +419,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;

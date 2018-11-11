@@ -17,18 +17,25 @@ public class ShopControl {
     private ArrayList<Command> commands = new ArrayList<Command>();
     //private Command undoCommand;
     private Stack<Command> undoCommands = new Stack<Command>();
+    private static ShopControl instance;
+    public int numCommands = 0;
     
-    public ShopControl(){
+    private ShopControl(){
         
+    }
+    
+    public static ShopControl GetInstance(){
+        if(instance == null)
+            instance = new ShopControl();
+        return instance;
     }
     
     public void AddCommand(Command command){
         commands.add(command);
+        numCommands++;
     }
     
     public void Undo(){
-        //if(undoCommand != null)
-        //    undoCommand.Undo();
         Command commandToUndo = undoCommands.pop();
         commandToUndo.Undo();
     }
