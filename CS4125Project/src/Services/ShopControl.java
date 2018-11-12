@@ -44,7 +44,6 @@ public class ShopControl {
     
     public void ExecuteCommand(int commandNum){
         commands.get(commandNum).execute();
-        //undoCommand = commands.get(commandNum);
         undoCommands.push(commands.get(commandNum));
     }
     

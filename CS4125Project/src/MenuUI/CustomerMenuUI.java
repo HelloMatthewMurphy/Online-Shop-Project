@@ -380,7 +380,6 @@ public class CustomerMenuUI extends javax.swing.JFrame {
 
     // checkout
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //ShoppingBasket.GetInstance().PrintOutShoppingBasket();
         new CheckoutUI().run();
     }//GEN-LAST:event_jButton5ActionPerformed
 
