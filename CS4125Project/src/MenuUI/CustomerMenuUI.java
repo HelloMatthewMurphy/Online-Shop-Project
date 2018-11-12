@@ -380,29 +380,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
 
     // checkout
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        System.out.println("WOW");
-        ShoppingBasket.GetInstance().PrintOutShoppingBasket();
-        
+        //ShoppingBasket.GetInstance().PrintOutShoppingBasket();
         new CheckoutUI().run();
-        
-        /*
-        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
-        
-        String[] itemNames = new String[list.size()];
-        int i = 0;
-        for(Map.Entry<String,Integer> entry : list){
-            itemNames[i] = entry.getKey() ;
-            i++;
-        }
-        
-        Object itemList = JOptionPane.showInputDialog(null, 
-                                                   "Pick item you would like to buy.", 
-                                                   "Buy Stock", 
-                                                    JOptionPane.QUESTION_MESSAGE, 
-                                                    null,
-                                                    itemNames, 
-                                                    itemNames[0]);
-        */
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

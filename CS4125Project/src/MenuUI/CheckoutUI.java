@@ -13,6 +13,7 @@ import Stock.StockItem;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,7 @@ public class CheckoutUI extends javax.swing.JFrame {
      */
     public CheckoutUI() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         SetData();
     }
     
@@ -41,12 +43,11 @@ public class CheckoutUI extends javax.swing.JFrame {
         float total = 0;
         
         for (int i = 0; i < items.size();i++){
-            System.out.println("name: " + items.get(i).getItem().getName() + " :: " + items.get(i).getQuantity());
+            //System.out.println("name: " + items.get(i).getItem().getName() + " :: " + items.get(i).getQuantity());
             rowData[0] = items.get(i).getItem().getName();
             rowData[1] = items.get(i).getQuantity();
             rowData[2] = items.get(i).getItem().getPrice();
             total += items.get(i).getItem().getPrice();
-            rowData[3] = new JButton();
             model.addRow(rowData);
         }
         totalCost.setText("Total: " + total);
@@ -89,11 +90,11 @@ public class CheckoutUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item", "Quantity", "Price", "Remove"
+                "Item", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

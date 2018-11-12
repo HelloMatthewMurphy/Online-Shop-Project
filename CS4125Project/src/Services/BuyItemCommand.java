@@ -25,13 +25,13 @@ public class BuyItemCommand implements Command{
     @Override
     public void execute() {
         shoppingBasket.AddToBasket(purchase);
-        System.out.println("You just bought: " + purchase.getItem().getName());
+        //System.out.println("You just bought: " + purchase.getItem().getName());
     }
 
     @Override
     public void Undo() {
         shoppingBasket.RemoveFromBasket(purchase);
-        System.out.println("You just undone: " + purchase.getItem().getName());
+        //System.out.println("You just undone: " + purchase.getItem().getName());
     }
     
 }
