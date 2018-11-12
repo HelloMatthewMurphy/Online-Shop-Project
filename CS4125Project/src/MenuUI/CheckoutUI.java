@@ -43,7 +43,6 @@ public class CheckoutUI extends javax.swing.JFrame {
         float total = 0;
         
         for (int i = 0; i < items.size();i++){
-            //System.out.println("name: " + items.get(i).getItem().getName() + " :: " + items.get(i).getQuantity());
             rowData[0] = items.get(i).getItem().getName();
             rowData[1] = items.get(i).getQuantity();
             rowData[2] = items.get(i).getItem().getPrice();
