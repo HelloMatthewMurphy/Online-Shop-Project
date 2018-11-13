@@ -1,6 +1,9 @@
+import os
+import shutil
+
 fileInfo = {
 	"purchaseinfo.csv":
-	"""Name,Quantity,Discount,Currency,Date
+	"""Name,Quantity,Discount,Date
 yeezy,2,1.00,21/11/2017,Brian
 yeezy,-1,1.00,21/11/2017,Brian
 yeezy,2,1.00,21/11/2017,Matt
@@ -56,6 +59,23 @@ two,yeezy,50
 }
 
 if __name__ == '__main__':
+	# Write to csv files, creating them if they don't exist
 	for filename, data in fileInfo.items():
 		with open(filename, "w") as f:
 			f.write(data)
+
+	# Delete backups folder
+	try:
+		shutil.rmtree("backups")
+	except OSError:
+		print("file deletion failed")
+	else:
+		print("file deletion succeded")
+
+	# Recreate the backups
+	try:
+		os.mkdir("backups")
+	except OSError:
+		print("directory creation failed")
+	else:
+		print("directory creation succeeded")
