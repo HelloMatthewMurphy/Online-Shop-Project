@@ -13,19 +13,29 @@ import ThirdParty.Delivery.Delivery;
  */
 public class Receipt implements ReceiptPlan{
     
-    private Account userAccount;
-    private Delivery delivery;
+    private String AccountUsername;
+    private String AccountEmail;
+    private String paymentDetails;
+    private String delivery;
     private ShoppingBasket purchases;
     
-    public void User(Account account){
-        this.userAccount = account;
+    public void Username(String username){
+        this.AccountUsername = username;
     }
     
-    public void DeliveryMethod(Delivery delivery){
-        this.delivery = delivery;
+    public void Email(String email){
+        this.AccountEmail = email;
     }
     
-    public void Purchases(ShoppingBasket purchases){
-        this.purchases = purchases;
+    public void PaymentDetails(String paymentDetails){
+        this.paymentDetails = paymentDetails;
+    }
+    
+    public void DeliveryMethod(String delivery){
+        //this.delivery = delivery.getType();
+    }
+    
+    public void Purchases(String purchases){
+        //this.purchases = purchases;
     } 
 }
