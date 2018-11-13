@@ -11,9 +11,9 @@ package Services;
  */
 interface ReceiptBuilder {
 
-    public void buildUser(); 
-  
-    public void buildPayment(); 
+    public void buildusername();
+    
+    public void buildEmail();
   
     public void bulidDelivery(); 
   
