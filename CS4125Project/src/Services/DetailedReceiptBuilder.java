@@ -26,9 +26,8 @@ public class DetailedReceiptBuilder {
         receipt.Email(Shop.getInstance().getAccount().getEmail());
     }
     
-    //Need brians payment method to add.
     public void buildPurchaseDetails(){
-        //receipt.PaymentDetails(Shop.getInstance().getAccount());
+        receipt.PaymentDetails(Shop.getInstance().getAccount().getPaymentType().toString());
     }
     
     public void bulidDelivery(){
