@@ -14,6 +14,8 @@ interface ReceiptBuilder {
     public void buildusername();
     
     public void buildEmail();
+    
+    public void buildPaymentDetails();
   
     public void bulidDelivery(); 
   
