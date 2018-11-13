@@ -23,6 +23,7 @@ public class PaymentSetupUI extends javax.swing.JFrame {
     
     public PaymentSetupUI(Payment customerPayment) {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         paymentType = customerPayment;
         temp = null;
     }
