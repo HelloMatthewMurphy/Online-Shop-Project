@@ -110,7 +110,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Checkout");
+        jButton5.setText("Basket");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -138,8 +138,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(138, 138, 138)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton3))))
+                                    .addComponent(jButton3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton5)))))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -171,11 +173,11 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(30, 30, 30))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,7 +211,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         String pickedItem = "";
         Object itemList = JOptionPane.showInputDialog(null, 
                                                    "Pick item you would like to buy.", 
-                                                   "Buy Stock", 
+                                                   "Add to basket", 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     itemNames, 
