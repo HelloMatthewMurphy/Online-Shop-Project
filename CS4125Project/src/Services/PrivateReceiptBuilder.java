@@ -27,7 +27,7 @@ public class PrivateReceiptBuilder implements ReceiptBuilder{
     
     //Need brians payment method to add.
     public void buildPaymentDetails(){
-        //receipt.PaymentDetails(Shop.getInstance().getAccount());
+        receipt.PaymentDetails(Shop.getInstance().getAccount().getPaymentType().toString());
     }
     
      public void bulidDelivery(){
