@@ -4,11 +4,42 @@
  * and open the template in the editor.
  */
 package Services;
-
+import User.Account;
 /**
  *
  * @author Jack
  */
-public class PrivateReceiptBuilder {
+public class PrivateReceiptBuilder implements ReceiptBuilder{
     
+    private Receipt receipt;
+    
+    public PrivateReceiptBuilder(){
+        this.receipt = new Receipt();
+    }
+    
+    public void buildusername(){
+        receipt.Username(Shop.getInstance().getAccount().getUsername());
+    }
+    
+    public void buildEmail(){
+        receipt.Email("User email has been hidden due to customer preference");
+    }
+    
+    //Need brians payment method to add.
+    public void buildPurchaseDetails(){
+        //receipt.PaymentDetails(Shop.getInstance().getAccount());
+    }
+    
+    //Delivery needs to be implemented
+    public void bulidDelivery(){
+        
+    } 
+  
+    public void buildPurchases(){
+        receipt.Purchases("The contents of this purchase have been hidden due to customer preference.");
+    } 
+  
+    public Receipt getReceipt(){
+        return this.receipt;
+    } 
 }
