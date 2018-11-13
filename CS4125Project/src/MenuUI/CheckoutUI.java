@@ -20,6 +20,7 @@ import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -185,9 +186,17 @@ public class CheckoutUI extends javax.swing.JFrame {
 
     // checkout
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        for (Purchase p: purchases) {
-            dispatcher.dispatch(new PurchaseRequest(p));
+
+        // Check for if the user has actually bought any items
+        if (purchases.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error - No items in basket!");
+            return;
         }
+        
+        purchases.forEach((p) -> {
+            dispatcher.dispatch(new PurchaseRequest(p));
+        });        
+       
         ShoppingBasket.GetInstance().ClearBasket();
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
