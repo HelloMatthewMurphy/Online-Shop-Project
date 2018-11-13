@@ -69,6 +69,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +117,13 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Payment method");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,12 +149,12 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                             .addComponent(jButton4)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jButton1))
-                                    .addComponent(jToggleButton1))))))
-                .addContainerGap(147, Short.MAX_VALUE))
+                                .addComponent(jToggleButton1))
+                            .addComponent(jButton6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jButton1)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,9 +171,11 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -389,12 +399,13 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }
     /*
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-            PaymentSetupUI paymentMenu = new PaymentSetupUI(Shop.getInstance().getAccount().getPaymentType());
-            paymentMenu.run();  
->>>>>>> finish implementation of Bridge Design Pattern
+
     }//GEN-LAST:event_jButton5ActionPerformed
-/*
+*/
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      new PaymentSetupUI(Shop.getInstance().getAccount().getPaymentType()).run();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * 
      */
@@ -410,6 +421,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;

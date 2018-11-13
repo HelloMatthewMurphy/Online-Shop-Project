@@ -58,8 +58,6 @@ public class Purchase {
     */
 
     public boolean makePurchase(String address){
-        //I took everything to put in ui now there is nothing left but a lonely return - Matthew
-        //System.out.println(address);
         if (Shop.getInstance().getAccount().getPaymentType() == null) {
             JOptionPane.showMessageDialog(null, "Error - there is no payment method set for this account");
             return false;
