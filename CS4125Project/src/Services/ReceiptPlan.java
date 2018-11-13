@@ -5,16 +5,16 @@
  */
 package Services;
 import User.Account;
-import ThirdParty.Payment.Payment;
 import ThirdParty.Delivery.Delivery;
 /**
  *
  * @author Jack
  */
 interface ReceiptPlan {
-    public void User(Account account);
-    public void PaymentMethod(Payment payment);
-    public void DeliveryMethod(Delivery delivery);
-    public void Purchases(ShoppingBasket purchases);
+    public void Username(String account);
+    public void Email(String email);
+    public void PaymentDetails(String paymentDetails);
+    public void DeliveryMethod(String delivery);
+    public void Purchases(String purchases);
     
 }
