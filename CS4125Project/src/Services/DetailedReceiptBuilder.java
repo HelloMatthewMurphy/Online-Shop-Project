@@ -31,9 +31,8 @@ public class DetailedReceiptBuilder {
         //receipt.PaymentDetails(Shop.getInstance().getAccount());
     }
     
-    //Delivery needs to be implemented
     public void bulidDelivery(){
-        
+        receipt.DeliveryMethod(Shop.getInstance().getAccount().getLocation());
     } 
   
     public void buildPurchases(){
