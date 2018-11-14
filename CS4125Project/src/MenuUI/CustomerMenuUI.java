@@ -43,12 +43,15 @@ public class CustomerMenuUI extends javax.swing.JFrame {
      * Creates new form CustomerMenuUI
      */
     private final String username;
+    private LocalizationDB loc;
+    
     public CustomerMenuUI(String username) {
         initComponents();
         this.username = username;
+        loc = DBControler.getInstance().getLocalizationDB();
         RefreshText();
         
-        LocalizationLanguage[] langauges = DBControler.getInstance().getLocalizationDB().GetLanguages();
+        LocalizationLanguage[] langauges = loc.GetLanguages();
         for(int i = 0; i < langauges.length; i++){
             LanguageDropdown.addItem(langauges[i].getName());
         }
@@ -56,7 +59,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         ActionListener languageChanged = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DBControler.getInstance().getLocalizationDB().SetLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
+                loc.SetLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
                 RefreshText();
             }
         };
@@ -198,7 +201,6 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RefreshText(){
-        LocalizationDB loc = DBControler.getInstance().getLocalizationDB();
         welcomeMessage.setText(loc.GetLocalization("WELCOME_MESSAGE"));
         logoutButton.setText(loc.GetLocalization("LOGOUT"));
         buyStockButton.setText(loc.GetLocalization("BUY_STOCK"));
@@ -212,7 +214,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     
     //Logout
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        JOptionPane.showMessageDialog(null, "See you next time!");
+        JOptionPane.showMessageDialog(null, loc.GetLocalization("LOG_OUT_MESSAGE"));
         this.setVisible(false);
         try {
             new MainMenuUI().run();
@@ -237,8 +239,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         //Picking item
         String pickedItem;
         Object itemList = JOptionPane.showInputDialog(null, 
-                                                   "Pick item you would like to buy.", 
-                                                   "Add to basket", 
+                                                    loc.GetLocalization("BASKET_MESSAGE"), 
+                                                    loc.GetLocalization("BASKET_HEADING"), 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     itemNames, 
@@ -270,8 +272,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         JComboBox cb = new JComboBox(itemNames);
         String pickedItem;
         Object itemList = JOptionPane.showInputDialog(null, 
-                                                   "Pick item you would like to see information of.", 
-                                                   "Check Stock", 
+                                                    loc.GetLocalization("CHECK_STOCK_MESSAGE"), 
+                                                    loc.GetLocalization("CHECK_STOCK_HEADING"), 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     itemNames, 
