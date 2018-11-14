@@ -23,7 +23,6 @@ public class ReceiptDirector {
     receiptBuilder.buildusername();
     receiptBuilder.buildEmail();
     receiptBuilder.buildPaymentDetails();
-    receiptBuilder.bulidDelivery();
     receiptBuilder.buildPurchases();
     }
         

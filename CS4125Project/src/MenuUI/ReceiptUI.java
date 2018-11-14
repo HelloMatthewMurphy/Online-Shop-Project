@@ -116,9 +116,6 @@ public class ReceiptUI extends javax.swing.JFrame {
         if(!detailedReceipt.getReceipt().GetPaymentDetails().equals("")){
             result += "PaymentDetails:  " + detailedReceipt.getReceipt().GetPaymentDetails() + "\n";
         }
-        //*if(!detailedReceipt.getReceipt().GetDeliveryMethod().equals("")){
-        //    result += "Delivery Location:  " + detailedReceipt.getReceipt().GetDeliveryMethod() + "\n";
-        //}
         if(!detailedReceipt.getReceipt().GetPurchases().equals("")){
             result += "Purchases:  " + detailedReceipt.getReceipt().GetPurchases() + "\n";
         }
@@ -142,9 +139,6 @@ public class ReceiptUI extends javax.swing.JFrame {
         if(!privateReceipt.getReceipt().GetPaymentDetails().equals("")){
             result += "PaymentDetails:  " + privateReceipt.getReceipt().GetPaymentDetails() + "\n";
         }
-        //*if(!detailedReceipt.getReceipt().GetDeliveryMethod().equals("")){
-        //    result += "Delivery Location:  " + detailedReceipt.getReceipt().GetDeliveryMethod() + "\n";
-        //}
         if(!privateReceipt.getReceipt().GetPurchases().equals("")){
             result += "Purchases:  " + privateReceipt.getReceipt().GetPurchases() + "\n";
         }
@@ -168,9 +162,6 @@ public class ReceiptUI extends javax.swing.JFrame {
         if(!ecoFriendlyReceipt.getReceipt().GetPaymentDetails().equals("")){
             result += "PaymentDetails:  " + ecoFriendlyReceipt.getReceipt().GetPaymentDetails() + "\n";
         }
-        //*if(!detailedReceipt.getReceipt().GetDeliveryMethod().equals("")){
-        //    result += "Delivery Location:  " + detailedReceipt.getReceipt().GetDeliveryMethod() + "\n";
-        //}
         if(!ecoFriendlyReceipt.getReceipt().GetPurchases().equals("")){
             result += "Purchases:  " + ecoFriendlyReceipt.getReceipt().GetPurchases() + "\n";
         }

@@ -25,14 +25,9 @@ public class PrivateReceiptBuilder implements ReceiptBuilder{
         receipt.SetEmail("User email has been hidden due to customer preference");
     }
     
-    //Need brians payment method to add.
     public void buildPaymentDetails(){
         receipt.SetPaymentDetails(Shop.getInstance().getAccount().getPaymentType().getPaymentInfo());
     }
-    
-     public void bulidDelivery(){
-        receipt.SetDeliveryMethod(Shop.getInstance().getAccount().getLocation());
-    } 
   
     public void buildPurchases(){
         receipt.SetPurchases("The contents of this purchase have been hidden due to customer preference.");
