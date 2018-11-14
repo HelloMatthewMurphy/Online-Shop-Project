@@ -15,11 +15,7 @@ import Services.ShopControl;
 import Services.ShoppingBasket;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-<<<<<<< HEAD
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-=======
->>>>>>> refactor code indents and variables names
 import javax.swing.table.DefaultTableModel;
 
 /**
