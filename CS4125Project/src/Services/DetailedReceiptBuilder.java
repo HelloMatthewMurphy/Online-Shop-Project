@@ -31,8 +31,7 @@ public class DetailedReceiptBuilder implements ReceiptBuilder{
   
     public void buildPurchases(){ 
         ArrayList<Purchase>purchases = ShoppingBasket.GetInstance().GetBasketContents();
-        String totalCost = "";
-        String itemList = "You have \" + basket.size() + \" items.\\n";
+        String itemList = "You have " + purchases.size() + " items.\n";
         float total = 0;
         //Money.Currency currency = Purchase.
         for (Purchase p : purchases) {
@@ -41,8 +40,12 @@ public class DetailedReceiptBuilder implements ReceiptBuilder{
             itemList += "Price: " + String.format("€%.2f", p.getItem().getPrice()) + "\n";
             total += p.getItem().getPrice() * p.getQuantity();
         }
-        itemList += "Total: " + total;
         
+        Money totalMoney = new Money(Money.Currency.EUR, total);
+        totalMoney.changeCurrency(purchases.get(0).getMoney().getCurrency());
+        
+        itemList += "Total: " + totalMoney;
+                
         receipt.SetPurchases(itemList);
     } 
   
