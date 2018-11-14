@@ -194,6 +194,8 @@ public final class CheckoutUI extends javax.swing.JFrame {
        
         ShoppingBasket.GetInstance().ClearBasket();
         dispose();
+        new ReceiptUI().run();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed
