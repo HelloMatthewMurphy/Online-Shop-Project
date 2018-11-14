@@ -31,10 +31,20 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
     }
   
     public void buildPurchases(){
-        ArrayList<Purchase> basket = ShoppingBasket.GetInstance().GetBasketContents();
-        String purchase = "You have " + basket.size() + " items.\n";
- 
-        receipt.SetPurchases(purchase);
+        ArrayList<Purchase>purchases = ShoppingBasket.GetInstance().GetBasketContents();
+        String itemList = "You have " + purchases.size() + " items.\n";
+        float total = 0;
+        //Money.Currency currency = Purchase.
+        for (Purchase p : purchases) {
+            total += p.getItem().getPrice() * p.getQuantity();
+        }
+        
+        Money totalMoney = new Money(Money.Currency.EUR, total);
+        totalMoney.changeCurrency(purchases.get(0).getMoney().getCurrency());
+        
+        itemList += "Total: " + totalMoney;
+                
+        receipt.SetPurchases(itemList);
     } 
   
     public Receipt getReceipt(){
