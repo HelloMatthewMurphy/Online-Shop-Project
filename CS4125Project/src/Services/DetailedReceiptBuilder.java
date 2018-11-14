@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Jack
  */
-public class DetailedReceiptBuilder {
+public class DetailedReceiptBuilder implements ReceiptBuilder{
     private Receipt receipt;
     
     public DetailedReceiptBuilder(){
@@ -19,19 +19,19 @@ public class DetailedReceiptBuilder {
     }
     
     public void buildusername(){
-        receipt.Username(Shop.getInstance().getAccount().getUsername());
+        receipt.SetUsername(Shop.getInstance().getAccount().getUsername());
     }
     
     public void buildEmail(){
-        receipt.Email(Shop.getInstance().getAccount().getEmail());
+        receipt.SetEmail(Shop.getInstance().getAccount().getEmail());
     }
     
-    public void buildPurchaseDetails(){
-        receipt.PaymentDetails(Shop.getInstance().getAccount().getPaymentType().toString());
+    public void buildPaymentDetails(){
+        receipt.SetPaymentDetails(Shop.getInstance().getAccount().getPaymentType().getPaymentInfo());
     }
     
     public void bulidDelivery(){
-        receipt.DeliveryMethod(Shop.getInstance().getAccount().getLocation());
+        receipt.SetDeliveryMethod(Shop.getInstance().getAccount().getLocation());
     } 
   
     public void buildPurchases(){
@@ -43,7 +43,7 @@ public class DetailedReceiptBuilder {
             purchase += (basket.get(i).getItem().getName()) + "\n";
         }
         
-        receipt.Purchases(purchase);
+        receipt.SetPurchases(purchase);
     } 
   
     public Receipt getReceipt(){
