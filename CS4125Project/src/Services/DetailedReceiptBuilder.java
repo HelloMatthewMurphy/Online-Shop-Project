@@ -35,8 +35,8 @@ public class DetailedReceiptBuilder implements ReceiptBuilder{
         float total = 0;
         //Money.Currency currency = Purchase.
         for (Purchase p : purchases) {
-            itemList += "Item Name: " + p.getItem().getName() + "\t\t";
-            itemList += "Quantity:  " + p.getQuantity() + "\t\t";
+            itemList += "Item Name: " + p.getItem().getName() + "           ";
+            itemList += "Quantity: " + p.getQuantity() + "           ";
             itemList += "Price: " + String.format("€%.2f", p.getItem().getPrice()) + "\n";
             total += p.getItem().getPrice() * p.getQuantity();
         }
