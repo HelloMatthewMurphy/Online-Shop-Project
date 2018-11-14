@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import Services.Shop;
+import ThirdParty.Payment.BOIPaymentSystem;
+import ThirdParty.Payment.CardPayment;
+import ThirdParty.Payment.Payment;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -227,8 +230,8 @@ public class MainMenuUI extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null,"Invalid details");
                                 return;
                             }
-                            else valid = true;
-
+                            else 
+                                valid = true;
                         }
             }  
                 AccountFactory factory = new AccountFactory();
@@ -270,7 +273,7 @@ public class MainMenuUI extends javax.swing.JFrame {
                         if (users.get(i).getEmail().equals(email)){
                             if(users.get(i) instanceof Customer){
                                 Shop s = Shop.getInstance();
-                                s.setAccount((Customer)users.get(i));
+                                s.setAccount((Customer)users.get(i));                                
                                 new CustomerMenuUI(users.get(i).getUsername()).run();
                                 this.setVisible(false);
                                 
