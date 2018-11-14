@@ -5,6 +5,7 @@ public abstract class Payment {
     protected String username;
     protected String cardNumber;
     protected String billingAddress;
+    protected String paymentInfo;
     
     public IPaymentSystem _IPaymentSystem;
     
@@ -22,6 +23,10 @@ public abstract class Payment {
         this.billingAddress = address;
     }
     
+    public void setPaymentInfo(String paymentInfo){
+        this.paymentInfo = paymentInfo;
+    }
+    
     public String getUsername() {
         return this.username;
     }
@@ -32,6 +37,10 @@ public abstract class Payment {
     
     public String getBillingAddress() {
         return this.billingAddress;
+    }
+    
+    public String getPaymentInfo() {
+        return this.paymentInfo;
     }
     
 }
