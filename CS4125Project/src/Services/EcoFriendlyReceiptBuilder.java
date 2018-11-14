@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Jack
  */
-public class EcoFriendlyReceiptBuilder {
+public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
         private Receipt receipt;
     
     public EcoFriendlyReceiptBuilder(){
@@ -19,20 +19,20 @@ public class EcoFriendlyReceiptBuilder {
     }
     
     public void buildusername(){
-        receipt.Username(Shop.getInstance().getAccount().getUsername());
+        receipt.SetUsername(Shop.getInstance().getAccount().getUsername());
     }
     
     public void buildEmail(){
-        receipt.Email("");
+        receipt.SetEmail("");
     }
     
     //Need brians payment method to add.
-    public void buildPurchaseDetails(){
-        receipt.PaymentDetails("");
+    public void buildPaymentDetails(){
+        receipt.SetPaymentDetails("");
     }
     
     public void bulidDelivery(){
-        receipt.DeliveryMethod(Shop.getInstance().getAccount().getLocation());
+        receipt.SetDeliveryMethod(Shop.getInstance().getAccount().getLocation());
     } 
   
     public void buildPurchases(){
@@ -40,7 +40,7 @@ public class EcoFriendlyReceiptBuilder {
         basket = ShoppingBasket.GetInstance().GetBasketContents();
         String purchase = "You have " + basket.size() + " items.\n";
  
-        receipt.Purchases(purchase);
+        receipt.SetPurchases(purchase);
     } 
   
     public Receipt getReceipt(){
