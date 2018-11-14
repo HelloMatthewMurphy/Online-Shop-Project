@@ -15,6 +15,9 @@ public abstract class Account {
     private String email;
     
     public Account(){
+        this.username = "Undefined";
+        this.password = "Undefined";
+        this.email = "Undefined";
     }
     
     public Account(String username, String password, String email){

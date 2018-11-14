@@ -6,16 +6,8 @@
 package Database;
 
 import Storage.Warehouse;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -26,7 +18,7 @@ import java.util.List;
  */
 public class WarehouseDB implements IDatabase {
     
-    private WarehouseDBLegacy warehouseDBLegacy;
+    private final WarehouseDBLegacy warehouseDBLegacy;
     
     /**
      * A constructor sets filename and a blank ArrayList for accounts
@@ -59,7 +51,6 @@ public class WarehouseDB implements IDatabase {
         ArrayList<GregorianCalendar> backupTimes = warehouseDBLegacy.getBackupTimes();
         
         String[] result = new String[backupTimes.size()];
-        
         for (int i = 0; i < backupTimes.size(); i++)
         {
             GregorianCalendar date = backupTimes.get(i);

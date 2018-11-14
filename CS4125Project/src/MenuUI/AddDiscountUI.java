@@ -8,12 +8,9 @@ package MenuUI;
 import Database.DBControler;
 import Database.StockItemDB;
 import Services.Shop;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +20,7 @@ import javax.swing.JOptionPane;
 public class AddDiscountUI extends javax.swing.JFrame {
 
     StockItemDB db;
-    Shop s = Shop.getInstance();
+    Shop shopInstance = Shop.getInstance();
     /**
      * Creates new form AddDiscountUI
      * @throws SQLException
@@ -142,13 +139,12 @@ public class AddDiscountUI extends javax.swing.JFrame {
                     error = true;
                     JOptionPane.showMessageDialog(null, "Invalid value inputed. Please enter a number in the format. (XX%)");
                 }
-                else{
+                else
                     value = (Double.parseDouble(discountValue.getText())/100);
-                }
-    } catch (NumberFormatException e) {
-        error = true;
-        JOptionPane.showMessageDialog(null, "Invalid value inputed. Please enter a number in the format. (XX%)");
-    }
+        } catch (NumberFormatException e) {
+                error = true;
+                JOptionPane.showMessageDialog(null, "Invalid value inputed. Please enter a number in the format. (XX%)");
+        }
         if((value > 100 || value <= 0) && !error){
             error = true;
             JOptionPane.showMessageDialog(null, "Invalid value inputed. Please enter a value between 0 and 100.");
@@ -156,7 +152,7 @@ public class AddDiscountUI extends javax.swing.JFrame {
         if(!error){
         db.getStockItemByName((String)jComboBox1.getSelectedItem()).setDiscount(value);            
         
-        s.addDiscount();
+        shopInstance.addDiscount();
         JOptionPane.showMessageDialog(null, "Discount updated!");
         }
     }//GEN-LAST:event_submitActionPerformed
@@ -166,10 +162,8 @@ public class AddDiscountUI extends javax.swing.JFrame {
         *
         */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String disS = "";
-        double disD = (db.getStockItemByName((String)jComboBox1.getSelectedItem()).getDiscount()) * 100;
-        disS += disD;
-        discountText.setText("Current item discount = " + (int)(disD) + "%");
+        int discount = (int) ((db.getStockItemByName((String)jComboBox1.getSelectedItem()).getDiscount()) * 100);
+        discountText.setText("Current item discount = " + discount + "%");
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
     /**
@@ -178,8 +172,8 @@ public class AddDiscountUI extends javax.swing.JFrame {
     * @throws SQLException
     */
     private void setComboBox() throws SQLException{
-        Shop s = Shop.getInstance();
-        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        Shop shopInstance = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) shopInstance.getSortedStock(Shop.SortOrder.NAME_ASC);
         
         int i = 0;
         String[] itemNames = new String[list.size()];
@@ -199,7 +193,7 @@ public class AddDiscountUI extends javax.swing.JFrame {
     */
     private void setFirstDiscountText(){
         
-        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) shopInstance.getSortedStock(Shop.SortOrder.NAME_ASC);
         
         int i = 0;
         String[] itemNames = new String[list.size()];
@@ -207,18 +201,16 @@ public class AddDiscountUI extends javax.swing.JFrame {
             itemNames[i] = entry.getKey();
             i++;
         }
-        String disS = "";
-        double disD = (db.getStockItemByName(itemNames[0]).getDiscount()) * 100;
-        disS += disD;
-        discountText.setText("Current item discount = " + (int)(disD) + "%");
+        int discount = (int)((db.getStockItemByName(itemNames[0]).getDiscount()) * 100);
+        discountText.setText("Current item discount = " + discount + "%");
     }
     /**
     * Sets visible to true for the JFrame
 
     */
     public void run() {
-                this.setVisible(true);
-            }
+        this.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel discountText;

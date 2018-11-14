@@ -9,7 +9,6 @@ import Database.AccountDB;
 import User.Account;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -59,20 +58,11 @@ public class Login {
     * 
     */
     public boolean Validate(String email, String password) throws InterruptedException {
-        
-        boolean validated = false;
         for (int i = 0; i < users.size();i++){
             if ((users.get(i).getEmail().equals(email)) && (users.get(i).getPassword().equals(password)) ){
-                validated = true;
-            }            
-        }  
-        
-        if(validated == false){
-        }        
-        else if (validated == true){
-            TimeUnit.SECONDS.sleep(2);
+                return true;
+            }           
         }
-        return validated;
-    }
-        
+        return false;
+    }     
 }

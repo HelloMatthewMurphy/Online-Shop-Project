@@ -5,7 +5,6 @@
  */
 package Services;
 
-import Stock.StockItem;
 import java.util.ArrayList;
 
 /**
@@ -14,12 +13,12 @@ import java.util.ArrayList;
  */
 public class ShoppingBasket {
     
-    private ArrayList<Purchase> basket = new ArrayList<Purchase>();
+    private final ArrayList<Purchase> basket;
     private static ShoppingBasket instance;
     
     // Receiver
     private ShoppingBasket(){
-        
+        this.basket = new ArrayList<>();
     }
     
     public static ShoppingBasket GetInstance(){
@@ -38,13 +37,6 @@ public class ShoppingBasket {
     
     public void RemoveFromBasket(Purchase item){
         basket.remove(item);
-    }
-    
-    public void PrintOutShoppingBasket(){
-        System.out.println("You have " + basket.size() + " items.");
-        for(int i = 0; i < basket.size(); i++){
-            System.out.println(basket.get(i).getItem().getName());
-        }
     }
     
     public ArrayList<Purchase> GetBasketContents(){

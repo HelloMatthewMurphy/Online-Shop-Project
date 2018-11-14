@@ -25,6 +25,7 @@ public class PurchaseConstraints {
     *
     * @param start
     * @param end
+    * @param type 
     */
     public PurchaseConstraints(GregorianCalendar start, GregorianCalendar end, 
             PurchaseType type) {

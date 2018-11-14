@@ -23,6 +23,7 @@ public class MoneySaver extends DeliveryDecorator {
      * 
      * @return 
      */
+    @Override
     public double getPrice(){
         return tempDelivery.getPrice()-10;
     }
@@ -31,6 +32,7 @@ public class MoneySaver extends DeliveryDecorator {
      * 
      * @return 
      */
+    @Override
     public int getDays(){
         return tempDelivery.getDays()+2;
     }

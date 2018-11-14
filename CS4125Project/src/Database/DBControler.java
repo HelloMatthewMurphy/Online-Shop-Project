@@ -20,10 +20,10 @@ public class DBControler {
     public static final int PURCHASE_DB = 4;
     
     private static DBControler instance;
-    private AccountDB aDB;
-    private StockItemDB sDB;
-    private WarehouseDB wDB;
-    private PurchaseDB pDB;
+    private final AccountDB aDB;
+    private final StockItemDB sDB;
+    private final WarehouseDB wDB;
+    private final PurchaseDB pDB;
     
     /**
      * A constructor sets filename for each database
@@ -44,6 +44,7 @@ public class DBControler {
     
     /**
      * Creates an instance of DBController
+     * @return instance
      */
     public static DBControler getInstance(){
         if(instance == null)
@@ -52,7 +53,7 @@ public class DBControler {
     }
     
     /**
-     * @param loading loads a database depending an int
+     * @param loading loads a database depending an integer
      */ 
     public void load(int loading){
         try {
@@ -142,6 +143,7 @@ public class DBControler {
     }
     
     /**
+     * @param name Name of stock item
      * @return StockItem
      */ 
     public static StockItem getStockItemByName(String name) {

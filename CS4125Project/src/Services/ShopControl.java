@@ -14,14 +14,16 @@ import java.util.Stack;
  */
 public class ShopControl {
     
-    private ArrayList<Command> commands = new ArrayList<Command>();
+    private final ArrayList<Command> commands;
     //private Command undoCommand;
-    private Stack<Command> undoCommands = new Stack<Command>();
+    private final Stack<Command> undoCommands;
     private static ShopControl instance;
-    public int numCommands = 0;
+    public int numCommands;
     
     private ShopControl(){
-        
+        this.commands = new ArrayList<>();
+        this.undoCommands = new Stack<>();
+        this.numCommands = 0; 
     }
     
     public static ShopControl GetInstance(){

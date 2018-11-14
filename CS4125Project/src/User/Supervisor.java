@@ -5,8 +5,6 @@
  */
 package User;
 
-import Stock.StockItem;
-
 /**
  *
  * @author Jack
