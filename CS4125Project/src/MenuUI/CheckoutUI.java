@@ -145,7 +145,7 @@ public class CheckoutUI extends javax.swing.JFrame {
         for (int i = 0; i < items.size(); i++){
             s.makePurchase(items.get(i).getItem(), items.get(i).getQuantity(), items.get(i).getUsername());
         }
-        if(!Shop.getInstance().getAccount().getPaymentType().getPaymentInfo().equals("")){
+        if(Shop.getInstance().getAccount().getPaymentType() != null){
             new ReceiptUI().run();
         }
 
