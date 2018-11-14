@@ -26,14 +26,9 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
         receipt.SetEmail("");
     }
     
-    //Need brians payment method to add.
     public void buildPaymentDetails(){
         receipt.SetPaymentDetails("");
     }
-    
-    public void bulidDelivery(){
-        receipt.SetDeliveryMethod(Shop.getInstance().getAccount().getLocation());
-    } 
   
     public void buildPurchases(){
         ArrayList<Purchase> basket = ShoppingBasket.GetInstance().GetBasketContents();

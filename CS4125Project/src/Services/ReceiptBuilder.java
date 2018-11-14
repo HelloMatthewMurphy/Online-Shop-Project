@@ -17,8 +17,6 @@ interface ReceiptBuilder {
     
     public void buildPaymentDetails();
   
-    public void bulidDelivery(); 
-  
     public void buildPurchases(); 
   
     public Receipt getReceipt(); 
