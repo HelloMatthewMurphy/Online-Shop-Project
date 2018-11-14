@@ -188,7 +188,10 @@ public class CheckoutUI extends javax.swing.JFrame {
         for (Purchase p: purchases) {
             dispatcher.dispatch(new PurchaseRequest(p));
         }
-        new ReceiptUI().run();
+        if(!Shop.getInstance().getAccount().getPaymentType().getPaymentInfo().equals("")){
+            new ReceiptUI().run();
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
