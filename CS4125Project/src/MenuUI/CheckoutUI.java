@@ -145,7 +145,10 @@ public class CheckoutUI extends javax.swing.JFrame {
         for (int i = 0; i < items.size(); i++){
             s.makePurchase(items.get(i).getItem(), items.get(i).getQuantity(), items.get(i).getUsername());
         }
-        new ReceiptUI().run();
+        if(!Shop.getInstance().getAccount().getPaymentType().getPaymentInfo().equals("")){
+            new ReceiptUI().run();
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
