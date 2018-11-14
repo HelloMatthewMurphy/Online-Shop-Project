@@ -208,7 +208,12 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     null,
                                                     itemNames, 
                                                     itemNames[0]);
-        String[] selectionSplit = itemList.toString().split(" ");
+        String[] selectionSplit = null;
+        try {
+            selectionSplit = itemList.toString().split(" ");
+        }catch (Exception ex) {
+            return;
+        }
         pickedItem = selectionSplit[0]; 
         
         buyItemFromShop(pickedItem, currency);
@@ -236,6 +241,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                     null,
                                                     itemNames, 
                                                     itemNames[0]);
+        
+        if (itemList == null)
+            return;
+        
         pickedItem = itemList.toString();
         
         //Gets amount left for stock chosen
@@ -286,7 +295,19 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                         null,
                                                         null, 
                                                         null);
+            if (howMuchWanted == null)
+                return;
+            try {
             amountWanted = Integer.parseInt(howMuchWanted.toString());
+            }catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Please enter a numberic value!", "Invalid Entry", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+            
+            if (amountWanted < 0) {
+                JOptionPane.showMessageDialog(null, "Error - Amount can not be negative!", "Invalid Entry", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
             if(amountWanted <= amountAvailable)
                 donePickingamount = true;
             else
@@ -305,6 +326,9 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             Object delvTypes = JOptionPane.showInputDialog(null, "What type of Delivery would you like?", 
                 "Stock", JOptionPane.QUESTION_MESSAGE, null, delvTypesStrings, 
                 delvTypesStrings[2]);
+            
+            if (delvTypes == null)
+                return;
             
             String pickedDelv = delvTypes.toString();
 
@@ -350,14 +374,38 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         Object itemChoice = JOptionPane.showInputDialog(null, 
             "Pick item you would like to return.", "Return Stock", 
             JOptionPane.QUESTION_MESSAGE, null, itemNames, itemNames[0]);
+                
+        boolean isValid = false;
+        int amount = 0;
+        String pickedItem = "";
         
-        String pickedItem = itemChoice.toString();
-        Object quantityChoice = JOptionPane.showInputDialog(null, 
+        while(!isValid) {
+            try {
+            pickedItem = itemChoice.toString();
+            } catch(Exception ex) {
+               return; 
+            }
+            
+            Object quantityChoice = JOptionPane.showInputDialog(null, 
             "How many?", "Return Stock", JOptionPane.QUESTION_MESSAGE, 
             null, null, null);
-        
-        int amount = Integer.parseInt(quantityChoice.toString());
-        
+            
+            if (quantityChoice == null)
+                return;
+            
+            try {
+            amount = Integer.parseInt(quantityChoice.toString());
+            }
+            catch(NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(null, "Error - Please enter a numeric value!", "Invalid entry", JOptionPane.ERROR_MESSAGE);
+                    continue;
+             }
+            if (amount < 0) {
+                JOptionPane.showMessageDialog(null, "Error - Numeric value must be postive!!", "Invalid entry", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+            isValid = true;
+        }
         // Choose currency to refund in
         String validCurrencyNames[] = new String[Money.Currency.values().length];
         StringBuilder validCurrenciesStr = new StringBuilder();
@@ -379,7 +427,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                          validCurrenciesStr
                     ),
                     "Currency", JOptionPane.QUESTION_MESSAGE, null, null, null);
-            
+            if (choice == null)
+                return;
             currencyChoiceStr = String.valueOf(choice);
             
             // Check if choice is valid

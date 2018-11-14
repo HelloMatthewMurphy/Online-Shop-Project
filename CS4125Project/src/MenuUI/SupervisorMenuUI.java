@@ -162,13 +162,27 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
         
         int numBackups = backupDateStrings.length;
                 
-        String message = "Please enter a value from 0 to " + (numBackups - 1) + ", corresponding to the backup you which to use\n";
-        for (String dateString : backupDateStrings)
-            message += dateString + "\n";
+
+        boolean isValid = false;
+        int backupId = 0;
         
-        String input = JOptionPane.showInputDialog(message);
-        
-        int backupId = Integer.parseInt(input);
+        while (!isValid) {
+            String message = "Please enter a value from 0 to " + (numBackups - 1) + ", corresponding to the backup you which to use\n";
+            for (String dateString : backupDateStrings)
+                message += dateString + "\n";
+
+            String input = JOptionPane.showInputDialog(message);
+
+            if (input == null)
+                return;
+            try {
+                backupId = Integer.parseInt(input);
+            }catch(NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Error - Please enter a numeric value!", "Invalid Entry!", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+            isValid = true;
+        }
         
         if (backupId >= 0 && backupId < numBackups) {
             try {

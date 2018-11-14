@@ -156,6 +156,7 @@ public class StockItemDB implements IDatabase {
     }
     
     /**
+     * @param name
      * @return stockItem
      */
     public StockItem getStockItemByName(String name){

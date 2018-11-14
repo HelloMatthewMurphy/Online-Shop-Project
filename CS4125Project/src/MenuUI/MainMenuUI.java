@@ -212,6 +212,11 @@ public class MainMenuUI extends javax.swing.JFrame {
                 email = RegisterEmail.getText();
                 RegisterEmail.setText("");
                 
+                if (email.isEmpty() || password.isEmpty() || username.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Error - One or more fields were left empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
                     if(users.isEmpty()){
                         valid = true;
                     }
@@ -224,16 +229,17 @@ public class MainMenuUI extends javax.swing.JFrame {
                             else 
                                 valid = true;
                         }
-            }  
-                AccountFactory factory = new AccountFactory();
-                users.add((Customer)factory.createAccount("customer", username, password, email));
-                try {
-                    db.save();
-                    JOptionPane.showMessageDialog(null,"Successfully Registered!");
-                    users = db.getAccounts();
-                } catch(IOException e) {
-                  System.out.println(e);  
-                }           
+            }   
+                
+            AccountFactory factory = new AccountFactory();
+            users.add((Customer)factory.createAccount("customer", username, password, email));
+            try {
+                db.save();
+                JOptionPane.showMessageDialog(null,"Successfully Registered!");
+                users = db.getAccounts();
+            } catch(IOException e) {
+              System.out.println(e);  
+            }           
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void LoginPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginPasswordActionPerformed
