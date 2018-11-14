@@ -82,6 +82,8 @@ public class PurchaseDB implements IDatabase {
             
             if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
                 filesInDir.get(i).delete();
+            else
+                filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
         }
         
     }

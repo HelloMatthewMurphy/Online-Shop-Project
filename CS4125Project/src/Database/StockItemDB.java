@@ -88,9 +88,10 @@ public class StockItemDB implements IDatabase {
             int id = Integer.parseInt(oldFilename.substring(BUP_PREFIX.length()));
             String newFilename = BUP_PREFIX + String.format("%03d", id + 1);
             
-            
             if (newFilename.equals(BUP_PREFIX + String.format("%03d", MAX_BACKUPS)))
                 filesInDir.get(i).delete();
+            else
+                filesInDir.get(i).renameTo(new File(BUP_PATH, newFilename));
         }
         
     }
@@ -120,6 +121,7 @@ public class StockItemDB implements IDatabase {
         });
         
         writer.flush();
+        writer.close();
     }
     
     /**
