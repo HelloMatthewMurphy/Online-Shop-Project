@@ -17,8 +17,6 @@ interface ReceiptPlan {
     public String GetEmail();
     public void SetPaymentDetails(String paymentDetails);
     public String GetPaymentDetails();
-    public void SetDeliveryMethod(String delivery);
-    public String GetDeliveryMethod();
     public void SetPurchases(String purchases);
     public String GetPurchases();
     

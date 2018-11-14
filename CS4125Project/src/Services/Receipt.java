@@ -16,7 +16,6 @@ public class Receipt implements ReceiptPlan{
     private String accountUsername;
     private String accountEmail;
     private String paymentDetails;
-    private String delivery;
     private String purchases;
     
     public void SetUsername(String username){
@@ -29,10 +28,6 @@ public class Receipt implements ReceiptPlan{
     
     public void SetPaymentDetails(String paymentDetails){
         this.paymentDetails = paymentDetails;
-    }
-    
-    public void SetDeliveryMethod(String delivery){
-        this.delivery = delivery;
     }
     
     public void SetPurchases(String purchases){
@@ -49,10 +44,6 @@ public class Receipt implements ReceiptPlan{
     
     public String GetPaymentDetails(){
         return this.paymentDetails;
-    } 
-    
-    public String GetDeliveryMethod(){
-        return this.delivery;
     } 
     
     public String GetPurchases(){

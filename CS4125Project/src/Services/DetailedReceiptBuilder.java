@@ -29,10 +29,6 @@ public class DetailedReceiptBuilder implements ReceiptBuilder{
     public void buildPaymentDetails(){
         receipt.SetPaymentDetails(Shop.getInstance().getAccount().getPaymentType().getPaymentInfo());
     }
-    
-    public void bulidDelivery(){
-        receipt.SetDeliveryMethod(Shop.getInstance().getAccount().getLocation());
-    } 
   
     public void buildPurchases(){
         ArrayList<Purchase> basket = ShoppingBasket.GetInstance().GetBasketContents();
