@@ -5,6 +5,7 @@
  */
 package Database;
 
+import Language.LocalizationLanguage;
 import Stock.StockItem;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,9 +19,10 @@ import java.util.HashMap;
  */
 public class LocalizationDB implements IDatabase {
     
-    String filename;
-    int currentLanguage;
-    HashMap<String, ArrayList<String>> localizations;
+    private String filename;
+    private int currentLanguage = 0;
+    private LocalizationLanguage[] languages;
+    private HashMap<String, ArrayList<String>> localizations;
     
     /**
      * A constructor sets filename and a hashmap of Localization
@@ -43,7 +45,13 @@ public class LocalizationDB implements IDatabase {
     @Override
     public void load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
-        reader.readLine();
+        
+        // getting languages
+        String[] headings = reader.readLine().split(",");
+        languages = new LocalizationLanguage[headings.length - 1];
+        for(int i = 1; i < headings.length; i++){
+            languages[i-1] = new LocalizationLanguage(headings[i], i-1);
+        }
         
         String line;
         while ((line = reader.readLine()) != null) {
@@ -58,7 +66,17 @@ public class LocalizationDB implements IDatabase {
     }
     
     public String GetLocalization(String tag){
-        String localizedString =  localizations.get(tag).get(0);
+        String localizedString =  localizations.get(tag).get(currentLanguage);
         return localizedString;
+    }
+    
+    public void SetLanguage(int languageNumber){
+        if(languageNumber <= languages.length){
+            currentLanguage = languageNumber;
+        }
+    }
+    
+    public LocalizationLanguage[] GetLanguages(){
+        return languages;
     }
 }
