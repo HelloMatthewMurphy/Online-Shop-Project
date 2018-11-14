@@ -36,8 +36,7 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
     } 
   
     public void buildPurchases(){
-        ArrayList<Purchase> basket = new ArrayList<Purchase>();
-        basket = ShoppingBasket.GetInstance().GetBasketContents();
+        ArrayList<Purchase> basket = ShoppingBasket.GetInstance().GetBasketContents();
         String purchase = "You have " + basket.size() + " items.\n";
  
         receipt.SetPurchases(purchase);
