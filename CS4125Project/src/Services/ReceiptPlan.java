@@ -11,10 +11,15 @@ import ThirdParty.Delivery.Delivery;
  * @author Jack
  */
 interface ReceiptPlan {
-    public void Username(String account);
-    public void Email(String email);
-    public void PaymentDetails(String paymentDetails);
-    public void DeliveryMethod(String delivery);
-    public void Purchases(String purchases);
+    public void SetUsername(String account);
+    public String GetUsername();
+    public void SetEmail(String email);
+    public String GetEmail();
+    public void SetPaymentDetails(String paymentDetails);
+    public String GetPaymentDetails();
+    public void SetDeliveryMethod(String delivery);
+    public String GetDeliveryMethod();
+    public void SetPurchases(String purchases);
+    public String GetPurchases();
     
 }
