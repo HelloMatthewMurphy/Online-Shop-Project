@@ -18,12 +18,14 @@ public class DBControler {
     public static final int WAREHOUSE_DB = 2;
     public static final int ALL_DB = 3;
     public static final int PURCHASE_DB = 4;
+    public static final int LOCALIZATION_DB = 5;
     
     private static DBControler instance;
     private final AccountDB aDB;
     private final StockItemDB sDB;
     private final WarehouseDB wDB;
     private final PurchaseDB pDB;
+    private final LocalizationDB lDB;
     
     /**
      * A constructor sets filename for each database
@@ -35,11 +37,13 @@ public class DBControler {
         sDB = new StockItemDB();
         wDB = new WarehouseDB();
         pDB = new PurchaseDB();
+        lDB = new LocalizationDB();
         
         aDB.setFilename("RegisteredUsers.csv");
         sDB.setFilename("stockiteminfo.csv");
         wDB.setFilename("warehouseinfo.csv");
         pDB.setFilename("purchaseinfo.csv");
+        lDB.setFilename("Localization.csv");
     }
     
     /**
@@ -58,18 +62,21 @@ public class DBControler {
     public void load(int loading){
         try {
             switch (loading){
-                case ACCOUNT_DB:    aDB.load();  
+                case ACCOUNT_DB:        aDB.load();  
                 break;
-                case STOCKITEM_DB:  sDB.load();  
+                case STOCKITEM_DB:      sDB.load();  
                 break;
-                case WAREHOUSE_DB:  wDB.load();  
+                case WAREHOUSE_DB:      wDB.load();  
                 break;
-                case PURCHASE_DB:   pDB.load();
+                case PURCHASE_DB:       pDB.load();
                 break;
-                case ALL_DB:        aDB.load();
-                                    sDB.load();
-                                    wDB.load();
-                                    pDB.load();
+                case LOCALIZATION_DB:   lDB.load();
+                break;
+                case ALL_DB:            aDB.load();
+                                        sDB.load();
+                                        wDB.load();
+                                        pDB.load();
+                                        lDB.load();
                 break;
         }
         } catch (IOException ex) {
@@ -84,18 +91,21 @@ public class DBControler {
     public void save(int saving){
         try {
             switch (saving){
-                case ACCOUNT_DB:    aDB.save();  
+                case ACCOUNT_DB:        aDB.save();  
                 break;
-                case STOCKITEM_DB:  sDB.save();  
+                case STOCKITEM_DB:      sDB.save();  
                 break;
-                case WAREHOUSE_DB:  wDB.save();  
+                case WAREHOUSE_DB:      wDB.save();  
                 break;
-                case PURCHASE_DB:   pDB.save();
+                case PURCHASE_DB:       pDB.save();
                 break;
-                case ALL_DB:        aDB.save();
-                                    sDB.save();
-                                    wDB.save();
-                                    pDB.save();
+                case LOCALIZATION_DB:   lDB.save();
+                break;
+                case ALL_DB:            aDB.save();
+                                        sDB.save();
+                                        wDB.save();
+                                        pDB.save();
+                                        lDB.save();
                 break;
         }
         } catch (IOException ex) {
@@ -130,6 +140,13 @@ public class DBControler {
      */ 
     public PurchaseDB getPurchaseDB() {
         return pDB;
+    }
+    
+    /**
+     * @return LocalizationDB
+     */ 
+    public LocalizationDB getLocalizationDB() {
+        return lDB;
     }
     
     /**
