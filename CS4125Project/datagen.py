@@ -3,25 +3,25 @@ import shutil
 
 fileInfo = {
 	"purchaseinfo.csv":
-	"""Name,Quantity,Discount,Date
-yeezy,2,1.00,21/11/2017,Brian
-yeezy,-1,1.00,21/11/2017,Brian
-yeezy,2,1.00,21/11/2017,Matt
-apple,1,1.00,23/11/2017,Brian
-Frog,60,1.00,23/11/2017,kys
-Frog,2,1.00,23/11/2017,kys
-Frog,-2,1.00,23/11/2017,kys
-Sweet,2,1.00,23/11/2017,kys
-Frog,1,1.00,25/10/2018,a
-apple,5,1.00,25/10/2018,a
-apple,12,1.00,8/11/2018,a
-apple,10,1.00,8/11/2018,a
-apple,2,1.00,8/11/2018,a
-apple,1,1.00,8/11/2018,a
-apple,10,1.00,8/11/2018,a
-Sweet,1,1.00,8/11/2018,a
-Sweet,1,1.00,8/11/2018,a
-Sweet,-20,1.00,8/11/2018,a
+	"""Name,Quantity,Discount,Currency,Date
+yeezy,2,1.00,EUR,21/11/2017,Brian
+yeezy,-1,1.00,EUR,21/11/2017,Brian
+yeezy,2,1.00,EUR,21/11/2017,Matt
+apple,1,1.00,EUR,23/11/2017,Brian
+Frog,60,1.00,EUR,23/11/2017,kys
+Frog,2,1.00,EUR,23/11/2017,kys
+Frog,-2,1.00,EUR,23/11/2017,kys
+Sweet,2,1.00,EUR,23/11/2017,kys
+Frog,1,1.00,EUR,25/10/2018,a
+apple,5,1.00,EUR,25/10/2018,a
+apple,12,1.00,EUR,8/11/2018,a
+apple,10,1.00,EUR,8/11/2018,a
+apple,2,1.00,EUR,8/11/2018,a
+apple,1,1.00,EUR,8/11/2018,a
+apple,10,1.00,EUR,8/11/2018,a
+Sweet,1,1.00,EUR,8/11/2018,a
+Sweet,1,1.00,EUR,8/11/2018,a
+Sweet,-20,1.00,EUR,8/11/2018,a
 """,
 
 	"RegisteredUsers.csv":
