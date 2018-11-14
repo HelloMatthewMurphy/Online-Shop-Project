@@ -13,6 +13,7 @@ import Services.PurchaseRequestInterceptorChangeCurrency;
 import Services.PurchaseRequestInterceptorLogging;
 import Services.ShopControl;
 import Services.ShoppingBasket;
+import Services.Shop;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -195,6 +196,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
         ShoppingBasket.GetInstance().ClearBasket();
         dispose();
         new ReceiptUI().run();
+        if(!Shop.getInstance().getAccount().getPaymentType().getPaymentInfo().equals("")){
+            new ReceiptUI().run();
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
