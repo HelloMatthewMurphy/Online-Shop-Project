@@ -39,6 +39,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     public CustomerMenuUI(String username) {
         initComponents();
         this.username = username;
+        welcomeMessage.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("WELCOME_MESSAGE"));
     }
 
     /**
@@ -52,7 +53,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        welcomeMessage = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -76,7 +77,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Welcome!");
+        welcomeMessage.setText("Welcome!");
 
         jButton3.setText("Check Stock");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +124,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(161, 161, 161)
-                                .addComponent(jLabel1))
+                                .addComponent(welcomeMessage))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(138, 138, 138)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +152,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(welcomeMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -475,8 +476,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel welcomeMessage;
     // End of variables declaration//GEN-END:variables
 }
