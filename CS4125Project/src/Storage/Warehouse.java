@@ -1,6 +1,5 @@
 package Storage;
 
-import Stock.StockItem;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,10 +10,10 @@ import java.util.Map;
 public class Warehouse {
     
     // Map of stockitem's names to quantity
-    private Map<String, Integer> stock;
+    private final Map<String, Integer> stock;
     //private ArrayList<StockItem> stock;
-    private Location warehouseLocation;
-    private String name;
+    private final Location warehouseLocation;
+    private final String name;
     
     /**
      * A constructor of Warehouse which sets the location and name of the warehouse.
@@ -22,7 +21,7 @@ public class Warehouse {
      * @param name The name of the warehouse.
      */
     public Warehouse(Location warehouseLocation, String name){
-        stock = new HashMap<String, Integer>();
+        stock = new HashMap<>();
         this.warehouseLocation = warehouseLocation;
         this.name = name;
     }
@@ -59,7 +58,7 @@ public class Warehouse {
     /**
      * 
      * @param itemName Checks if Item is in warehouse.
-     * @return bool
+     * @return true if warehouse is storing a requested item
      */
     public boolean hasItem(String itemName){
         boolean bool = stock.containsKey(itemName);

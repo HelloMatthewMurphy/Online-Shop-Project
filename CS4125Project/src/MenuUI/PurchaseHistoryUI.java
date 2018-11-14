@@ -8,7 +8,6 @@ package MenuUI;
 import Database.DBControler;
 import Database.PurchaseDB;
 import Services.Purchase;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -17,14 +16,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Brian
  */
-public class PurchaseHistoryUI extends javax.swing.JFrame {
+public final class PurchaseHistoryUI extends javax.swing.JFrame {
 
     /**
      * Creates new form PurchaseHistoryUI
      */
-    private PurchaseDB db;
-    private List<Purchase> purchases;
-    private String username;
+    private final PurchaseDB db;
+    private final List<Purchase> purchases;
+    private final String username;
     public PurchaseHistoryUI(String username) {
         this.username = username;
         initComponents();

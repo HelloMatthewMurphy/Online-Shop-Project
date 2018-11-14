@@ -110,15 +110,14 @@ public class StockItemDB implements IDatabase {
         PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
         writer.write("Name,Price,Category,Description,Discount,\n");
         
-        for (String siName : stockItems.keySet()) {
-            String line = String.format("%s,%.2f,%s,%s,%.2f",
-                    siName,
-                    stockItems.get(siName).getPrice(),
-                    stockItems.get(siName).getCategory(),
-                    stockItems.get(siName).getDescription(),
-                    stockItems.get(siName).getDiscount());
-            writer.write(line + "\n");
-        }
+        stockItems.keySet().stream().map((siName) -> String.format("%s,%.2f,%s,%s,%.2f",
+                siName,
+                stockItems.get(siName).getPrice(),
+                stockItems.get(siName).getCategory(),
+                stockItems.get(siName).getDescription(),
+                stockItems.get(siName).getDiscount())).forEachOrdered((line) -> {
+                    writer.write(line + "\n");
+        });
         
         writer.flush();
     }

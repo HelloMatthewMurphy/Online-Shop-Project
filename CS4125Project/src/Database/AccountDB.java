@@ -24,14 +24,14 @@ import java.util.List;
 public class AccountDB implements IDatabase {
     
     private String filename;
-    private List<Account> accounts;
+    private final List<Account> accounts;
     
     /**
      * A constructor sets filename and a blank ArrayList for accounts
      */
     public AccountDB(){
         filename = "";
-        accounts = new ArrayList<Account>();
+        accounts = new ArrayList<>();
     }
     /**
      * A constructor sets filename and a ArrayList for accounts
@@ -55,24 +55,24 @@ public class AccountDB implements IDatabase {
      */ 
     @Override
     public void save() throws IOException{
-        PrintWriter writer = new PrintWriter(new FileWriter(filename, false));	
-        writer.write("Username,Password,Email\n\n");
-        for (int i = 0; i < accounts.size();i++){
-            writer.write(String.valueOf(accounts.get(i).getUsername()));
-            writer.write(",");
-            writer.write(String.valueOf(accounts.get(i).getPassword()));
-            writer.write(",");
-            writer.write(String.valueOf(accounts.get(i).getEmail()));
-            writer.write(",");
-            if(accounts.get(i) instanceof Supervisor){
-                writer.write("S");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename, false))) {
+            writer.write("Username,Password,Email\n\n");
+            for (int i = 0; i < accounts.size();i++){
+                writer.write(String.valueOf(accounts.get(i).getUsername()));
+                writer.write(",");
+                writer.write(String.valueOf(accounts.get(i).getPassword()));
+                writer.write(",");
+                writer.write(String.valueOf(accounts.get(i).getEmail()));
+                writer.write(",");
+                if(accounts.get(i) instanceof Supervisor){
+                    writer.write("S");
+                }
+                else if(accounts.get(i) instanceof Customer){
+                    writer.write("C");
+                }
+                writer.write("\n");
             }
-            else if(accounts.get(i) instanceof Customer){
-                writer.write("C");
-            }
-            writer.write("\n");
         }
-        writer.close();
     }
     
      /**
@@ -81,24 +81,24 @@ public class AccountDB implements IDatabase {
      */ 
     @Override
     public void load() throws IOException {
-        BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"));
-        fileReader.readLine();
-        fileReader.readLine();
-        String fileLine;
-        while ((fileLine = fileReader.readLine()) != null) {  
-            String [] data = fileLine.split(",", -1);
-            String username= data[0];
-            String password = data[1];
-            String email = data[2];
-            String type = data[3];
-            if (type.equals("S")){
-                accounts.add(new Supervisor(username,password,email));
-            }
-            else if (type.equals("C")){
-                accounts.add(new Customer(username,password,email));
+        try (BufferedReader fileReader = new BufferedReader (new FileReader("RegisteredUsers.csv"))) {
+            fileReader.readLine();
+            fileReader.readLine();
+            String fileLine;
+            while ((fileLine = fileReader.readLine()) != null) {
+                String [] data = fileLine.split(",", -1);
+                String username= data[0];
+                String password = data[1];
+                String email = data[2];
+                String type = data[3];
+                if (type.equals("S")){
+                    accounts.add(new Supervisor(username,password,email));
+                }
+                else if (type.equals("C")){
+                    accounts.add(new Customer(username,password,email));
+                }
             }
         }
-        fileReader.close();
     }
     /**
      * 

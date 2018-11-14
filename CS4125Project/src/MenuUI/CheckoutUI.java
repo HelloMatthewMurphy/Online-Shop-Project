@@ -11,28 +11,27 @@ import Services.PurchaseRequest;
 import Services.PurchaseRequestDispatcher;
 import Services.PurchaseRequestInterceptorChangeCurrency;
 import Services.PurchaseRequestInterceptorLogging;
-import Services.Shop;
 import Services.ShopControl;
 import Services.ShoppingBasket;
-import Stock.StockItem;
 import java.util.ArrayList;
-import java.util.Calendar;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+<<<<<<< HEAD
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+=======
+>>>>>>> refactor code indents and variables names
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hello
  */
-public class CheckoutUI extends javax.swing.JFrame {
+public final class CheckoutUI extends javax.swing.JFrame {
 
-    private ArrayList<Purchase> purchases = new ArrayList<Purchase>();
+    private ArrayList<Purchase> purchases = new ArrayList<>();
     private Money.Currency currency = Money.Currency.values()[0];
     
-    private PurchaseRequestDispatcher dispatcher;
+    private final PurchaseRequestDispatcher dispatcher;
     private PurchaseRequestInterceptorChangeCurrency currencyChangeInterceptor;
     
     /**

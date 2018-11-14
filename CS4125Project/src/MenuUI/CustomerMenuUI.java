@@ -6,38 +6,23 @@
 package MenuUI;
 
 import Database.DBControler;
-import Database.PurchaseDB;
 import Services.BuyItemCommand;
 import Services.Money;
-import Services.Purchase;
 import Services.Shop;
 import Services.ShopControl;
-import Services.ShoppingBasket;
 import Stock.StockItem;
 import ThirdParty.CreditCardCo;
 import ThirdParty.Delivery.BasicDelivery;
 import ThirdParty.Delivery.MoneySaver;
 import ThirdParty.Delivery.Premium;
 import ThirdParty.Delivery.Delivery;
-import java.awt.BorderLayout;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
-import javax.swing.JList;
+import javax.swing.JComboBox;;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.CCSTATE;
 
 /**
  *
@@ -50,7 +35,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     /**
      * Creates new form CustomerMenuUI
      */
-    private String username;
+    private final String username;
     public CustomerMenuUI(String username) {
         initComponents();
         this.username = username;
@@ -213,7 +198,9 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             itemNames[i] = String.format("%s : %c%.2f", list.get(i).getKey(), currency.getSymbol(), item.getPrice() * currency.getFromEuroRate());
         }
         
-        String pickedItem = "";
+
+        //Picking item
+        String pickedItem;
         Object itemList = JOptionPane.showInputDialog(null, 
                                                    "Pick item you would like to buy.", 
                                                    "Add to basket", 
@@ -241,7 +228,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
         //Picking item
         JComboBox cb = new JComboBox(itemNames);
-        String pickedItem = "";
+        String pickedItem;
         Object itemList = JOptionPane.showInputDialog(null, 
                                                    "Pick item you would like to see information of.", 
                                                    "Check Stock", 
@@ -312,36 +299,34 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
         //Getting delevery type
         Delivery delivery = null;
-        boolean validD = false;
-        while(validD == false){
+        boolean validDelivery = false;
+        while(!validDelivery){
             String[] delvTypesStrings = {"Slow", "Regular", "Premium"};
-            Object delvTypes = JOptionPane.showInputDialog(null, 
-                                                   "What type of Delivery would you like?", 
-                                                   "Stock", 
-                                                    JOptionPane.QUESTION_MESSAGE, 
-                                                    null,
-                                                    delvTypesStrings, 
-                                                    delvTypesStrings[2]);
+            Object delvTypes = JOptionPane.showInputDialog(null, "What type of Delivery would you like?", 
+                "Stock", JOptionPane.QUESTION_MESSAGE, null, delvTypesStrings, 
+                delvTypesStrings[2]);
+            
             String pickedDelv = delvTypes.toString();
 
             switch (pickedDelv) {
                 case "Slow":
                     delivery = new MoneySaver(new BasicDelivery());
-                    validD = true;
+                    validDelivery = true;
                     break;
                 case "Regular":
                     delivery = new BasicDelivery();
-                    validD = true;
+                    validDelivery = true;
                     break;
                 case "Premium":
                     delivery = new Premium(new BasicDelivery());
-                    validD = true;
+                    validDelivery = true;
                     break;
                 default:
                     break;
             }
             price += delivery.getPrice();
         }
+        
         CreditCardCo credit = new CreditCardCo();
         if(!pickedItem.equals("")){
             ShopControl controler = ShopControl.GetInstance();
@@ -352,9 +337,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     
     //Return Item
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        Shop s = Shop.getInstance();
-        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
 
+        Shop shopInstance = Shop.getInstance();
+        ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) shopInstance.getSortedStock(Shop.SortOrder.NAME_ASC);
+        
         String[] itemNames = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             itemNames[i] = list.get(i).getKey();
@@ -362,20 +348,14 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
         //Picking item
         Object itemChoice = JOptionPane.showInputDialog(null, 
-                                                   "Pick item you would like to return.", 
-                                                   "Return Stock", 
-                                                    JOptionPane.QUESTION_MESSAGE, 
-                                                    null,
-                                                    itemNames, 
-                                                    itemNames[0]);
+            "Pick item you would like to return.", "Return Stock", 
+            JOptionPane.QUESTION_MESSAGE, null, itemNames, itemNames[0]);
+        
         String pickedItem = itemChoice.toString();
         Object quantityChoice = JOptionPane.showInputDialog(null, 
-                                                   "How many?", 
-                                                   "Return Stock", 
-                                                    JOptionPane.QUESTION_MESSAGE, 
-                                                    null,
-                                                    null, 
-                                                    null);
+            "How many?", "Return Stock", JOptionPane.QUESTION_MESSAGE, 
+            null, null, null);
+        
         int amount = Integer.parseInt(quantityChoice.toString());
         
         // Choose currency to refund in
@@ -398,11 +378,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                         "Which currency would you like to be refunded in? Options are: %s",
                          validCurrenciesStr
                     ),
-                    "Currency",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null, 
-                    null, 
-                    null);
+                    "Currency", JOptionPane.QUESTION_MESSAGE, null, null, null);
+            
             currencyChoiceStr = String.valueOf(choice);
             
             // Check if choice is valid
@@ -421,7 +398,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         } while(!validChoice);
         Money.Currency currency = Money.Currency.valueOf(currencyChoiceStr);
         
-        s.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount, currency);
+        shopInstance.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount, currency);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     // checkout
@@ -437,13 +414,9 @@ public class CustomerMenuUI extends javax.swing.JFrame {
       new PaymentSetupUI(Shop.getInstance().getAccount().getPaymentType()).run();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    /**
-     * 
-     */
-
-            public void run() {
-                this.setVisible(true);
-            }
+    public void run() {
+        this.setVisible(true);
+    }
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,7 +13,7 @@ import Stock.StockItem;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import javax.swing.DefaultListModel;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,30 +56,29 @@ public class ShopAnalysisUI extends javax.swing.JFrame {
         cbCategory.removeAllItems();
         cbCategory.addItem("-- any --");
         
-        for (String category : categories)
+        categories.forEach((category) -> {
             cbCategory.addItem(category);
+        });
     }
     
     /**
      * Updates combobox categories.
      */
     private void updateCbProducts() {
-        
         ArrayList<String> products = new ArrayList();
-        
-        for (StockItem si : DBControler.getInstance().getStockItemDB().getStockItems().values()) {
-            
-            
-            if (!products.contains(si.getName()) 
-                    && si.getCategory().equals(cbCategory.getSelectedItem()))
+        HashMap<String, StockItem> stockItems =
+                DBControler.getInstance().getStockItemDB().getStockItems();
+        stockItems.values().stream().filter((si) -> (!products.contains(si.getName()) 
+            && si.getCategory().equals(cbCategory.getSelectedItem()))).forEachOrdered((si) -> {
                 products.add(si.getName());
-        }
+        });
         
         cbProduct.removeAllItems();
         cbProduct.addItem("-- any --");
         
-        for (String product : products)
+        products.forEach((product) -> {
             cbProduct.addItem(product);
+        });
     }
 
     /**

@@ -1,15 +1,7 @@
 package Services;
 
-import MenuUI.PaymentSetupUI;
 import Stock.StockItem;
-import ThirdParty.*;
-import ThirdParty.Delivery.BasicDelivery;
-import ThirdParty.Delivery.Delivery;
-import ThirdParty.Delivery.MoneySaver;
-import ThirdParty.Delivery.Premium;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
-import ThirdParty.Payment.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,7 +55,7 @@ public class Purchase {
 
     public boolean validatePurchase(String address){
         if (Shop.getInstance().getAccount().getPaymentType() == null) {
-            JOptionPane.showMessageDialog(null, "Error - there is no payment method set for this account");
+            JOptionPane.showMessageDialog(null, "Error - There is no payment method set for this account");
             return false;
         }
         return true;

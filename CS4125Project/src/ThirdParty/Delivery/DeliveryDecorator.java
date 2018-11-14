@@ -26,6 +26,7 @@ public class DeliveryDecorator implements Delivery {
      * 
      * @return 
      */
+    @Override
     public String getType(){
         return tempDelivery.getType();
     }
@@ -34,6 +35,7 @@ public class DeliveryDecorator implements Delivery {
      * 
      * @return 
      */
+    @Override
     public double getPrice(){
         return tempDelivery.getPrice();
     }
@@ -42,6 +44,7 @@ public class DeliveryDecorator implements Delivery {
      * 
      * @return 
      */
+    @Override
     public int getDays(){
         return tempDelivery.getDays();
     }

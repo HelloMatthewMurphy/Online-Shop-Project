@@ -13,7 +13,7 @@ import Stock.StockItem;
  */
 public class CheckStockCommand implements Command{
 
-    private StockItem stockItem;
+    private final StockItem stockItem;
     
     // Concrete Command
     public CheckStockCommand(StockItem stockItem, ShoppingBasket shoppingBasket){

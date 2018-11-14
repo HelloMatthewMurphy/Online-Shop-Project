@@ -5,7 +5,6 @@
  */
 package Services;
 import Stock.StockItem;
-import Services.Purchase;
 
 /**
  *
@@ -13,8 +12,8 @@ import Services.Purchase;
  */
 public class BuyItemCommand implements Command{
 
-    private Purchase purchase;
-    private ShoppingBasket shoppingBasket;
+    private final Purchase purchase;
+    private final ShoppingBasket shoppingBasket;
     
     // Concrete Command
     public BuyItemCommand(StockItem stockItem, int quantity, String username, Money.Currency currency){

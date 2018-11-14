@@ -8,20 +8,9 @@ package Database;
 import Services.Money;
 import Services.Purchase;
 import Stock.StockItem;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+
 
 /**
  * Stores all sales ever made
@@ -72,7 +61,7 @@ public class PurchaseDB implements IDatabase {
         // Remove all non-files (folders) from the arraylist, and ones which are
         // not relevant to this type
         
-        for (int i = 0; i < filesInDir.size(); ) {
+        for (int i = 0; i < filesInDir.size();) {
             if (!filesInDir.get(i).isFile() || !filesInDir.get(i).getName().startsWith(BUP_PREFIX))
                 filesInDir.remove(i);
             else
@@ -111,28 +100,24 @@ public class PurchaseDB implements IDatabase {
     
     private void saveFile(String filename) throws IOException
     {   
-        PrintWriter writer = new PrintWriter(new FileWriter(filename, false));
-        // Write the headers
-        writer.write("Name,Quantity,Discount,Currency,Date\n");
-        
-        for (Purchase purchase : purchases)
-        {
-            String line = String.format("%s,%d,%.2f,%s,%d/%d/%d,%s",
-                purchase.getItem().getName(),
-                purchase.getQuantity(),
-                purchase.getDiscount(),
-                purchase.getMoney().getCurrency().name(),
-                purchase.getDate().get(Calendar.DATE),
-                purchase.getDate().get(Calendar.MONTH) + 1,
-                purchase.getDate().get(Calendar.YEAR),
-                purchase.getUsername());
-            writer.write(line + "\n");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename, false))) {
+            // Write the headers
+            writer.write("Name,Quantity,Discount,Currency,Date\n");
+            
+            purchases.stream().map((Purchase purchase) -> String.format("%s,%d,%.2f,%s,%d/%d/%d,%s",
+                    purchase.getItem().getName(),
+                    purchase.getQuantity(),
+                    purchase.getDiscount(),
+                    purchase.getMoney().getCurrency().name(),
+                    purchase.getDate().get(Calendar.DATE),
+                    purchase.getDate().get(Calendar.MONTH) + 1,
+                    purchase.getDate().get(Calendar.YEAR),
+                    purchase.getUsername())).forEachOrdered((String line) -> {
+                        writer.write(line + "\n");
+            });
+            
+            writer.flush();
         }
-        
-        writer.flush();
-        
-        
-        writer.close();
     }
     
     /**
@@ -147,8 +132,8 @@ public class PurchaseDB implements IDatabase {
     
     private void loadFile(String filename) throws IOException
     {
+
         BufferedReader reader = new BufferedReader(new FileReader(filename));
-        // Ignore the headers
         reader.readLine();
         
         // Initialize/Clear the list
@@ -165,20 +150,17 @@ public class PurchaseDB implements IDatabase {
             Money.Currency currency = Money.Currency.valueOf(currencyStr);
             
             String dateString = data[4];
+            String username = data[5];
             
             int day = Integer.parseInt(dateString.split("/")[0]);
             int month = Integer.parseInt(dateString.split("/")[1]);
             int year = Integer.parseInt(dateString.split("/")[2]);
-            
-            String username = data[5];
             
             GregorianCalendar date = new GregorianCalendar(year, month-1, day);
             
             StockItem si = DBControler.getStockItemByName(data[0]);
             purchases.add(new Purchase(si, quantity, username, currency, date));
         }
-        
-        reader.close();
     }
     /**
      * @return  List of Purchases

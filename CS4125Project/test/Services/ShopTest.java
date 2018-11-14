@@ -6,6 +6,7 @@
 package Services;
 
 import Database.DBControler;
+import Services.Money.Currency;
 import Stock.StockItem;
 import Storage.Warehouse;
 import User.Customer;
@@ -16,7 +17,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -88,7 +88,7 @@ public class ShopTest {
         System.out.println("returnItem");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
         Shop instance = Shop.getInstance();
-        instance.returnItem(item, 1);
+        instance.returnItem(item, 1, Currency.EUR);
     }
 
     /**
@@ -101,7 +101,7 @@ public class ShopTest {
         int quantity = 1;
         Shop instance = Shop.getInstance();
         instance.setAccount(new Customer("wow", "test", "testing"));
-        instance.makePurchase(item, quantity, "wow");
+        instance.makePurchase(item, quantity, "wow", Currency.EUR);
     }
     
 }

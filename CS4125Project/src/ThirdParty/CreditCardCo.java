@@ -8,7 +8,7 @@ package ThirdParty;
 import User.Account;
 
 /**
- * Third party creditcard company
+ * Third party credit card company
  * @author Jack
  */
 public class CreditCardCo {
@@ -23,7 +23,7 @@ public class CreditCardCo {
     /**
      * 
      * @param account users account
-     * @param ammount the ammount to be charged to the user
+     * @param ammount the amount to be charged to the user
      * @return true
      */
     public boolean makePurchase(Account account, double ammount){

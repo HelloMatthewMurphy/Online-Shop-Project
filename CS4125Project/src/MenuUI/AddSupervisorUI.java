@@ -9,12 +9,10 @@ import Database.AccountDB;
 import Database.DBControler;
 import User.Account;
 import User.AccountFactory;
-import User.Customer;
 import User.Supervisor;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,16 +21,14 @@ import javax.swing.JOptionPane;
  */
 public class AddSupervisorUI extends javax.swing.JFrame {
 
-    private Scanner scan;
-    private List<Account> users;
+    private final List<Account> users;
     private String username;
-    AccountDB db;
+    private final AccountDB db;
     private String password;
     private String email;
     
     public AddSupervisorUI() {
         initComponents();
-        scan = new Scanner(System.in);
         db = DBControler.getInstance().getAccountDB();
         users = db.getAccounts();
         username = "";
@@ -135,45 +131,48 @@ public class AddSupervisorUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean valid = false;
-            while (valid == false){
-                username = RegisterUsername.getText();
-                RegisterUsername.setText("");
-                password = RegisterPassword.getText();
-                RegisterPassword.setText("");
-                email = RegisterEmail.getText();
-                RegisterEmail.setText("");
-                
-                    if(users.isEmpty()){
-                        valid = true;
+        while (!valid){
+            username = RegisterUsername.getText();
+            RegisterUsername.setText("");
+            password = RegisterPassword.getText();
+            RegisterPassword.setText("");
+            email = RegisterEmail.getText();
+            RegisterEmail.setText("");
+
+            if(users.isEmpty())
+                valid = true;
+            else {
+                for(int i = 0; i < users.size();i++) {
+                    if (username.equals(users.get(i).getUsername()) || email.equals(users.get(i).getEmail())) {
+                        JOptionPane.showMessageDialog(null,"Error - Invalid entry. Please try again.");
+                        return;
                     }
                     else
-                        for(int i = 0; i < users.size();i++){
-                            if(username.equals(users.get(i).getUsername()) || email.equals(users.get(i).getEmail())){
-                                JOptionPane.showMessageDialog(null,"Invalid details");
-                                return;
-                            }
-                            else valid = true;
-
-                        }
-            }  
-                AccountFactory factory = new AccountFactory();
-                users.add((Supervisor)factory.createAccount("supervisor", username, password, email));
-                try{
-                db.save();
-                JOptionPane.showMessageDialog(null,"Successfully Registered!");
-                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-                }catch(IOException e){
-                    
+                        valid = true;
                 }
+            }
+        }
+        AccountFactory factory = new AccountFactory();
+        users.add((Supervisor)factory.createAccount("supervisor", username, password, email));
+                
+        try {
+            db.save();
+            JOptionPane.showMessageDialog(null,"Success - Account registered!");
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+        catch(IOException e) {
+            System.out.println(e);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void RegisterUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RegisterUsernameActionPerformed
 
-            public void run() {
-                this.setVisible(true);
-            }
+    public void run() {
+        this.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField RegisterEmail;

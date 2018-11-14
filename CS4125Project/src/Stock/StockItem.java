@@ -11,10 +11,10 @@ package Stock;
  * 
  */
 public class StockItem {
-    private String name;
+    private final String name;
     private double price;
-    private String category;
-    private String description;
+    private final String category;
+    private final String description;
     private double discount;
     
 /**

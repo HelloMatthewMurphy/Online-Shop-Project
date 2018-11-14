@@ -27,8 +27,8 @@ public class Shop extends Observable{
         QUANTITY_DESC(true, true),
         QUANTITY_ASC(false, true);
         
-        private boolean descending;
-        private boolean byQuantity;
+        private final boolean descending;
+        private final boolean byQuantity;
         
     /**
      * Sets a descending boolean, and byQuantity boolean
@@ -108,7 +108,7 @@ public class Shop extends Observable{
     
     public Map<String, Integer> checkStock(){
         Map<String, Integer> tempStock;
-        Map<String, Integer> totalStock = new HashMap<String, Integer>();
+        Map<String, Integer> totalStock = new HashMap<>();
         
         for(int i = 0; i < DBControler.getWarehouses().size(); i++){
             tempStock = DBControler.getWarehouses().get(i).checkStock();
@@ -145,13 +145,13 @@ public class Shop extends Observable{
      * @param quantity amount of item to be bought.
      * @param username User making purchase.
      * @param currency The currency to make the purchase in
+     * @return boolean stating whether a purchase happened or not
      */
     public boolean makePurchase(StockItem item, int quantity, String username, Money.Currency currency){
         Purchase pur = new Purchase(item, quantity, username, currency);
         //Precondition - you can not purchase a negative.
         if(quantity > 0){
-            boolean purchaseHappened = false;
-            purchaseHappened = pur.validatePurchase(account.getLocation());
+            boolean purchaseHappened = pur.validatePurchase(account.getLocation());
             if(purchaseHappened){
                 boolean done = false;
                 for(int i = 0; i < DBControler.getWarehouses().size() && !done; i++){
@@ -214,8 +214,7 @@ public class Shop extends Observable{
                 i++;
             else
                 purchases.remove(i);
-        }
-        
+        } 
         return purchases;
     }
     

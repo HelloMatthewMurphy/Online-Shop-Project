@@ -8,8 +8,8 @@ import Stock.StockItem;
  */
 public class StockOrder {
     
-    private StockItem item;
-    private int quantity;
+    private final StockItem item;
+    private final int quantity;
     //private Account account;
     /***
      * 

@@ -13,15 +13,8 @@ import User.AccountFactory;
 import User.Customer;
 import User.Supervisor;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import Services.Shop;
-import ThirdParty.Payment.BOIPaymentSystem;
-import ThirdParty.Payment.CardPayment;
-import ThirdParty.Payment.Payment;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -31,16 +24,14 @@ import javax.swing.JOptionPane;
  */
 public class MainMenuUI extends javax.swing.JFrame {
 
-   private Scanner scan;
     private List<Account> users;
+    private final AccountDB db;
     private String username;
-    AccountDB db;
     private String password;
     private String email;
     
     public MainMenuUI() throws IOException{
         initComponents();
-        scan = new Scanner(System.in);
         db = DBControler.getInstance().getAccountDB();
         users = db.getAccounts();
         username = "";
@@ -213,7 +204,7 @@ public class MainMenuUI extends javax.swing.JFrame {
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
             boolean valid = false;
-            while (valid == false){
+            while (!valid){
                 username = RegisterUsername.getText();
                 RegisterUsername.setText("");
                 password = RegisterPassword.getText();
@@ -225,7 +216,7 @@ public class MainMenuUI extends javax.swing.JFrame {
                         valid = true;
                     }
                     else
-                        for(int i = 0; i < users.size();i++){
+                        for(int i = 0; i < users.size(); i++) {
                             if(username.equals(users.get(i).getUsername()) || email.equals(users.get(i).getEmail())){
                                 JOptionPane.showMessageDialog(null,"Invalid details");
                                 return;
@@ -236,15 +227,13 @@ public class MainMenuUI extends javax.swing.JFrame {
             }  
                 AccountFactory factory = new AccountFactory();
                 users.add((Customer)factory.createAccount("customer", username, password, email));
-                try{
-                db.save();
-                JOptionPane.showMessageDialog(null,"Successfully Registered!");
-                users = db.getAccounts();
-                }catch(IOException e){
-                    
-                }
-        
-            
+                try {
+                    db.save();
+                    JOptionPane.showMessageDialog(null,"Successfully Registered!");
+                    users = db.getAccounts();
+                } catch(IOException e) {
+                  System.out.println(e);  
+                }           
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void LoginPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginPasswordActionPerformed
@@ -262,18 +251,17 @@ public class MainMenuUI extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         email = LoginEmail.getText();
         password = LoginPassword.getText();
-        boolean bool = false;
+        boolean isValid = false;
        try { 
-           bool = Login.getInstance().Validate(email, password);
+           isValid = Login.getInstance().Validate(email, password);
        } catch (InterruptedException ex) {
            Logger.getLogger(MainMenuUI.class.getName()).log(Level.SEVERE, null, ex);
        }
-                if (bool == true){
+                if (isValid){
                     for(int i = 0; i < users.size();i++){
                         if (users.get(i).getEmail().equals(email)){
                             if(users.get(i) instanceof Customer){
-                                Shop s = Shop.getInstance();
-                                s.setAccount((Customer)users.get(i));                                
+                                Shop.getInstance().setAccount((Customer)users.get(i));
                                 new CustomerMenuUI(users.get(i).getUsername()).run();
                                 this.setVisible(false);
                                 
@@ -284,9 +272,8 @@ public class MainMenuUI extends javax.swing.JFrame {
                             }
                         }
                     }
-
                 }
-                else JOptionPane.showMessageDialog(null,"Invalid combination of email and password.");
+                else JOptionPane.showMessageDialog(null,"Error - Invalid combination of email and password.");
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void RegisterUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterUsernameActionPerformed
@@ -297,11 +284,10 @@ public class MainMenuUI extends javax.swing.JFrame {
  
     }//GEN-LAST:event_RegisterPasswordActionPerformed
 
-            public void run() {
-                this.setVisible(true);
-            }
+    public void run() {
+        this.setVisible(true);
+    }
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
     private javax.swing.JTextField LoginEmail;
