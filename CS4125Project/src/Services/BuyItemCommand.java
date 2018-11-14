@@ -17,8 +17,8 @@ public class BuyItemCommand implements Command{
     private ShoppingBasket shoppingBasket;
     
     // Concrete Command
-    public BuyItemCommand(StockItem stockItem, int quantity, String username){
-        purchase = new Purchase(stockItem, quantity, username);
+    public BuyItemCommand(StockItem stockItem, int quantity, String username, Money.Currency currency){
+        purchase = new Purchase(stockItem, quantity, username, currency);
         this.shoppingBasket = ShoppingBasket.GetInstance();
     }
     
