@@ -6,6 +6,9 @@
 package MenuUI;
 
 import Database.DBControler;
+import Database.LocalizationDB;
+import Database.PurchaseDB;
+import Language.LocalizationLanguage;
 import Services.BuyItemCommand;
 import Services.Money;
 import Services.Shop;
@@ -16,6 +19,10 @@ import ThirdParty.Delivery.BasicDelivery;
 import ThirdParty.Delivery.MoneySaver;
 import ThirdParty.Delivery.Premium;
 import ThirdParty.Delivery.Delivery;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -39,7 +46,21 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     public CustomerMenuUI(String username) {
         initComponents();
         this.username = username;
-        welcomeMessage.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("WELCOME_MESSAGE"));
+        RefreshText();
+        
+        LocalizationLanguage[] langauges = DBControler.getInstance().getLocalizationDB().GetLanguages();
+        for(int i = 0; i < langauges.length; i++){
+            LanguageDropdown.addItem(langauges[i].getName());
+        }
+        
+        ActionListener languageChanged = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBControler.getInstance().getLocalizationDB().SetLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
+                RefreshText();
+            }
+        };
+        LanguageDropdown.addActionListener(languageChanged);
     }
 
     /**
@@ -51,130 +72,146 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
+        buyStockButton = new javax.swing.JButton();
         welcomeMessage = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        checkStockButton = new javax.swing.JButton();
+        purchaseHistoryButton = new javax.swing.JButton();
+        returnItemButton = new javax.swing.JToggleButton();
+        basketButton = new javax.swing.JButton();
+        paymentMethodButton = new javax.swing.JButton();
+        LanguageDropdown = new javax.swing.JComboBox<>();
+        Language = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Logout");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logoutButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Buy Stock");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buyStockButton.setText("Buy Stock");
+        buyStockButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buyStockButtonActionPerformed(evt);
             }
         });
 
         welcomeMessage.setText("Welcome!");
 
-        jButton3.setText("Check Stock");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        checkStockButton.setText("Check Stock");
+        checkStockButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                checkStockButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Purchase History");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        purchaseHistoryButton.setText("Purchase History");
+        purchaseHistoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                purchaseHistoryButtonActionPerformed(evt);
             }
         });
 
-        jToggleButton1.setText("Return Item");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        returnItemButton.setText("Return Item");
+        returnItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                returnItemButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Basket");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        basketButton.setText("Basket");
+        basketButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                basketButtonActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Payment method");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        paymentMethodButton.setText("Payment method");
+        paymentMethodButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                paymentMethodButtonActionPerformed(evt);
             }
         });
+
+        Language.setText("Language");
+        Language.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(welcomeMessage))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jButton5)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jToggleButton1))
-                            .addComponent(jButton6)))
+                        .addComponent(welcomeMessage)
+                        .addGap(55, 55, 55))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(returnItemButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buyStockButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(basketButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkStockButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(purchaseHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jButton1)))
-                .addContainerGap(145, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Language)
+                            .addComponent(LanguageDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(paymentMethodButton, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(welcomeMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Language)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LanguageDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(welcomeMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(checkStockButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(basketButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buyStockButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(purchaseHistoryButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(returnItemButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(paymentMethodButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(logoutButton)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void RefreshText(){
+        LocalizationDB loc = DBControler.getInstance().getLocalizationDB();
+        welcomeMessage.setText(loc.GetLocalization("WELCOME_MESSAGE"));
+        logoutButton.setText(loc.GetLocalization("LOGOUT"));
+        buyStockButton.setText(loc.GetLocalization("BUY_STOCK"));
+        checkStockButton.setText(loc.GetLocalization("CHECK_STOCK"));
+        purchaseHistoryButton.setText(loc.GetLocalization("PURCHASE_HISTORY"));
+        basketButton.setText(loc.GetLocalization("BASKET"));
+        paymentMethodButton.setText(loc.GetLocalization("PAYMENT_METHOD"));
+        returnItemButton.setText(loc.GetLocalization("RETURN_ITEM"));
+        repaint();
+    }
+    
     //Logout
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         JOptionPane.showMessageDialog(null, "See you next time!");
         this.setVisible(false);
         try {
@@ -182,14 +219,11 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(CustomerMenuUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     //Buy stock
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+    private void buyStockButtonActionPerformed(java.awt.event.ActionEvent evt) {  
         Money.Currency currency = DEFAULT_CURRENCY;
-        
-        //Picking item
         Shop s = Shop.getInstance();
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
         
@@ -218,10 +252,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         pickedItem = selectionSplit[0]; 
         
         buyItemFromShop(pickedItem, currency);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }                                        
 
     //Check Stock
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void checkStockButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         Shop s = Shop.getInstance();
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
         
@@ -266,12 +300,12 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                                                        stock.getPrice(), amountAvailable),
                                         String.format("Info on %s", pickedItem),
                                         JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }   
 
     //View purchases
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void purchaseHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseHistoryButtonActionPerformed
          new PurchaseHistoryUI(username).run();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_purchaseHistoryButtonActionPerformed
     
     //Buying items
     public void buyItemFromShop(String pickedItem, Money.Currency currency){
@@ -361,7 +395,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }
     
     //Return Item
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void returnItemButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 
         Shop shopInstance = Shop.getInstance();
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) shopInstance.getSortedStock(Shop.SortOrder.NAME_ASC);
@@ -449,20 +483,20 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         Money.Currency currency = Money.Currency.valueOf(currencyChoiceStr);
         
         shopInstance.returnItem(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amount, currency);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }
 
     // checkout
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void basketButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new CheckoutUI().run();
     }
     /*
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void basketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_basketButtonActionPerformed
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_basketButtonActionPerformed
 */
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void paymentMethodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentMethodButtonActionPerformed
       new PaymentSetupUI(Shop.getInstance().getAccount().getPaymentType()).run();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_paymentMethodButtonActionPerformed
 
     public void run() {
         this.setVisible(true);
@@ -470,14 +504,16 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel Language;
+    private javax.swing.JComboBox<String> LanguageDropdown;
+    private javax.swing.JButton basketButton;
+    private javax.swing.JButton buyStockButton;
+    private javax.swing.JButton checkStockButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JButton paymentMethodButton;
+    private javax.swing.JButton purchaseHistoryButton;
+    private javax.swing.JToggleButton returnItemButton;
     private javax.swing.JLabel welcomeMessage;
     // End of variables declaration//GEN-END:variables
 }
