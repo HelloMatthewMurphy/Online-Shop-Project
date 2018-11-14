@@ -193,7 +193,6 @@ public final class CheckoutUI extends javax.swing.JFrame {
             dispatcher.dispatch(new PurchaseRequest(p));
         });        
        
-        ShoppingBasket.GetInstance().ClearBasket();
         dispose();
         if(Shop.getInstance().getAccount().getPaymentType() != null){
             new ReceiptUI().run();
