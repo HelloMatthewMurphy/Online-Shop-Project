@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class DetailedReceiptBuilder implements ReceiptBuilder{
     private Receipt receipt;
-    
     public DetailedReceiptBuilder(){
         this.receipt = new Receipt();
     }
@@ -30,15 +29,21 @@ public class DetailedReceiptBuilder implements ReceiptBuilder{
         receipt.SetPaymentDetails(Shop.getInstance().getAccount().getPaymentType().getPaymentInfo());
     }
   
-    public void buildPurchases(){
-        ArrayList<Purchase> basket = ShoppingBasket.GetInstance().GetBasketContents();
-        String purchase = "You have " + basket.size() + " items.\n";
-        
-        for(int i = 0; i < basket.size(); i++){
-            purchase += (basket.get(i).getItem().getName()) + "\n";
+    public void buildPurchases(){ 
+        ArrayList<Purchase>purchases = ShoppingBasket.GetInstance().GetBasketContents();
+        String totalCost = "";
+        String itemList = "You have \" + basket.size() + \" items.\\n";
+        float total = 0;
+        //Money.Currency currency = Purchase.
+        for (Purchase p : purchases) {
+            itemList += "Item Name: " + p.getItem().getName() + "\t\t";
+            itemList += "Quantity:  " + p.getQuantity() + "\t\t";
+            itemList += "Price: " + String.format("€%.2f", p.getItem().getPrice()) + "\n";
+            total += p.getItem().getPrice() * p.getQuantity();
         }
+        itemList += "Total: " + total;
         
-        receipt.SetPurchases(purchase);
+        receipt.SetPurchases(itemList);
     } 
   
     public Receipt getReceipt(){
