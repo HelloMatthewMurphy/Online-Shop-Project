@@ -44,6 +44,8 @@ import jdk.nashorn.internal.runtime.regexp.joni.constants.CCSTATE;
  * @author Brian
  */
 public class CustomerMenuUI extends javax.swing.JFrame {
+    
+    private static final Money.Currency DEFAULT_CURRENCY = Money.Currency.EUR;
 
     /**
      * Creates new form CustomerMenuUI
@@ -198,48 +200,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
 
     //Buy stock
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Get user to pick currency
-        String validCurrencyNames[] = new String[Money.Currency.values().length];
-        StringBuilder validCurrenciesStr = new StringBuilder();
-        for (int i = 0; i < Money.Currency.values().length; i++) {
-            validCurrencyNames[i] = Money.Currency.values()[i].name();
-            validCurrenciesStr.append(validCurrencyNames[i]);
-            if (i < Money.Currency.values().length - 1) {
-                validCurrenciesStr.append(", ");
-            }
-        }
         
-        boolean validChoice = false;
-        String currencyChoiceStr;
-        do
-        {
-            Object choice = JOptionPane.showInputDialog(null,
-                    String.format(
-                        "Which currency would you like to pay in? Options are: %s",
-                         validCurrenciesStr
-                    ),
-                    "Currency",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null, 
-                    null, 
-                    null);
-            currencyChoiceStr = String.valueOf(choice);
-            
-            // Check if choice is valid
-            for (int i = 0; i < validCurrencyNames.length && !validChoice; i++) {
-                if (currencyChoiceStr.equals(validCurrencyNames[i])) {
-                    validChoice = true;
-                }
-            }
-            
-            if (!validChoice) {
-                JOptionPane.showMessageDialog(null, 
-                    String.format("%s is an invalid choice", currencyChoiceStr),
-                    "Invalid Choice",
-                    JOptionPane.WARNING_MESSAGE);
-            }
-        } while(!validChoice);
-        Money.Currency currency = Money.Currency.valueOf(currencyChoiceStr);
+        Money.Currency currency = DEFAULT_CURRENCY;
         
         //Picking item
         Shop s = Shop.getInstance();
@@ -383,7 +345,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         CreditCardCo credit = new CreditCardCo();
         if(!pickedItem.equals("")){
             ShopControl controler = ShopControl.GetInstance();
-            controler.AddCommand(new BuyItemCommand(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername()));
+            controler.AddCommand(new BuyItemCommand(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername(), currency));
             controler.ExecuteCommand(controler.numCommands-1);
         }
     }
@@ -392,7 +354,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         Shop s = Shop.getInstance();
         ArrayList<Map.Entry<String,Integer>> list = (ArrayList<Map.Entry<String,Integer>>) s.getSortedStock(Shop.SortOrder.NAME_ASC);
-        
+
         String[] itemNames = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             itemNames[i] = list.get(i).getKey();

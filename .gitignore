@@ -55,6 +55,6 @@ private.properties
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+CS4125Project/*.log
 CS4125Project/*.csv
-CS4125Project/src/MenuUI/SupervisorMenuUI.java
 CS4125Project/backups/
