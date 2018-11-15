@@ -66,7 +66,11 @@ public class LocalizationDB implements IDatabase {
     }
     
     public String GetLocalization(String tag){
-        String localizedString =  localizations.get(tag).get(currentLanguage);
+        String localizedString;
+        if(localizations.get(tag).size() > currentLanguage)
+            localizedString =  localizations.get(tag).get(currentLanguage);
+        else
+            localizedString =  localizations.get(tag).get(0); // default to engilsh
         return localizedString;
     }
     

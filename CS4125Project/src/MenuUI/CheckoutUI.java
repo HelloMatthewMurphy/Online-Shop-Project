@@ -6,6 +6,7 @@
 package MenuUI;
 
 import Services.Money;
+import Database.DBControler;
 import Services.Purchase;
 import Services.PurchaseRequest;
 import Services.PurchaseRequestDispatcher;
@@ -37,6 +38,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
     public CheckoutUI() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        CheckoutButton.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("CHECKOUT"));
+        UndoButton.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("UNDO"));
+        
         SetData();
         
         // Set up currency choice combo box
@@ -68,7 +73,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
         // Set the text for the "Total Cost" label
         Money totalMoney = new Money(Money.Currency.EUR, total);
         totalMoney.changeCurrency(currency);
-        totalCost.setText("Total: " + totalMoney);
+        totalCost.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("GET_TOTAL") + "€" + totalMoney);
         totalCost.repaint();
     }
     
@@ -89,7 +94,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton5 = new javax.swing.JButton();
+        CheckoutButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemsInBasket = new javax.swing.JTable();
         totalCost = new javax.swing.JLabel();
@@ -99,10 +104,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton5.setText("Checkout");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        CheckoutButton.setText("Checkout");
+        CheckoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                CheckoutButtonActionPerformed(evt);
             }
         });
 
@@ -111,7 +116,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item", "Quantity", "Price"
+                "", "", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -123,6 +128,11 @@ public final class CheckoutUI extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(itemsInBasket);
+        if (itemsInBasket.getColumnModel().getColumnCount() > 0) {
+            itemsInBasket.getColumnModel().getColumn(0).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("ITEM"));
+            itemsInBasket.getColumnModel().getColumn(1).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("QUANTITY"));
+            itemsInBasket.getColumnModel().getColumn(2).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("PRICE"));
+        }
 
         totalCost.setText("Total: €0.00");
 
@@ -153,7 +163,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(UndoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CheckoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -172,7 +182,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
+                    .addComponent(CheckoutButton)
                     .addComponent(UndoButton))
                 .addContainerGap())
         );
@@ -181,7 +191,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // checkout
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         // Check for if the user has actually bought any items
         if (purchases.isEmpty()) {
@@ -196,7 +206,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
             new ReceiptUI().run();
         }
         dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_CheckoutButtonActionPerformed
 
     private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed
         ShopControl.GetInstance().Undo();
@@ -221,10 +231,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CheckoutButton;
     private javax.swing.JButton UndoButton;
     private javax.swing.JComboBox<String> cbCurrency;
     private javax.swing.JTable itemsInBasket;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel totalCost;
