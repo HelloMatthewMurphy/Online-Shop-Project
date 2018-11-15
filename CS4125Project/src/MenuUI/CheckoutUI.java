@@ -7,6 +7,7 @@ package MenuUI;
 
 import Services.Money;
 import Database.DBControler;
+import Database.LocalizationDB;
 import Services.Purchase;
 import Services.PurchaseRequest;
 import Services.PurchaseRequestDispatcher;
@@ -27,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public final class CheckoutUI extends javax.swing.JFrame {
 
     private ArrayList<Purchase> purchases = new ArrayList<>();
+    private LocalizationDB loc;
     private Money.Currency currency = Money.Currency.values()[0];
     
     private final PurchaseRequestDispatcher dispatcher;
@@ -39,8 +41,9 @@ public final class CheckoutUI extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        CheckoutButton.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("CHECKOUT"));
-        UndoButton.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("UNDO"));
+        loc = DBControler.getInstance().getLocalizationDB();
+        CheckoutButton.setText(loc.GetLocalization("CHECKOUT"));
+        UndoButton.setText(loc.GetLocalization("UNDO"));
         
         SetData();
         
@@ -191,7 +194,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // checkout
-    private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
         // Check for if the user has actually bought any items
         if (purchases.isEmpty()) {
@@ -206,7 +209,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
             new ReceiptUI().run();
         }
         dispose();
-    }//GEN-LAST:event_CheckoutButtonActionPerformed
+    }                                              
 
     private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed
         ShopControl.GetInstance().Undo();

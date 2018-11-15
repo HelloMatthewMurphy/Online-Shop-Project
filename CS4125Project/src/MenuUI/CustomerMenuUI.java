@@ -209,6 +209,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         basketButton.setText(loc.GetLocalization("BASKET"));
         paymentMethodButton.setText(loc.GetLocalization("PAYMENT_METHOD"));
         returnItemButton.setText(loc.GetLocalization("RETURN_ITEM"));
+        Language.setText(loc.GetLocalization("LANGUAGE"));
         repaint();
     }
     

@@ -37,3 +37,12 @@ QUANTITY,Quantity,Aantal stuks
 PRICE,Price,Prijs
 CHECKOUT,Checkout,Uitchecken
 UNDO,Undo,Ongedaan maken
+PAYMENT_SETUP,Payment Method,Betalingsmiddel
+TYPE,Type,Type
+PROVIDER,Provider,Leverancier
+SUBMIT,Submit,voorleggen
+PAYEMENT_ERROR1,Error - No Payment type selected!,Fout - Geen betalingstype geselecteerd!
+PAYEMENT_ERROR2,Error - No Payment provider selected!,Fout - Geen betalingsprovider geselecteerd!
+DIALOG,Dialog,Dialoog
+DISCOUNT,Discount,Korting
+DATE,Date,Datum
