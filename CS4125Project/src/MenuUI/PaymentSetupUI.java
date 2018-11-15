@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package MenuUI;
+import Database.DBControler;
+import Database.LocalizationDB;
 import Services.Shop;
 import ThirdParty.Payment.*;
 import javax.swing.JFrame;
@@ -20,12 +22,19 @@ public class PaymentSetupUI extends javax.swing.JFrame {
      */
     private Payment paymentType;
     private IPaymentSystem temp;
+    private LocalizationDB loc;
     
     public PaymentSetupUI(Payment customerPayment) {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         paymentType = customerPayment;
         temp = null;
+        
+        loc = DBControler.getInstance().getLocalizationDB();
+        jLabel1.setText(loc.GetLocalization("PAYMENT_SETUP"));
+        jLabel2.setText(loc.GetLocalization("TYPE"));
+        jLabel3.setText(loc.GetLocalization("PROVIDER"));
+        SubmitButton.setText(loc.GetLocalization("SUBMIT"));
     }
 
     public void run() {
@@ -183,15 +192,15 @@ public class PaymentSetupUI extends javax.swing.JFrame {
         
         if (paymentType == null) {   
             System.out.print("payment null");
-            JOptionPane.showMessageDialog(new JFrame(), "Error - No Payment type selected!.",
-                    "Dialog", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), loc.GetLocalization("PAYEMENT_ERROR1"),
+                    loc.GetLocalization("DIALOG"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (temp == null) {
             System.out.print("temp null");
-            JOptionPane.showMessageDialog(new JFrame(), "Error - No Payment provider selected!.",
-                "Dialog", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), loc.GetLocalization("PAYEMENT_ERROR2"),
+                loc.GetLocalization("DIALOG"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         paymentType._IPaymentSystem = temp;

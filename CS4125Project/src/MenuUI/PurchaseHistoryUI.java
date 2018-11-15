@@ -6,6 +6,7 @@
 package MenuUI;
 
 import Database.DBControler;
+import Database.LocalizationDB;
 import Database.PurchaseDB;
 import Services.Purchase;
 import java.util.Calendar;
@@ -24,12 +25,15 @@ public final class PurchaseHistoryUI extends javax.swing.JFrame {
     private final PurchaseDB db;
     private final List<Purchase> purchases;
     private final String username;
+    private final LocalizationDB loc;
     public PurchaseHistoryUI(String username) {
         this.username = username;
         initComponents();
         db = DBControler.getInstance().getPurchaseDB();
         purchases = db.getPurchases();
         addRowsToTable();
+        
+        loc = DBControler.getInstance().getLocalizationDB();
     }
 
     /**
@@ -49,10 +53,16 @@ public final class PurchaseHistoryUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item", "Quantity", "Discount", "Cost", "Date"
+                "", "", "", ""
             }
         ));
         jScrollPane1.setViewportView(purchaseHistory);
+        if (purchaseHistory.getColumnModel().getColumnCount() > 0) {
+            purchaseHistory.getColumnModel().getColumn(0).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("ITEM"));
+            purchaseHistory.getColumnModel().getColumn(1).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("QUANTITY"));
+            purchaseHistory.getColumnModel().getColumn(2).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("DISCOUNT"));
+            purchaseHistory.getColumnModel().getColumn(3).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("DATE"));
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
