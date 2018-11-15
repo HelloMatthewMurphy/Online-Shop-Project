@@ -5,8 +5,7 @@
  */
 package Database;
 
-import Language.LocalizationLanguage;
-import Stock.StockItem;
+import Services.LocalizationLanguage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -71,13 +70,13 @@ public class LocalizationDB implements IDatabase {
             return localizations.get(tag).get(0);
     }
     
-    public void SetLanguage(int languageNumber){
+    public void setLanguage(int languageNumber){
         if(languageNumber <= languages.length){
             currentLanguage = languageNumber;
         }
     }
     
-    public LocalizationLanguage[] GetLanguages(){
+    public LocalizationLanguage[] getLanguages(){
         return languages;
     }
 }

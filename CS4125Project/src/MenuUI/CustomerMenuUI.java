@@ -8,7 +8,7 @@ package MenuUI;
 import Database.DBControler;
 import Database.LocalizationDB;
 import Database.PurchaseDB;
-import Language.LocalizationLanguage;
+import Services.LocalizationLanguage;
 import Services.BuyItemCommand;
 import Services.Money;
 import Services.Shop;
@@ -51,7 +51,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         localizationDB = DBControler.getInstance().getLocalizationDB();
         RefreshText();
         
-        LocalizationLanguage[] langauges = localizationDB.GetLanguages();
+        LocalizationLanguage[] langauges = localizationDB.getLanguages();
         for(int i = 0; i < langauges.length; i++){
             LanguageDropdown.addItem(langauges[i].getName());
         }
@@ -59,7 +59,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         ActionListener languageChanged = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                localizationDB.SetLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
+                localizationDB.setLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
                 RefreshText();
             }
         };

@@ -42,8 +42,8 @@ public final class CheckoutUI extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
         localizationDB = DBControler.getInstance().getLocalizationDB();
-        CheckoutButton.setText(localizationDB.GetLocalization("CHECKOUT"));
-        UndoButton.setText(localizationDB.GetLocalization("UNDO"));
+        checkoutButton.setText(localizationDB.GetLocalization("CHECKOUT"));
+        undoButton.setText(localizationDB.GetLocalization("UNDO"));
         
         SetData();
         
@@ -96,20 +96,20 @@ public final class CheckoutUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CheckoutButton = new javax.swing.JButton();
+        checkoutButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemsInBasket = new javax.swing.JTable();
         totalCost = new javax.swing.JLabel();
-        UndoButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
         cbCurrency = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CheckoutButton.setText("Checkout");
-        CheckoutButton.addActionListener(new java.awt.event.ActionListener() {
+        checkoutButton.setText("Checkout");
+        checkoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckoutButtonActionPerformed(evt);
+                checkoutButtonActionPerformed(evt);
             }
         });
 
@@ -138,10 +138,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
 
         totalCost.setText("Total: €0.00");
 
-        UndoButton.setText("Undo");
-        UndoButton.addActionListener(new java.awt.event.ActionListener() {
+        undoButton.setText("Undo");
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UndoButtonActionPerformed(evt);
+                undoButtonActionPerformed(evt);
             }
         });
 
@@ -163,9 +163,9 @@ public final class CheckoutUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(totalCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(UndoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(undoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CheckoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(checkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -184,8 +184,8 @@ public final class CheckoutUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CheckoutButton)
-                    .addComponent(UndoButton))
+                    .addComponent(checkoutButton)
+                    .addComponent(undoButton))
                 .addContainerGap())
         );
 
@@ -193,7 +193,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // checkout
-    private void CheckoutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
         // Check for if the user has actually bought any items
         if (purchases.isEmpty()) {
@@ -208,12 +208,12 @@ public final class CheckoutUI extends javax.swing.JFrame {
             new ReceiptUI().run();
         }
         dispose();
-    }                                              
+    }
 
-    private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         ShopControl.GetInstance().Undo();
         SetData();
-    }//GEN-LAST:event_UndoButtonActionPerformed
+    }//GEN-LAST:event_undoButtonActionPerformed
 
     private void cbCurrencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCurrencyActionPerformed
         currency = Money.Currency.valueOf(cbCurrency.getSelectedItem().toString());
@@ -233,12 +233,12 @@ public final class CheckoutUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CheckoutButton;
-    private javax.swing.JButton UndoButton;
+    private javax.swing.JButton checkoutButton;
     private javax.swing.JComboBox<String> cbCurrency;
     private javax.swing.JTable itemsInBasket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel totalCost;
+    private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }
