@@ -4,20 +4,18 @@
  * and open the template in the editor.
  */
 package Services;
-import User.Account;
-import ThirdParty.Delivery.Delivery;
 /**
  *
  * @author Jack
  */
 interface ReceiptPlan {
-    public void SetUsername(String account);
-    public String GetUsername();
-    public void SetEmail(String email);
-    public String GetEmail();
-    public void SetPaymentDetails(String paymentDetails);
-    public String GetPaymentDetails();
-    public void SetPurchases(String purchases);
-    public String GetPurchases();
+    public void setUsername(String account);
+    public String getUsername();
+    public void setEmail(String email);
+    public String getEmail();
+    public void setPaymentDetails(String paymentDetails);
+    public String getPaymentDetails();
+    public void setPurchases(String purchases);
+    public String getPurchases();
     
 }

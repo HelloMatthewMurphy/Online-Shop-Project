@@ -18,9 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ReceiptUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ReceiptUI
-     */
+    /* Creates new form ReceiptUI */
     public ReceiptUI() {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -107,17 +105,17 @@ public class ReceiptUI extends javax.swing.JFrame {
         ReceiptDirector.GetInstance().makeReceipt(detailedReceipt);
         String result = "";
         
-        if(!detailedReceipt.getReceipt().GetUsername().equals("")){
-            result += "Username:  " + detailedReceipt.getReceipt().GetUsername() + "\n";
+        if(!detailedReceipt.getReceipt().getUsername().equals("")){
+            result += "Username:  " + detailedReceipt.getReceipt().getUsername() + "\n";
         }
-        if(!detailedReceipt.getReceipt().GetEmail().equals("")){
-            result += "Email:  " + detailedReceipt.getReceipt().GetEmail() + "\n";
+        if(!detailedReceipt.getReceipt().getEmail().equals("")){
+            result += "Email:  " + detailedReceipt.getReceipt().getEmail() + "\n";
         }
-        if(!detailedReceipt.getReceipt().GetPaymentDetails().equals("")){
-            result += "PaymentDetails:  " + detailedReceipt.getReceipt().GetPaymentDetails() + "\n";
+        if(!detailedReceipt.getReceipt().getPaymentDetails().equals("")){
+            result += "PaymentDetails:  " + detailedReceipt.getReceipt().getPaymentDetails() + "\n";
         }
-        if(!detailedReceipt.getReceipt().GetPurchases().equals("")){
-            result += "Purchases:  " + detailedReceipt.getReceipt().GetPurchases() + "\n";
+        if(!detailedReceipt.getReceipt().getPurchases().equals("")){
+            result += "Purchases:  " + detailedReceipt.getReceipt().getPurchases() + "\n";
         }
         
         JOptionPane.showMessageDialog(null,result, "Detailed Receipt", JOptionPane.INFORMATION_MESSAGE);
@@ -130,17 +128,17 @@ public class ReceiptUI extends javax.swing.JFrame {
         this.setVisible(false);
         String result = "";
         
-        if(!privateReceipt.getReceipt().GetUsername().equals("")){
-            result += "Username:  " + privateReceipt.getReceipt().GetUsername() + "\n";
+        if(!privateReceipt.getReceipt().getUsername().equals("")){
+            result += "Username:  " + privateReceipt.getReceipt().getUsername() + "\n";
         }
-        if(!privateReceipt.getReceipt().GetEmail().equals("")){
-            result += "Email:  " + privateReceipt.getReceipt().GetEmail() + "\n";
+        if(!privateReceipt.getReceipt().getEmail().equals("")){
+            result += "Email:  " + privateReceipt.getReceipt().getEmail() + "\n";
         }
-        if(!privateReceipt.getReceipt().GetPaymentDetails().equals("")){
-            result += "PaymentDetails:  " + privateReceipt.getReceipt().GetPaymentDetails() + "\n";
+        if(!privateReceipt.getReceipt().getPaymentDetails().equals("")){
+            result += "PaymentDetails:  " + privateReceipt.getReceipt().getPaymentDetails() + "\n";
         }
-        if(!privateReceipt.getReceipt().GetPurchases().equals("")){
-            result += "Purchases:  " + privateReceipt.getReceipt().GetPurchases() + "\n";
+        if(!privateReceipt.getReceipt().getPurchases().equals("")){
+            result += "Purchases:  " + privateReceipt.getReceipt().getPurchases() + "\n";
         }
         
         JOptionPane.showMessageDialog(null,result, "Private Receipt", JOptionPane.INFORMATION_MESSAGE);
@@ -153,17 +151,17 @@ public class ReceiptUI extends javax.swing.JFrame {
         this.setVisible(false);
         String result = "";
         
-        if(!ecoFriendlyReceipt.getReceipt().GetUsername().equals("")){
-            result += "Username:  " + ecoFriendlyReceipt.getReceipt().GetUsername() + "\n";
+        if(!ecoFriendlyReceipt.getReceipt().getUsername().equals("")){
+            result += "Username:  " + ecoFriendlyReceipt.getReceipt().getUsername() + "\n";
         }
-        if(!ecoFriendlyReceipt.getReceipt().GetEmail().equals("")){
-            result += "Email:  " + ecoFriendlyReceipt.getReceipt().GetEmail() + "\n";
+        if(!ecoFriendlyReceipt.getReceipt().getEmail().equals("")){
+            result += "Email:  " + ecoFriendlyReceipt.getReceipt().getEmail() + "\n";
         }
-        if(!ecoFriendlyReceipt.getReceipt().GetPaymentDetails().equals("")){
-            result += "PaymentDetails:  " + ecoFriendlyReceipt.getReceipt().GetPaymentDetails() + "\n";
+        if(!ecoFriendlyReceipt.getReceipt().getPaymentDetails().equals("")){
+            result += "PaymentDetails:  " + ecoFriendlyReceipt.getReceipt().getPaymentDetails() + "\n";
         }
-        if(!ecoFriendlyReceipt.getReceipt().GetPurchases().equals("")){
-            result += "Purchases:  " + ecoFriendlyReceipt.getReceipt().GetPurchases() + "\n";
+        if(!ecoFriendlyReceipt.getReceipt().getPurchases().equals("")){
+            result += "Purchases:  " + ecoFriendlyReceipt.getReceipt().getPurchases() + "\n";
         }
         
         JOptionPane.showMessageDialog(null,result, "Eco Friendly Receipt", JOptionPane.INFORMATION_MESSAGE);
