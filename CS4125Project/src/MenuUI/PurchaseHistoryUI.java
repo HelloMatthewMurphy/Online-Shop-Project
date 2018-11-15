@@ -26,6 +26,7 @@ public final class PurchaseHistoryUI extends javax.swing.JFrame {
     private final List<Purchase> purchases;
     private final String username;
     private final LocalizationDB localizationDB;
+    
     public PurchaseHistoryUI(String username) {
         this.username = username;
         initComponents();
