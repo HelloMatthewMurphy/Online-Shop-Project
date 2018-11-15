@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Services;
-import User.Account;
-import ThirdParty.Delivery.Delivery;
 
 /**
  *
@@ -18,35 +16,35 @@ public class Receipt implements ReceiptPlan{
     private String paymentDetails;
     private String purchases;
     
-    public void SetUsername(String username){
+    public void setUsername(String username){
         this.accountUsername = username;
     }
     
-    public void SetEmail(String email){
+    public void setEmail(String email){
         this.accountEmail = email;
     }
     
-    public void SetPaymentDetails(String paymentDetails){
+    public void setPaymentDetails(String paymentDetails){
         this.paymentDetails = paymentDetails;
     }
     
-    public void SetPurchases(String purchases){
+    public void setPurchases(String purchases){
         this.purchases = purchases;
     }
     
-    public String GetUsername(){
+    public String getUsername(){
         return this.accountUsername;
     } 
     
-    public String GetEmail(){
+    public String getEmail(){
         return this.accountEmail;
     } 
     
-    public String GetPaymentDetails(){
+    public String getPaymentDetails(){
         return this.paymentDetails;
     } 
     
-    public String GetPurchases(){
+    public String getPurchases(){
         return this.purchases;
     } 
 

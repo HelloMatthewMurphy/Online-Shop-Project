@@ -192,13 +192,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
         purchases.forEach((p) -> {
             dispatcher.dispatch(new PurchaseRequest(p));
         });        
-       
-        dispose();
-        if(Shop.getInstance().getAccount().getPaymentType() != null){
+               if(Shop.getInstance().getAccount().getPaymentType() != null){
             new ReceiptUI().run();
         }
-
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void UndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UndoButtonActionPerformed

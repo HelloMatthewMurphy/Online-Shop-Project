@@ -19,32 +19,31 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
     }
     
     public void buildusername(){
-        receipt.SetUsername(Shop.getInstance().getAccount().getUsername());
+        receipt.setUsername(Shop.getInstance().getAccount().getUsername());
     }
     
     public void buildEmail(){
-        receipt.SetEmail("");
+        receipt.setEmail("");
     }
     
     public void buildPaymentDetails(){
-        receipt.SetPaymentDetails("");
+        receipt.setPaymentDetails("");
     }
   
     public void buildPurchases(){
         ArrayList<Purchase>purchases = ShoppingBasket.GetInstance().GetBasketContents();
-        String itemList = "You have " + purchases.size() + " items.\n";
+        String itemList = "You have " + purchases.size() + " purchases.\n";
         float total = 0;
-        //Money.Currency currency = Purchase.
+
         for (Purchase p : purchases) {
             total += p.getItem().getPrice() * p.getQuantity();
         }
         
-        Money totalMoney = new Money(Money.Currency.EUR, total);
-        totalMoney.changeCurrency(purchases.get(0).getMoney().getCurrency());
+        Money totalMoney = new Money(purchases.get(0).getMoney().getCurrency(), total);
         
         itemList += "Total: " + totalMoney;
                 
-        receipt.SetPurchases(itemList);
+        receipt.setPurchases(itemList);
     } 
   
     public Receipt getReceipt(){

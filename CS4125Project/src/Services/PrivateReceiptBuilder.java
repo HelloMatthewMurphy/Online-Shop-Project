@@ -18,19 +18,19 @@ public class PrivateReceiptBuilder implements ReceiptBuilder{
     }
     
     public void buildusername(){
-        receipt.SetUsername(Shop.getInstance().getAccount().getUsername());
+        receipt.setUsername(Shop.getInstance().getAccount().getUsername());
     }
     
     public void buildEmail(){
-        receipt.SetEmail("User email has been hidden due to customer preference");
+        receipt.setEmail("User email has been hidden due to customer preference");
     }
     
     public void buildPaymentDetails(){
-        receipt.SetPaymentDetails(Shop.getInstance().getAccount().getPaymentType().getPaymentInfo());
+        receipt.setPaymentDetails(Shop.getInstance().getAccount().getPaymentType().getPaymentInfo());
     }
   
     public void buildPurchases(){
-        receipt.SetPurchases("The contents of this purchase have been hidden due to customer preference.");
+        receipt.setPurchases("The contents of this purchase have been hidden due to customer preference.");
     } 
   
     public Receipt getReceipt(){
