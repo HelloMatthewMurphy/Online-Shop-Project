@@ -7,7 +7,7 @@ package Language;
 
 /**
  *
- * @author hello
+ * @author Matthew
  */
 public class LocalizationLanguage {
     private String languageName;

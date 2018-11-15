@@ -25,15 +25,14 @@ public final class PurchaseHistoryUI extends javax.swing.JFrame {
     private final PurchaseDB db;
     private final List<Purchase> purchases;
     private final String username;
-    private final LocalizationDB loc;
+    private final LocalizationDB localizationDB;
     public PurchaseHistoryUI(String username) {
         this.username = username;
         initComponents();
         db = DBControler.getInstance().getPurchaseDB();
         purchases = db.getPurchases();
         addRowsToTable();
-        
-        loc = DBControler.getInstance().getLocalizationDB();
+        localizationDB = DBControler.getInstance().getLocalizationDB();
     }
 
     /**
