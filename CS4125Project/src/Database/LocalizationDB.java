@@ -15,18 +15,16 @@ import java.util.HashMap;
 
 /**
  *
- * @author hello
+ * @author Matthew
  */
 public class LocalizationDB implements IDatabase {
     
     private String filename;
     private int currentLanguage = 0;
     private LocalizationLanguage[] languages;
-    private HashMap<String, ArrayList<String>> localizations;
+    private final HashMap<String, ArrayList<String>> localizations;
     
-    /**
-     * A constructor sets filename and a hashmap of Localization
-     */
+    /** A constructor sets filename and a hashmap of Localization*/
     public LocalizationDB() {
         filename = "";
         localizations = new HashMap();
@@ -42,11 +40,11 @@ public class LocalizationDB implements IDatabase {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /** Loads in languages and then the localizations*/
     @Override
     public void load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         
-        // getting languages
         String[] headings = reader.readLine().split(",");
         languages = new LocalizationLanguage[headings.length - 1];
         for(int i = 1; i < headings.length; i++){
@@ -66,12 +64,11 @@ public class LocalizationDB implements IDatabase {
     }
     
     public String GetLocalization(String tag){
-        String localizedString;
         if(localizations.get(tag).size() > currentLanguage)
-            localizedString =  localizations.get(tag).get(currentLanguage);
+            return localizations.get(tag).get(currentLanguage);
         else
-            localizedString =  localizations.get(tag).get(0); // default to engilsh
-        return localizedString;
+            /* defaults to English */
+            return localizations.get(tag).get(0);
     }
     
     public void SetLanguage(int languageNumber){

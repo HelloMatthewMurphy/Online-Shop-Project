@@ -23,12 +23,12 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hello
+ * @author Matthew
  */
 public final class CheckoutUI extends javax.swing.JFrame {
 
     private ArrayList<Purchase> purchases = new ArrayList<>();
-    private LocalizationDB loc;
+    private final LocalizationDB localizationDB;
     private Money.Currency currency = Money.Currency.values()[0];
     
     private final PurchaseRequestDispatcher dispatcher;
@@ -41,9 +41,9 @@ public final class CheckoutUI extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
-        loc = DBControler.getInstance().getLocalizationDB();
-        CheckoutButton.setText(loc.GetLocalization("CHECKOUT"));
-        UndoButton.setText(loc.GetLocalization("UNDO"));
+        localizationDB = DBControler.getInstance().getLocalizationDB();
+        CheckoutButton.setText(localizationDB.GetLocalization("CHECKOUT"));
+        UndoButton.setText(localizationDB.GetLocalization("UNDO"));
         
         SetData();
         
@@ -72,11 +72,10 @@ public final class CheckoutUI extends javax.swing.JFrame {
             total += p.getItem().getPrice() * p.getQuantity();
             model.addRow(rowData);
         }
-        
         // Set the text for the "Total Cost" label
         Money totalMoney = new Money(Money.Currency.EUR, total);
         totalMoney.changeCurrency(currency);
-        totalCost.setText(DBControler.getInstance().getLocalizationDB().GetLocalization("GET_TOTAL") + "€" + totalMoney);
+        totalCost.setText(localizationDB.GetLocalization("GET_TOTAL") + "€" + totalMoney);
         totalCost.repaint();
     }
     

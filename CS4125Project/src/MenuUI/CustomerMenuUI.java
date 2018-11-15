@@ -43,15 +43,15 @@ public class CustomerMenuUI extends javax.swing.JFrame {
      * Creates new form CustomerMenuUI
      */
     private final String username;
-    private LocalizationDB loc;
+    private final LocalizationDB localizationDB;
     
     public CustomerMenuUI(String username) {
         initComponents();
         this.username = username;
-        loc = DBControler.getInstance().getLocalizationDB();
+        localizationDB = DBControler.getInstance().getLocalizationDB();
         RefreshText();
         
-        LocalizationLanguage[] langauges = loc.GetLanguages();
+        LocalizationLanguage[] langauges = localizationDB.GetLanguages();
         for(int i = 0; i < langauges.length; i++){
             LanguageDropdown.addItem(langauges[i].getName());
         }
@@ -59,7 +59,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         ActionListener languageChanged = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loc.SetLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
+                localizationDB.SetLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
                 RefreshText();
             }
         };
@@ -201,21 +201,21 @@ public class CustomerMenuUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RefreshText(){
-        welcomeMessage.setText(loc.GetLocalization("WELCOME_MESSAGE"));
-        logoutButton.setText(loc.GetLocalization("LOGOUT"));
-        buyStockButton.setText(loc.GetLocalization("BUY_STOCK"));
-        checkStockButton.setText(loc.GetLocalization("CHECK_STOCK"));
-        purchaseHistoryButton.setText(loc.GetLocalization("PURCHASE_HISTORY"));
-        basketButton.setText(loc.GetLocalization("BASKET"));
-        paymentMethodButton.setText(loc.GetLocalization("PAYMENT_METHOD"));
-        returnItemButton.setText(loc.GetLocalization("RETURN_ITEM"));
-        Language.setText(loc.GetLocalization("LANGUAGE"));
+        welcomeMessage.setText(localizationDB.GetLocalization("WELCOME_MESSAGE"));
+        logoutButton.setText(localizationDB.GetLocalization("LOGOUT"));
+        buyStockButton.setText(localizationDB.GetLocalization("BUY_STOCK"));
+        checkStockButton.setText(localizationDB.GetLocalization("CHECK_STOCK"));
+        purchaseHistoryButton.setText(localizationDB.GetLocalization("PURCHASE_HISTORY"));
+        basketButton.setText(localizationDB.GetLocalization("BASKET"));
+        paymentMethodButton.setText(localizationDB.GetLocalization("PAYMENT_METHOD"));
+        returnItemButton.setText(localizationDB.GetLocalization("RETURN_ITEM"));
+        Language.setText(localizationDB.GetLocalization("LANGUAGE"));
         repaint();
     }
     
     //Logout
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        JOptionPane.showMessageDialog(null, loc.GetLocalization("LOG_OUT_MESSAGE"));
+        JOptionPane.showMessageDialog(null, localizationDB.GetLocalization("LOG_OUT_MESSAGE"));
         this.setVisible(false);
         try {
             new MainMenuUI().run();
@@ -240,8 +240,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         //Picking item
         String pickedItem;
         Object itemList = JOptionPane.showInputDialog(null, 
-                                                    loc.GetLocalization("BASKET_MESSAGE"), 
-                                                    loc.GetLocalization("BASKET_HEADING"), 
+                                                    localizationDB.GetLocalization("BASKET_MESSAGE"), 
+                                                    localizationDB.GetLocalization("BASKET_HEADING"), 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     itemNames, 
@@ -273,8 +273,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         JComboBox cb = new JComboBox(itemNames);
         String pickedItem;
         Object itemList = JOptionPane.showInputDialog(null, 
-                                                    loc.GetLocalization("CHECK_STOCK_MESSAGE"), 
-                                                    loc.GetLocalization("CHECK_STOCK_HEADING"), 
+                                                    localizationDB.GetLocalization("CHECK_STOCK_MESSAGE"), 
+                                                    localizationDB.GetLocalization("CHECK_STOCK_HEADING"), 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     itemNames, 
@@ -296,12 +296,12 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         //Show info on item
         StockItem stock = DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem);
         JOptionPane.showMessageDialog(null,
-                                        String.format(loc.GetLocalization("ITEM_NAME") + "%s\n" +
-                                                      loc.GetLocalization("ITEM_PRICE") + "%c%.2f\n" +
-                                                      loc.GetLocalization("ITEM_DESCRIPTION") + "%d\n",
+                                        String.format(localizationDB.GetLocalization("ITEM_NAME") + "%s\n" +
+                                                      localizationDB.GetLocalization("ITEM_PRICE") + "%c%.2f\n" +
+                                                      localizationDB.GetLocalization("ITEM_DESCRIPTION") + "%d\n",
                                                        pickedItem, Money.Currency.EUR.getSymbol(),
                                                        stock.getPrice(), amountAvailable),
-                                        String.format(loc.GetLocalization("ITEM_INFO_ON") + "%s", pickedItem),
+                                        String.format(localizationDB.GetLocalization("ITEM_INFO_ON") + "%s", pickedItem),
                                         JOptionPane.WARNING_MESSAGE);
     }
 
@@ -327,8 +327,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         //Getting amount user wants
         while(!donePickingamount){
             Object howMuchWanted = JOptionPane.showInputDialog(null, 
-                                                        loc.GetLocalization("BUYING_MSG1_PT1") + amountAvailable + " " + pickedItem + loc.GetLocalization("BUYING_MSG1_PT2"), 
-                                                        loc.GetLocalization("STOCK"), 
+                                                        localizationDB.GetLocalization("BUYING_MSG1_PT1") + amountAvailable + " " + pickedItem + localizationDB.GetLocalization("BUYING_MSG1_PT2"), 
+                                                        localizationDB.GetLocalization("STOCK"), 
                                                         JOptionPane.QUESTION_MESSAGE, 
                                                         null,
                                                         null, 
@@ -350,8 +350,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
                 donePickingamount = true;
             else
                 JOptionPane.showMessageDialog(null,
-                                            loc.GetLocalization("BUYING_MSG2") + amountAvailable + ".",
-                                            loc.GetLocalization("BUYING_MSG3") + pickedItem + "'s",
+                                            localizationDB.GetLocalization("BUYING_MSG2") + amountAvailable + ".",
+                                            localizationDB.GetLocalization("BUYING_MSG3") + pickedItem + "'s",
                                             JOptionPane.WARNING_MESSAGE);
         }
         price += DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem).getPrice() * amountWanted;
@@ -360,10 +360,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         Delivery delivery = null;
         boolean validD = false;
         while(validD == false){
-            String[] delvTypesStrings = {loc.GetLocalization("SLOW"), loc.GetLocalization("REGULAR"), loc.GetLocalization("PREMIUM")};
+            String[] delvTypesStrings = {localizationDB.GetLocalization("SLOW"), localizationDB.GetLocalization("REGULAR"), localizationDB.GetLocalization("PREMIUM")};
             Object delvTypes = JOptionPane.showInputDialog(null, 
-                                                    loc.GetLocalization("BUYING_MSG4"), 
-                                                    loc.GetLocalization("STOCK"), 
+                                                    localizationDB.GetLocalization("BUYING_MSG4"), 
+                                                    localizationDB.GetLocalization("STOCK"), 
                                                     JOptionPane.QUESTION_MESSAGE, 
                                                     null,
                                                     delvTypesStrings, 
@@ -374,15 +374,15 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             
             String pickedDelv = delvTypes.toString();
 
-            if(pickedDelv == loc.GetLocalization("SLOW")){
+            if(pickedDelv == localizationDB.GetLocalization("SLOW")){
                 delivery = new MoneySaver(new BasicDelivery());
                 validD = true;
             }
-            else if(pickedDelv == loc.GetLocalization("REGULAR")){
+            else if(pickedDelv == localizationDB.GetLocalization("REGULAR")){
                 delivery = new BasicDelivery();
                 validD = true;
             }
-            else if(pickedDelv == loc.GetLocalization("PREMIUM")){
+            else if(pickedDelv == localizationDB.GetLocalization("PREMIUM")){
                 delivery = new Premium(new BasicDelivery());
                 validD = true;
             }
@@ -410,7 +410,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
         //Picking item
         Object itemChoice = JOptionPane.showInputDialog(null, 
-            loc.GetLocalization("RETURN_MSG1"), loc.GetLocalization("RETURN_STOCK"), 
+            localizationDB.GetLocalization("RETURN_MSG1"), localizationDB.GetLocalization("RETURN_STOCK"), 
             JOptionPane.QUESTION_MESSAGE, null, itemNames, itemNames[0]);
                 
         boolean isValid = false;
@@ -425,7 +425,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             }
             
             Object quantityChoice = JOptionPane.showInputDialog(null, 
-            loc.GetLocalization("RETURN_MSG2"), loc.GetLocalization("RETURN_STOCK"), JOptionPane.QUESTION_MESSAGE, 
+            localizationDB.GetLocalization("RETURN_MSG2"), localizationDB.GetLocalization("RETURN_STOCK"), JOptionPane.QUESTION_MESSAGE, 
             null, null, null);
             
             if (quantityChoice == null)
