@@ -56,28 +56,28 @@
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                    <Connection code="DBControler.getInstance().getLocalizationDB().GetLocalization(&quot;ITEM&quot;)" type="code"/>
+                    <Connection code="DBControler.getInstance().getLocalizationDB().getLocalization(&quot;ITEM&quot;)" type="code"/>
                   </Title>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                    <Connection code="DBControler.getInstance().getLocalizationDB().GetLocalization(&quot;QUANTITY&quot;)" type="code"/>
+                    <Connection code="DBControler.getInstance().getLocalizationDB().getLocalization(&quot;QUANTITY&quot;)" type="code"/>
                   </Title>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                    <Connection code="DBControler.getInstance().getLocalizationDB().GetLocalization(&quot;DISCOUNT&quot;)" type="code"/>
+                    <Connection code="DBControler.getInstance().getLocalizationDB().getLocalization(&quot;DISCOUNT&quot;)" type="code"/>
                   </Title>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                    <Connection code="DBControler.getInstance().getLocalizationDB().GetLocalization(&quot;DATE&quot;)" type="code"/>
+                    <Connection code="DBControler.getInstance().getLocalizationDB().getLocalization(&quot;DATE&quot;)" type="code"/>
                   </Title>
                   <Editor/>
                   <Renderer/>
