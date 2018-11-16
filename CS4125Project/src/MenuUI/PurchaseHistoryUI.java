@@ -6,7 +6,6 @@
 package MenuUI;
 
 import Database.DBControler;
-import Database.LocalizationDB;
 import Database.PurchaseDB;
 import Services.Purchase;
 import java.util.Calendar;

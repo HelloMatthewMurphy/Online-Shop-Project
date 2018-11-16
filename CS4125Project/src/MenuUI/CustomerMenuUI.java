@@ -49,7 +49,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         initComponents();
         this.username = username;
         localizationDB = DBControler.getInstance().getLocalizationDB();
-        RefreshText();
+        refreshText();
         
         LocalizationLanguage[] langauges = localizationDB.getLanguages();
         for(int i = 0; i < langauges.length; i++){
@@ -60,7 +60,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 localizationDB.setLanguage(langauges[LanguageDropdown.getSelectedIndex()].getNum());
-                RefreshText();
+                refreshText();
             }
         };
         LanguageDropdown.addActionListener(languageChanged);
@@ -200,7 +200,7 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RefreshText(){
+    private void refreshText(){
         welcomeMessage.setText(localizationDB.GetLocalization("WELCOME_MESSAGE"));
         logoutButton.setText(localizationDB.GetLocalization("LOGOUT"));
         buyStockButton.setText(localizationDB.GetLocalization("BUY_STOCK"));

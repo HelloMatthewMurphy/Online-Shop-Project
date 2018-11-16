@@ -62,7 +62,7 @@ public class LocalizationDB implements IDatabase {
         reader.close();  
     }
     
-    public String GetLocalization(String tag){
+    public String getLocalization(String tag){
         if(localizations.get(tag).size() > currentLanguage)
             return localizations.get(tag).get(currentLanguage);
         else
