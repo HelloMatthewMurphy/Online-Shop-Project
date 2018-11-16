@@ -22,8 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Matthew
+ * 
+ * @author Matthew Murphy
  */
 public final class CheckoutUI extends javax.swing.JFrame {
 
@@ -44,8 +44,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
         localizationDB = DBControler.getInstance().getLocalizationDB();
         checkoutButton.setText(localizationDB.getLocalization("CHECKOUT"));
         undoButton.setText(localizationDB.getLocalization("UNDO"));
-        
-        SetData();
+        setData();
         
         // Set up currency choice combo box
         for (Money.Currency currency : Money.Currency.values())
@@ -57,9 +56,9 @@ public final class CheckoutUI extends javax.swing.JFrame {
         currencyChangeInterceptor = null;
     }
     
-    public void SetData(){
+    public void setData(){
         DeleteData();
-        purchases = ShoppingBasket.GetInstance().GetBasketContents();
+        purchases = ShoppingBasket.getInstance().getBasketContents();
         
         DefaultTableModel model = (DefaultTableModel) itemsInBasket.getModel();
         float total = 0;
@@ -204,20 +203,20 @@ public final class CheckoutUI extends javax.swing.JFrame {
         purchases.forEach((p) -> {
             dispatcher.dispatch(new PurchaseRequest(p));
         });        
-               if(Shop.getInstance().getAccount().getPaymentType() != null){
+        if(Shop.getInstance().getAccount().getPaymentType() != null){
             new ReceiptUI().run();
         }
         dispose();
     }
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
-        ShopControl.GetInstance().Undo();
-        SetData();
+        ShopControl.getInstance().undo();
+        setData();
     }//GEN-LAST:event_undoButtonActionPerformed
 
     private void cbCurrencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCurrencyActionPerformed
         currency = Money.Currency.valueOf(cbCurrency.getSelectedItem().toString());
-        SetData();
+        setData();
         
         // Set up currency change interceptor
         if (dispatcher != null) {

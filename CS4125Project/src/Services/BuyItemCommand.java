@@ -7,28 +7,34 @@ package Services;
 import Stock.StockItem;
 
 /**
- *
- * @author hello
+ * A Concrete Command for the command pattern. A command that creates a purchase that the user wants and adds it to the basket.
+ * @author Matthew Murphy
  */
 public class BuyItemCommand implements Command{
 
     private final Purchase purchase;
     private final ShoppingBasket shoppingBasket;
-    
-    // Concrete Command
+
+    /**
+     * A constructor for BuyItemCommand
+     * @param stockItem
+     * @param quantity
+     * @param username
+     * @param currency
+     */
     public BuyItemCommand(StockItem stockItem, int quantity, String username, Money.Currency currency){
         purchase = new Purchase(stockItem, quantity, username, currency);
-        this.shoppingBasket = ShoppingBasket.GetInstance();
+        this.shoppingBasket = ShoppingBasket.getInstance();
     }
     
     @Override
     public void execute() {
-        shoppingBasket.AddToBasket(purchase);
+        shoppingBasket.addToBasket(purchase);
     }
 
     @Override
-    public void Undo() {
-        shoppingBasket.RemoveFromBasket(purchase);
+    public void undo() {
+        shoppingBasket.removeFromBasket(purchase);
     }
     
 }

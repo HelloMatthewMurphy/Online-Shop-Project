@@ -6,10 +6,18 @@
 package Services;
 
 /**
- *
- * @author Matthew
+ * The command interface for the command design pattern. 
+ * @author Matthew Murphy
  */
 public interface Command {
+
+    /**
+     * Will execute the command
+     */
     public void execute();
-    public void Undo();
+
+    /**
+     * Undo the command
+     */
+    public void undo();
 }
