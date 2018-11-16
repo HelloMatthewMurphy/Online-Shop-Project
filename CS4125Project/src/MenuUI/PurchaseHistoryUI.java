@@ -6,6 +6,7 @@
 package MenuUI;
 
 import Database.DBControler;
+import Database.LocalizationDB;
 import Database.PurchaseDB;
 import Services.Purchase;
 import java.util.Calendar;
@@ -57,10 +58,10 @@ public final class PurchaseHistoryUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(purchaseHistory);
         if (purchaseHistory.getColumnModel().getColumnCount() > 0) {
-            purchaseHistory.getColumnModel().getColumn(0).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("ITEM"));
-            purchaseHistory.getColumnModel().getColumn(1).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("QUANTITY"));
-            purchaseHistory.getColumnModel().getColumn(2).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("DISCOUNT"));
-            purchaseHistory.getColumnModel().getColumn(3).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("DATE"));
+            purchaseHistory.getColumnModel().getColumn(0).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("ITEM"));
+            purchaseHistory.getColumnModel().getColumn(1).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("QUANTITY"));
+            purchaseHistory.getColumnModel().getColumn(2).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("DISCOUNT"));
+            purchaseHistory.getColumnModel().getColumn(3).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("DATE"));
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

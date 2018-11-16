@@ -42,8 +42,8 @@ public final class CheckoutUI extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         
         localizationDB = DBControler.getInstance().getLocalizationDB();
-        checkoutButton.setText(localizationDB.GetLocalization("CHECKOUT"));
-        undoButton.setText(localizationDB.GetLocalization("UNDO"));
+        checkoutButton.setText(localizationDB.getLocalization("CHECKOUT"));
+        undoButton.setText(localizationDB.getLocalization("UNDO"));
         
         SetData();
         
@@ -75,7 +75,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
         // Set the text for the "Total Cost" label
         Money totalMoney = new Money(Money.Currency.EUR, total);
         totalMoney.changeCurrency(currency);
-        totalCost.setText(localizationDB.GetLocalization("GET_TOTAL") + "€" + totalMoney);
+        totalCost.setText(localizationDB.getLocalization("GET_TOTAL") + "€" + totalMoney);
         totalCost.repaint();
     }
     
@@ -131,9 +131,9 @@ public final class CheckoutUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(itemsInBasket);
         if (itemsInBasket.getColumnModel().getColumnCount() > 0) {
-            itemsInBasket.getColumnModel().getColumn(0).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("ITEM"));
-            itemsInBasket.getColumnModel().getColumn(1).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("QUANTITY"));
-            itemsInBasket.getColumnModel().getColumn(2).setHeaderValue(DBControler.getInstance().getLocalizationDB().GetLocalization("PRICE"));
+            itemsInBasket.getColumnModel().getColumn(0).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("ITEM"));
+            itemsInBasket.getColumnModel().getColumn(1).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("QUANTITY"));
+            itemsInBasket.getColumnModel().getColumn(2).setHeaderValue(DBControler.getInstance().getLocalizationDB().getLocalization("PRICE"));
         }
 
         totalCost.setText("Total: €0.00");

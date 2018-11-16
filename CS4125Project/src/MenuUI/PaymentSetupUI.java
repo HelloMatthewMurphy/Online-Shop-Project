@@ -31,10 +31,10 @@ public class PaymentSetupUI extends javax.swing.JFrame {
         temp = null;
         
         loc = DBControler.getInstance().getLocalizationDB();
-        jLabel1.setText(loc.GetLocalization("PAYMENT_SETUP"));
-        jLabel2.setText(loc.GetLocalization("TYPE"));
-        jLabel3.setText(loc.GetLocalization("PROVIDER"));
-        SubmitButton.setText(loc.GetLocalization("SUBMIT"));
+        jLabel1.setText(loc.getLocalization("PAYMENT_SETUP"));
+        jLabel2.setText(loc.getLocalization("TYPE"));
+        jLabel3.setText(loc.getLocalization("PROVIDER"));
+        SubmitButton.setText(loc.getLocalization("SUBMIT"));
     }
 
     public void run() {
@@ -192,15 +192,15 @@ public class PaymentSetupUI extends javax.swing.JFrame {
         
         if (paymentType == null) {   
             System.out.print("payment null");
-            JOptionPane.showMessageDialog(new JFrame(), loc.GetLocalization("PAYEMENT_ERROR1"),
-                    loc.GetLocalization("DIALOG"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), loc.getLocalization("PAYEMENT_ERROR1"),
+                    loc.getLocalization("DIALOG"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (temp == null) {
             System.out.print("temp null");
-            JOptionPane.showMessageDialog(new JFrame(), loc.GetLocalization("PAYEMENT_ERROR2"),
-                loc.GetLocalization("DIALOG"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), loc.getLocalization("PAYEMENT_ERROR2"),
+                loc.getLocalization("DIALOG"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         paymentType._IPaymentSystem = temp;
