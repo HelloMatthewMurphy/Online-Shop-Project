@@ -8,38 +8,59 @@ package Services;
 import java.util.ArrayList;
 
 /**
- *
- * @author Matthew
+ * Is Receiver for command pattern. Hold all the purchases so they can be removed before checking out and buying them all.
+ * @author Matthew Murphy
  */
 public class ShoppingBasket {
     
     private final ArrayList<Purchase> basket;
     private static ShoppingBasket instance;
     
-    // Receiver
+    /**
+    * A constructor for the shopping basket
+    */
     private ShoppingBasket(){
         this.basket = new ArrayList<>();
     }
     
-    public static ShoppingBasket GetInstance(){
+    /** 
+     * Returns an instance of the ShoppingBasket and creates one if none exist
+     * @return instance
+     */
+    public static ShoppingBasket getInstance(){
         if(instance == null)
             instance = new ShoppingBasket();
         return instance;
     }
     
-    public void AddToBasket(Purchase item){
+    /**
+     * Adds a Purchase to the basket
+     * @param item
+     */
+    public void addToBasket(Purchase item){
         basket.add(item);
     }
     
-    public void ClearBasket(){
+    /**
+     * Clears the basket
+     */
+    public void clearBasket(){
         basket.clear();
     }
     
-    public void RemoveFromBasket(Purchase item){
+    /**
+     * Removes a Purchase to the basket
+     * @param item
+     */
+    public void removeFromBasket(Purchase item){
         basket.remove(item);
     }
     
-    public ArrayList<Purchase> GetBasketContents(){
+    /**
+     * Returns the basket
+     * @return basket
+     */
+    public ArrayList<Purchase> getBasketContents(){
         return basket;
     }
     

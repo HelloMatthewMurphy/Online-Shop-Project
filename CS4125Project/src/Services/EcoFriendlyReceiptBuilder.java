@@ -31,7 +31,7 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
     }
   
     public void buildPurchases(){
-        ArrayList<Purchase>purchases = ShoppingBasket.GetInstance().GetBasketContents();
+        ArrayList<Purchase>purchases = ShoppingBasket.getInstance().getBasketContents();
         String itemList = "You have " + purchases.size() + " purchases.\n";
         float total = 0;
 

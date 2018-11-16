@@ -391,9 +391,9 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         
         CreditCardCo credit = new CreditCardCo();
         if(!pickedItem.equals("")){
-            ShopControl controler = ShopControl.GetInstance();
-            controler.AddCommand(new BuyItemCommand(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername(), currency));
-            controler.ExecuteCommand(controler.numCommands-1);
+            ShopControl controler = ShopControl.getInstance();
+            controler.addCommand(new BuyItemCommand(DBControler.getInstance().getStockItemDB().getStockItemByName(pickedItem), amountWanted, s.getAccount().getUsername(), currency));
+            controler.executeCommand(controler.numCommands-1);
         }
     }
     

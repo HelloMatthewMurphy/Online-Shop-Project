@@ -119,7 +119,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         }
         
         JOptionPane.showMessageDialog(null,result, "Detailed Receipt", JOptionPane.INFORMATION_MESSAGE);
-        ShoppingBasket.GetInstance().ClearBasket();
+        ShoppingBasket.getInstance().clearBasket();
     }//GEN-LAST:event_DetailedReceiptActionPerformed
 
     private void PrivateReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrivateReceiptActionPerformed
@@ -142,7 +142,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         }
         
         JOptionPane.showMessageDialog(null,result, "Private Receipt", JOptionPane.INFORMATION_MESSAGE);
-        ShoppingBasket.GetInstance().ClearBasket();
+        ShoppingBasket.getInstance().clearBasket();
     }//GEN-LAST:event_PrivateReceiptActionPerformed
 
     private void EcoFriendlyReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EcoFriendlyReceiptActionPerformed
@@ -165,7 +165,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         }
         
         JOptionPane.showMessageDialog(null,result, "Eco Friendly Receipt", JOptionPane.INFORMATION_MESSAGE);
-        ShoppingBasket.GetInstance().ClearBasket();
+        ShoppingBasket.getInstance().clearBasket();
     }//GEN-LAST:event_EcoFriendlyReceiptActionPerformed
 
    
