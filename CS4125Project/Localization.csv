@@ -22,6 +22,8 @@ ITEM_INFO_ON,Info on ,Info op
 BUYING_MSG1_PT1,There are ,Er zijn
 BUYING_MSG1_PT2,s left in stock. How many would you like?,is nog op voorraad. Hoeveel zou je willen?
 STOCK,Stock,Voorraad
+ENTER_NUM,Please enter a numberic value!,
+MUST_BE_ABOVE_ZERO,Error - Amount must be above 0!,
 BUYING_MSG2,"You can not buy that much, you can get a maximum of ","Je kunt niet zoveel kopen, je kunt er een maximum van krijgen"
 BUYING_MSG3,You cant have that much ,Je kunt niet zoveel hebben
 SLOW,Slow,Langzaam
@@ -31,6 +33,13 @@ BUYING_MSG4,What type of Delivery would you like?,Welk type levering wilt u?
 RETURN_MSG1,Pick item you would like to return.,Kies een item dat u wilt retourneren.
 RETURN_STOCK,Return Stock,Voorraad terugsturen
 RETURN_MSG2,How many?,Hoeveel?
+RETURN_MSG3,Error - Please enter a numeric value!,
+RETURN_MSG4,Error - Numeric value must be postive!!,
+RETURN_MSG5,Which currency would you like to be refunded in? Options are: ,
+RETURN_MSG6,is an invalid choice,
+INVALID_ENTRY,Invalid entry,
+CURRENCY,Currency,
+INVALID_CHOICE,Invalid Choice,
 GET_TOTAL,Total: ,Totaal:
 ITEM,Item,Item
 QUANTITY,Quantity,Aantal stuks

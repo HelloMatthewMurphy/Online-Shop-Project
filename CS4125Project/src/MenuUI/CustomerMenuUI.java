@@ -338,12 +338,12 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             try {
             amountWanted = Integer.parseInt(howMuchWanted.toString());
             }catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(null, "Please enter a numberic value!", "Invalid Entry", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, localizationDB.getLocalization("ENTER_NUM"), localizationDB.getLocalization("INVALID_ENTRY"), JOptionPane.ERROR_MESSAGE);
                 continue;
             }
             
-            if (amountWanted < 0) {
-                JOptionPane.showMessageDialog(null, "Error - Amount can not be negative!", "Invalid Entry", JOptionPane.ERROR_MESSAGE);
+            if (amountWanted <= 0) {
+                JOptionPane.showMessageDialog(null, localizationDB.getLocalization("MUST_BE_ABOVE_ZERO"), localizationDB.getLocalization("INVALID_ENTRY"), JOptionPane.ERROR_MESSAGE);
                 continue;
             }
             if(amountWanted <= amountAvailable)
@@ -435,11 +435,11 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             amount = Integer.parseInt(quantityChoice.toString());
             }
             catch(NumberFormatException nfe) {
-                    JOptionPane.showMessageDialog(null, "Error - Please enter a numeric value!", "Invalid entry", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, localizationDB.getLocalization("RETURN_MSG3"), localizationDB.getLocalization("INVALID_ENTRY"), JOptionPane.ERROR_MESSAGE);
                     continue;
              }
             if (amount < 0) {
-                JOptionPane.showMessageDialog(null, "Error - Numeric value must be postive!!", "Invalid entry", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, localizationDB.getLocalization("RETURN_MSG4"), localizationDB.getLocalization("INVALID_ENTRY"), JOptionPane.ERROR_MESSAGE);
                 continue;
             }
             isValid = true;
@@ -461,10 +461,10 @@ public class CustomerMenuUI extends javax.swing.JFrame {
         {
             Object choice = JOptionPane.showInputDialog(null,
                     String.format(
-                        "Which currency would you like to be refunded in? Options are: %s",
+                        localizationDB.getLocalization("RETURN_MSG5") + "%s",
                          validCurrenciesStr
                     ),
-                    "Currency", JOptionPane.QUESTION_MESSAGE, null, null, null);
+                    localizationDB.getLocalization("CURRENCY"), JOptionPane.QUESTION_MESSAGE, null, null, null);
             if (choice == null)
                 return;
             currencyChoiceStr = String.valueOf(choice);
@@ -478,8 +478,8 @@ public class CustomerMenuUI extends javax.swing.JFrame {
             
             if (!validChoice) {
                 JOptionPane.showMessageDialog(null, 
-                    String.format("%s is an invalid choice", currencyChoiceStr),
-                    "Invalid Choice",
+                    String.format("%s!" + localizationDB.getLocalization("RETURN_MSG6"), currencyChoiceStr),
+                    localizationDB.getLocalization("INVALID_CHOICE"),
                     JOptionPane.WARNING_MESSAGE);
             }
         } while(!validChoice);
