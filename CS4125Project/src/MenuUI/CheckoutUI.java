@@ -75,7 +75,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
         // Set the text for the "Total Cost" label
         Money totalMoney = new Money(Money.Currency.EUR, total);
         totalMoney.changeCurrency(currency);
-        totalCost.setText(localizationDB.getLocalization("GET_TOTAL") + "€" + totalMoney);
+        totalCost.setText(localizationDB.getLocalization("GET_TOTAL") + totalMoney);
         totalCost.repaint();
     }
     
