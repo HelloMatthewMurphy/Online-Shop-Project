@@ -67,7 +67,7 @@ public final class CheckoutUI extends javax.swing.JFrame {
             Object rowData[] = new Object[3];
             rowData[0] = p.getItem().getName();
             rowData[1] = p.getQuantity();
-            rowData[2] = String.format("€%.2f", p.getItem().getPrice());
+            rowData[2] = String.format("€%.2f", p.getItem().getPrice() * p.getQuantity());
             total += p.getItem().getPrice() * p.getQuantity();
             model.addRow(rowData);
         }
