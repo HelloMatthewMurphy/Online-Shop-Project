@@ -51,7 +51,6 @@ public class ShopTest {
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
-        boolean workedFine = false;
         Shop expResult = Shop.getInstance();
         
         assertNotNull(expResult);
