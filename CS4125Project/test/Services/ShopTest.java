@@ -50,7 +50,13 @@ public class ShopTest {
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
+        boolean workedFine = false;
         Shop expResult = Shop.getInstance();
+        
+        if(expResult != null)
+            workedFine = true;
+        
+        assert(workedFine);
     }
 
     /**
@@ -59,9 +65,14 @@ public class ShopTest {
     @Test
     public void testSetAccount() {
         System.out.println("setAccount");
+        boolean workedFine = false;
         Customer account = new Customer("Matt", "Pass", "Email@email.email");;
         Shop instance = Shop.getInstance();
         instance.setAccount(account);
+        if(instance.getAccount() != null)
+            workedFine = true;
+        
+        assert(workedFine);
     }
     
     /**
@@ -85,13 +96,19 @@ public class ShopTest {
      */
     @Test
     public void testCreditCardDetails(){
+        boolean workedFine = false;
         System.out.println("CreditCardDetails");
-         Customer account = new Customer("Matt", "Pass", "Email@email.email");
+        Customer account = new Customer("Matt", "Pass", "Email@email.email");
         Payment paymentType = new NetBankingPayment();
         paymentType._IPaymentSystem = new BOIPaymentSystem();
         Shop instance = Shop.getInstance();
         instance.setAccount(account);
         Shop.getInstance().getAccount().setPaymentType(paymentType);
+        
+        if(Shop.getInstance().getAccount().getPaymentType() != null){
+            workedFine = true;
+        }
+            assert(workedFine);
     }
     
         /**
@@ -99,6 +116,7 @@ public class ShopTest {
      */
     @Test
     public void testCreateReceipt(){
+        boolean workedFine = false;
         System.out.println("makeReceipt");
         Customer account = new Customer("Matt", "Pass", "Email@email.email");
         Payment paymentType = new NetBankingPayment();
@@ -109,6 +127,12 @@ public class ShopTest {
         
         PrivateReceiptBuilder privateReceipt = new PrivateReceiptBuilder();
         ReceiptDirector.GetInstance().makeReceipt(privateReceipt);
+        
+        if(privateReceipt.getReceipt() != null){
+            workedFine = true;
+        }
+        
+        assert(workedFine);
     }
     
 }
