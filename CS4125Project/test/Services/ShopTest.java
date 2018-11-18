@@ -17,6 +17,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ThirdParty.Payment.*;
 
 /**
  *
@@ -62,7 +63,7 @@ public class ShopTest {
         Shop instance = Shop.getInstance();
         instance.setAccount(account);
     }
-
+    
     /**
      * Test of getSortedStock method, of class Shop.
      */
@@ -79,29 +80,35 @@ public class ShopTest {
         }
         assert(workedFine);
     }
-
-    /**
-     * Test of returnItem method, of class Shop.
+        /**
+     * Test of setPaymentType method, of class Shop.
      */
     @Test
-    public void testReturnItem() {
-        System.out.println("returnItem");
-        StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
+    public void testCreditCardDetails(){
+        System.out.println("CreditCardDetails");
+         Customer account = new Customer("Matt", "Pass", "Email@email.email");
+        Payment paymentType = new NetBankingPayment();
+        paymentType._IPaymentSystem = new BOIPaymentSystem();
         Shop instance = Shop.getInstance();
-        instance.returnItem(item, 1, Currency.EUR);
+        instance.setAccount(account);
+        Shop.getInstance().getAccount().setPaymentType(paymentType);
     }
-
-    /**
-     * Test of makePurchase method, of class Shop.
+    
+        /**
+     * Test of makeReceipt method, of class ReceiptDirector.
      */
     @Test
-    public void testMakePurchase() {
-        System.out.println("makePurchase");
-        StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
-        int quantity = 1;
+    public void testCreateReceipt(){
+        System.out.println("makeReceipt");
+        Customer account = new Customer("Matt", "Pass", "Email@email.email");
+        Payment paymentType = new NetBankingPayment();
+        paymentType._IPaymentSystem = new BOIPaymentSystem();
         Shop instance = Shop.getInstance();
-        instance.setAccount(new Customer("wow", "test", "testing"));
-        instance.makePurchase(item, quantity, "wow", Currency.EUR);
+        instance.setAccount(account);
+        Shop.getInstance().getAccount().setPaymentType(paymentType);
+        
+        PrivateReceiptBuilder privateReceipt = new PrivateReceiptBuilder();
+        ReceiptDirector.GetInstance().makeReceipt(privateReceipt);
     }
     
 }
