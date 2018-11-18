@@ -50,7 +50,6 @@ public class ShopTest {
      */
     @Test
     public void testGetInstance() {
-        System.out.println("getInstance");
         Shop expResult = Shop.getInstance();
         
         assertNotNull(expResult);
@@ -61,7 +60,6 @@ public class ShopTest {
      */
     @Test
     public void testSetAccount() {
-        System.out.println("setAccount");
         Customer account = new Customer("Matt", "Pass", "Email@email.email");;
         Shop instance = Shop.getInstance();
         instance.setAccount(account);
@@ -74,7 +72,6 @@ public class ShopTest {
      */
     @Test
     public void testGetSortedStock() {
-        System.out.println("getSortedStock");
         Shop instance = Shop.getInstance();
         List<Map.Entry<String, Integer>> result = instance.getSortedStock(Shop.SortOrder.NAME_DESC);
         boolean workedFine = true;
@@ -91,7 +88,6 @@ public class ShopTest {
      */
     @Test
     public void testReturnItem() {
-        System.out.println("returnItem");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
         assertNotNull(item);
         Shop instance = Shop.getInstance();
@@ -103,7 +99,6 @@ public class ShopTest {
      */
     @Test   
     public void testMakePurchase() {
-        System.out.println("makePurchase");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
         assertNotNull(item);
         int quantity = 1;
@@ -117,7 +112,6 @@ public class ShopTest {
      */
     @Test
     public void testCreditCardDetails(){
-        System.out.println("CreditCardDetails");
         Customer account = new Customer("Matt", "Pass", "Email@email.email");
         Payment paymentType = new NetBankingPayment();
         paymentType._IPaymentSystem = new BOIPaymentSystem();
@@ -133,7 +127,6 @@ public class ShopTest {
      */
     @Test
     public void testCreateReceipt(){
-        System.out.println("makeReceipt");
         Customer account = new Customer("Matt", "Pass", "Email@email.email");
         Payment paymentType = new NetBankingPayment();
         paymentType._IPaymentSystem = new BOIPaymentSystem();
