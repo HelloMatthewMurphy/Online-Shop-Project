@@ -25,6 +25,8 @@ import org.junit.Test;
 public class ShopTest {
     
     public ShopTest() {
+        /* Load CSV files when creating a ShopTest instance */
+        DBControler.getInstance().load(DBControler.ALL_DB);
     }
     
     @BeforeClass
@@ -94,14 +96,14 @@ public class ShopTest {
     /**
      * Test of makePurchase method, of class Shop.
      */
-    @Test
+    @Test   
     public void testMakePurchase() {
         System.out.println("makePurchase");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
         int quantity = 1;
         Shop instance = Shop.getInstance();
-        instance.setAccount(new Customer("wow", "test", "testing"));
-        instance.makePurchase(item, quantity, "wow", Currency.EUR);
+        instance.setAccount(new Customer("Brian", "test", "testing"));
+        instance.makePurchase(item, quantity, "Brian", Currency.EUR);
     }
     
 }
