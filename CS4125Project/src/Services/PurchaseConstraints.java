@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 
 import java.util.GregorianCalendar;
@@ -23,9 +18,9 @@ public class PurchaseConstraints {
     
     /**
     *
-    * @param start
-    * @param end
-    * @param type 
+    * @param start start date
+    * @param end end date
+    * @param type purchase type
     */
     public PurchaseConstraints(GregorianCalendar start, GregorianCalendar end, 
             PurchaseType type) {
@@ -34,11 +29,11 @@ public class PurchaseConstraints {
     
     /**
     *
-    * @param start
-    * @param end
-    * @param category
-    * @param product
-    * @param type
+    * @param start start date
+    * @param end end date
+    * @param category item category
+    * @param product item product
+    * @param type purchase type
     */
     public PurchaseConstraints(GregorianCalendar start, GregorianCalendar end, 
             String category, String product, PurchaseType type) {

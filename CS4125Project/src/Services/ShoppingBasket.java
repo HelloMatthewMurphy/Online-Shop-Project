@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 
 import java.util.ArrayList;
 
 /**
  * Is Receiver for command pattern. Hold all the purchases so they can be removed before checking out and buying them all.
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class ShoppingBasket {
     
@@ -35,7 +30,7 @@ public class ShoppingBasket {
     
     /**
      * Adds a Purchase to the basket
-     * @param item
+     * @param item the item to add
      */
     public void addToBasket(Purchase item){
         basket.add(item);
@@ -50,7 +45,7 @@ public class ShoppingBasket {
     
     /**
      * Removes a Purchase to the basket
-     * @param item
+     * @param item the item to remove
      */
     public void removeFromBasket(Purchase item){
         basket.remove(item);

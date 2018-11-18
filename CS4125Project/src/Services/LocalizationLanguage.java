@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 
 /**
@@ -13,15 +8,28 @@ public class LocalizationLanguage {
     private String languageName;
     private int languageNum;
     
+    /**
+     *
+     * @param name localization language name
+     * @param num localization language number
+     */
     public LocalizationLanguage(String name, int num){
         languageName = name;
         languageNum = num;
     }
     
+    /**
+     *
+     * @return languageName
+     */
     public String getName(){
         return languageName;
     }
     
+    /**
+     *
+     * @return languageNum
+     */
     public int getNum(){
         return languageNum;
     }

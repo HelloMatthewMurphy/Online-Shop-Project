@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
 
 import Services.LocalizationLanguage;
@@ -39,7 +34,9 @@ public class LocalizationDB implements IDatabase {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /** Loads in languages and then the localizations*/
+    /** Loads in languages and then the localization
+     * @throws java.io.IOException -
+     */
     @Override
     public void load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -62,6 +59,11 @@ public class LocalizationDB implements IDatabase {
         reader.close();  
     }
     
+    /**
+     *
+     * @param tag the tag of the string
+     * @return localization
+     */
     public String getLocalization(String tag){
         if(localizations.get(tag).size() > currentLanguage)
             return localizations.get(tag).get(currentLanguage);
@@ -70,12 +72,20 @@ public class LocalizationDB implements IDatabase {
             return localizations.get(tag).get(0);
     }
     
+    /**
+     *
+     * @param languageNumber the language number of the current language
+     */
     public void setLanguage(int languageNumber){
         if(languageNumber <= languages.length){
             currentLanguage = languageNumber;
         }
     }
     
+    /**
+     *
+     * @return languages
+     */
     public LocalizationLanguage[] getLanguages(){
         return languages;
     }

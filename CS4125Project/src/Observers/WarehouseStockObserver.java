@@ -12,8 +12,8 @@ public class WarehouseStockObserver implements Observer{
 
     /**
     *
-    * @param o
-    * @param arg
+    * @param o the observer
+    * @param arg argument
     * 
     */
     @Override

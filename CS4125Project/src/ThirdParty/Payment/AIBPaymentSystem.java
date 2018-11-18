@@ -3,6 +3,10 @@ package ThirdParty.Payment;
 import Services.Shop;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author Brian
+ */
 public class AIBPaymentSystem implements IPaymentSystem {
     
     @Override

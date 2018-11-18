@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * A warehouse which holds stock.
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class Warehouse {
     

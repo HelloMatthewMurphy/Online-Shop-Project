@@ -1,8 +1,3 @@
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
 import Database.AccountDB;
@@ -24,6 +19,7 @@ public class Login {
     /**
      * Get the single instance of the class
      * 
+     * @return instance
      */
     public static Login getInstance() {
         // Craete it if needed
@@ -54,7 +50,7 @@ public class Login {
     * @param email users email.
     * @param password users password.
     * @return validated
-    * @throws InterruptedException
+    * @throws InterruptedException -
     * 
     */
     public boolean Validate(String email, String password) throws InterruptedException {

@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 import Stock.StockItem;
 
 /**
  * A Concrete Command for the command pattern. A command that creates a purchase that the user wants and adds it to the basket.
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class BuyItemCommand implements Command{
 
@@ -17,10 +12,10 @@ public class BuyItemCommand implements Command{
 
     /**
      * A constructor for BuyItemCommand
-     * @param stockItem
-     * @param quantity
-     * @param username
-     * @param currency
+     * @param stockItem item that will be bought
+     * @param quantity amount to buy
+     * @param username username of user
+     * @param currency the currency they are using
      */
     public BuyItemCommand(StockItem stockItem, int quantity, String username, Money.Currency currency){
         purchase = new Purchase(stockItem, quantity, username, currency);

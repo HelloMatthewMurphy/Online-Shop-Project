@@ -23,7 +23,7 @@ public class AddDiscountUI extends javax.swing.JFrame {
     Shop shopInstance = Shop.getInstance();
     /**
      * Creates new form AddDiscountUI
-     * @throws SQLException
+     * @throws SQLException -
      */
     public AddDiscountUI() throws SQLException {
         initComponents();

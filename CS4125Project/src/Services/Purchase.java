@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Creates a receipt of purchases made.
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class Purchase {
     
@@ -22,7 +22,7 @@ public class Purchase {
     * @param  item a StockItem object
     * @param quantity The amount of StockItem being bought
     * @param username The user that bought the item
-    * 
+    * @param currency The currency of the purchase
     */
     public Purchase(StockItem item, int quantity, String username, Money.Currency currency){
         this(item, quantity,username, currency, new GregorianCalendar());
@@ -33,6 +33,7 @@ public class Purchase {
     * @param  item A StockItem object
     * @param quantity The amount of StockItem being bought
     * @param username The user that bought the item
+    * @param currency the currency to make purchase in
     * @param date The date of purchase
     * 
     */
@@ -48,7 +49,7 @@ public class Purchase {
     
     /**
     * A method for making purchases
-    * @param  address 
+    * @param  address  the address of the purchase
     * @return true
     * 
     */

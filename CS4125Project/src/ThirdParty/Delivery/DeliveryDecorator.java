@@ -24,7 +24,7 @@ public class DeliveryDecorator implements Delivery {
     
     /**
      * 
-     * @return 
+     * @return type
      */
     @Override
     public String getType(){
@@ -33,7 +33,7 @@ public class DeliveryDecorator implements Delivery {
     
     /**
      * 
-     * @return 
+     * @return price
      */
     @Override
     public double getPrice(){
@@ -42,7 +42,7 @@ public class DeliveryDecorator implements Delivery {
     
     /**
      * 
-     * @return 
+     * @return days
      */
     @Override
     public int getDays(){

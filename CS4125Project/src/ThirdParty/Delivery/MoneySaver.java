@@ -13,7 +13,7 @@ public class MoneySaver extends DeliveryDecorator {
     
     /**
      * 
-     * @param delivery
+     * @param delivery the delivery type
      */
     public MoneySaver(Delivery delivery){
         super(delivery);
@@ -21,7 +21,7 @@ public class MoneySaver extends DeliveryDecorator {
     
     /**
      * 
-     * @return 
+     * @return price
      */
     @Override
     public double getPrice(){
@@ -30,7 +30,7 @@ public class MoneySaver extends DeliveryDecorator {
     
     /**
      * 
-     * @return 
+     * @return days
      */
     @Override
     public int getDays(){

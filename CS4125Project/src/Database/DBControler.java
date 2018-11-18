@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  * Creates an instance of each database for the system to use.
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class DBControler {
     

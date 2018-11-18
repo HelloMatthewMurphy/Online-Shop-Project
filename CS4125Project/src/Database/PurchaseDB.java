@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
 
 import Services.Money;
@@ -41,6 +36,11 @@ public class PurchaseDB implements IDatabase {
         this.filename = filename;
     }
     
+    /**
+     *
+     * @param backupNum the backup number to load
+     * @throws IOException -
+     */
     public void loadBackup(int backupNum) throws IOException {
         if (backupNum > MAX_BACKUPS)
             backupNum = MAX_BACKUPS;
@@ -90,7 +90,7 @@ public class PurchaseDB implements IDatabase {
     
     /**
      * saves Purchases to a CSV file
-     * @throws IOException
+     * @throws IOException -
      */
     @Override
     public void save() throws IOException
@@ -124,7 +124,7 @@ public class PurchaseDB implements IDatabase {
     
     /**
      * Creates an ArrayList of purchases and adds them to a DB from a CSV file
-     * @throws IOException
+     * @throws IOException -
      */ 
     @Override
     public void load() throws IOException
