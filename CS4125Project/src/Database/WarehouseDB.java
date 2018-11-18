@@ -47,7 +47,7 @@ public class WarehouseDB implements IDatabase {
         warehouseDBLegacy.loadBackup(backupNum);
     }
     
-    public String[] getBackupTimeStrings() throws IOException {
+    public String[] getBackupTimes() throws IOException {
         ArrayList<GregorianCalendar> backupTimes = warehouseDBLegacy.getBackupTimes();
         
         String[] result = new String[backupTimes.size()];
