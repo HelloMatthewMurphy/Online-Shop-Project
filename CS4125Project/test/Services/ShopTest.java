@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ThirdParty.Payment.*;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  *
@@ -53,10 +54,7 @@ public class ShopTest {
         boolean workedFine = false;
         Shop expResult = Shop.getInstance();
         
-        if(expResult != null)
-            workedFine = true;
-        
-        assert(workedFine);
+        assertNotNull(expResult);
     }
 
     /**
@@ -65,14 +63,11 @@ public class ShopTest {
     @Test
     public void testSetAccount() {
         System.out.println("setAccount");
-        boolean workedFine = false;
         Customer account = new Customer("Matt", "Pass", "Email@email.email");;
         Shop instance = Shop.getInstance();
         instance.setAccount(account);
-        if(instance.getAccount() != null)
-            workedFine = true;
         
-        assert(workedFine);
+        assertNotNull(instance.getAccount());
     }
     
     /**
@@ -99,6 +94,7 @@ public class ShopTest {
     public void testReturnItem() {
         System.out.println("returnItem");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
+        assertNotNull(item);
         Shop instance = Shop.getInstance();
         instance.returnItem(item, 1, Currency.EUR);
     }
@@ -110,6 +106,7 @@ public class ShopTest {
     public void testMakePurchase() {
         System.out.println("makePurchase");
         StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
+        assertNotNull(item);
         int quantity = 1;
         Shop instance = Shop.getInstance();
         instance.setAccount(new Customer("Brian", "test", "testing"));
@@ -121,7 +118,6 @@ public class ShopTest {
      */
     @Test
     public void testCreditCardDetails(){
-        boolean workedFine = false;
         System.out.println("CreditCardDetails");
         Customer account = new Customer("Matt", "Pass", "Email@email.email");
         Payment paymentType = new NetBankingPayment();
@@ -130,11 +126,7 @@ public class ShopTest {
         instance.setAccount(account);
         Shop.getInstance().getAccount().setPaymentType(paymentType);
         
-        if(Shop.getInstance().getAccount().getPaymentType() != null){
-            workedFine = true;
-        }
-        
-        assert(workedFine);
+        assertNotNull(Shop.getInstance().getAccount().getPaymentType());
     }
     
         /**
@@ -142,7 +134,6 @@ public class ShopTest {
      */
     @Test
     public void testCreateReceipt(){
-        boolean workedFine = false;
         System.out.println("makeReceipt");
         Customer account = new Customer("Matt", "Pass", "Email@email.email");
         Payment paymentType = new NetBankingPayment();
@@ -154,11 +145,7 @@ public class ShopTest {
         PrivateReceiptBuilder privateReceipt = new PrivateReceiptBuilder();
         ReceiptDirector.GetInstance().makeReceipt(privateReceipt);
         
-        if(privateReceipt.getReceipt() != null){
-            workedFine = true;
-        }
-        
-        assert(workedFine);
+        assertNotNull(privateReceipt.getReceipt());
     }
     
 }
