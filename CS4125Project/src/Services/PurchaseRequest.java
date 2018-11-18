@@ -21,7 +21,7 @@ public class PurchaseRequest {
         return purchase;
     }
     
-    public void execute() {
+    public void doPurchase() {
         Shop.getInstance().makePurchase(
             purchase.getItem(), purchase.getQuantity(), 
             purchase.getUsername(), purchase.getMoney().getCurrency()
