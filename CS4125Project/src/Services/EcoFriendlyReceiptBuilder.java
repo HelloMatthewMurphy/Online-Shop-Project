@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 
 import java.util.ArrayList;
@@ -46,6 +41,10 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
         receipt.setPurchases(itemList);
     } 
   
+    /**
+     *
+     * @return receipt
+     */
     public Receipt getReceipt(){
         return this.receipt;
     } 

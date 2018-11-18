@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
 
 import Stock.StockItem;
@@ -52,6 +47,11 @@ public class StockItemDB implements IDatabase {
         this.filename = filename;
     }
     
+    /**
+     *
+     * @param backupNum the backup number to load
+     * @throws IOException -
+     */
     public void loadBackup(int backupNum) throws IOException {
         if (backupNum > MAX_BACKUPS)
             backupNum = MAX_BACKUPS;
@@ -98,7 +98,7 @@ public class StockItemDB implements IDatabase {
     
     /**
      * saves StockItems to a CSV file
-     * @throws IOException
+     * @throws IOException -
      */ 
     @Override
     public void save() throws IOException {
@@ -126,13 +126,18 @@ public class StockItemDB implements IDatabase {
     
     /**
      * Creates StockItem and adds them to a DB
-     * @throws IOException
+     * @throws IOException -
      */ 
     @Override
     public void load() throws IOException {
         loadFile(filename);
     }
     
+    /**
+     *
+     * @param filename the filename to load
+     * @throws IOException -
+     */
     public void loadFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         // Ignore the headers
@@ -158,7 +163,7 @@ public class StockItemDB implements IDatabase {
     }
     
     /**
-     * @param name
+     * @param name the name of the stock
      * @return stockItem
      */
     public StockItem getStockItemByName(String name){

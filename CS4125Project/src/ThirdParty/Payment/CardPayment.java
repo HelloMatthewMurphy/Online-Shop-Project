@@ -1,5 +1,9 @@
 package ThirdParty.Payment;
 
+/**
+ *
+ * @author Brian
+ */
 public class CardPayment extends Payment {
 
     @Override

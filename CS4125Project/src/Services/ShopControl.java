@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 
 import java.util.ArrayList;
@@ -10,7 +5,7 @@ import java.util.Stack;
 
 /**
  * The controller for the shop that keeps the commands and the order there executed in
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class ShopControl {
     
@@ -41,7 +36,7 @@ public class ShopControl {
     
     /**
      * Adds a command to the commands
-     * @param command
+     * @param command command to add
      */
     public void addCommand(Command command){
         commands.add(command);
@@ -60,7 +55,7 @@ public class ShopControl {
     
     /**
      * Executes the command at commandNum
-     * @param commandNum
+     * @param commandNum the command number of the command to execute
      */
     public void executeCommand(int commandNum){
         commands.get(commandNum).execute();

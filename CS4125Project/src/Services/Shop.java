@@ -17,7 +17,7 @@ import java.util.Map.Entry;
 
 /**
  * An object that allows user to check stock, buy and return items.
- * @author Matthew Murphy
+ * @author Matthew
  */
 
 public class Shop extends Observable{
@@ -174,7 +174,7 @@ public class Shop extends Observable{
     
     /**
      * Get the list of sales or returns which fall within the given date range
-     * @param constraints 
+     * @param constraints  the constraints for the purchase
      * @return purchases The list of sales or returns which fall within the range
      */
     public List<Purchase> getPurchases(PurchaseConstraints constraints)

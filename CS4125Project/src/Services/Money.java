@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Services;
 
 /**
@@ -11,6 +6,9 @@ package Services;
  */
 public class Money {
     
+    /**
+     *Currency enum
+     */
     public enum Currency {
         EUR('€', 1), GBP('£', 1.15), USD('$', 0.88);
         
@@ -38,11 +36,20 @@ public class Money {
     private Currency currency;
     private double amount;
     
+    /**
+     *
+     * @param currency the currency to start money with
+     * @param amount the amount to start money with
+     */
     public Money(Currency currency, double amount) {
         this.currency = currency;
         this.amount = amount;
     }
     
+    /**
+     *
+     * @param newCurrency the new currency
+     */
     public void changeCurrency(Currency newCurrency) {
         double rate = currency.getToEuroRate() * (1 / newCurrency.getToEuroRate());
         
@@ -50,18 +57,34 @@ public class Money {
         amount *= rate;
     }
     
+    /**
+     *
+     * @return currency
+     */
     public Currency getCurrency() {
         return currency;
     }
     
+    /**
+     *
+     * @param currency a currency to set the currency too
+     */
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
     
+    /**
+     *
+     * @return amount
+     */
     public double getAmount() {
         return amount;
     }
     
+    /**
+     *
+     * @param amount the amount to set amount too
+     */
     public void setAmount(double amount) {
         this.amount = amount;
     }

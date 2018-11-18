@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
 
 import User.Account;
@@ -51,7 +46,7 @@ public class AccountDB implements IDatabase {
     
     /**
      * saves Accounts to a CSV file
-     * @throws IOException
+     * @throws IOException -
      */ 
     @Override
     public void save() throws IOException{
@@ -77,7 +72,7 @@ public class AccountDB implements IDatabase {
     
      /**
      * Creates Accounts and adds them to a DB from a RegisteredUsers.csv
-     * @throws IOException
+     * @throws IOException -
      */ 
     @Override
     public void load() throws IOException {

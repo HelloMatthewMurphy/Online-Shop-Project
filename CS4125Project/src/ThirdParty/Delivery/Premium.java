@@ -13,7 +13,7 @@ public class Premium extends DeliveryDecorator {
     
     /**
      * 
-     * @param delivery 
+     * @param delivery the delivery type
      */
     public Premium(Delivery delivery){
         super(delivery);
@@ -21,7 +21,7 @@ public class Premium extends DeliveryDecorator {
     
     /**
      * 
-     * @return 
+     * @return  price
      */
     public double getPrice(){
         return tempDelivery.getPrice()+10;
@@ -29,7 +29,7 @@ public class Premium extends DeliveryDecorator {
     
     /**
      * 
-     * @return 
+     * @return days
      */
     public int getDays(){
         return tempDelivery.getDays()-2;

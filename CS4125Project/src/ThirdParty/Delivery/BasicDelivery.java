@@ -29,7 +29,7 @@ public class BasicDelivery implements Delivery {
     
     /**
      * Gets price of delivery
-     * @return 
+     * @return price
      */
     @Override
     public double getPrice() {

@@ -2,7 +2,7 @@ package Storage;
 
 /**
  * A object which holds a country and address.
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class Location {
     private String country;
@@ -17,8 +17,8 @@ public class Location {
     
     /**
      * A constructor which sets country and address.
-     * @param country
-     * @param address 
+     * @param country country of user
+     * @param address address of user
      */
     public Location(String country, String address){
         this.country = country;
@@ -27,7 +27,7 @@ public class Location {
     
     /**
      * 
-     * @return 
+     * @return country
      */
     public String getCountry(){
         return country;
@@ -35,7 +35,7 @@ public class Location {
     
     /**
      * 
-     * @param country 
+     * @param country the country of user
      */
     public void setCountry(String country){
         this.country = country;
@@ -51,7 +51,7 @@ public class Location {
     
     /**
      * 
-     * @param address 
+     * @param address address of user
      */
     public void setAddress(String address){
         this.address = address;

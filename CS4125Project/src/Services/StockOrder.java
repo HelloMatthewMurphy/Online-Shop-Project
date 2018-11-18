@@ -4,7 +4,7 @@ import Stock.StockItem;
 
 /**
  *
- * @author Matthew Murphy
+ * @author Matthew
  */
 public class StockOrder {
     

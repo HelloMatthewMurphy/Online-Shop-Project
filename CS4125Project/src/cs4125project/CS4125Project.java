@@ -17,8 +17,8 @@ public class CS4125Project {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
-     * @throws java.lang.InterruptedException
+     * @throws java.io.IOException -
+     * @throws java.lang.InterruptedException -
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         DBControler.getInstance().load(DBControler.ALL_DB);

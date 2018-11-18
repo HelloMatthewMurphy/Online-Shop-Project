@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Database;
 
 import Storage.Warehouse;
@@ -57,6 +52,11 @@ public class WarehouseDBLegacy implements IDatabase {
         this.filename = filename;
     }
     
+    /**
+     *
+     * @param backupNum the backup number to load
+     * @throws IOException -
+     */
     public void loadBackup(int backupNum) throws IOException {
         if (backupNum > MAX_BACKUPS)
             backupNum = MAX_BACKUPS;
@@ -65,6 +65,11 @@ public class WarehouseDBLegacy implements IDatabase {
         loadFile(new File(BUP_PATH, loadFilename).getPath());
     }
     
+    /**
+     *
+     * @return backupTimes
+     * @throws IOException -
+     */
     public ArrayList<GregorianCalendar> getBackupTimes() throws IOException {
         File dir = new File(BUP_PATH);
         ArrayList<File> filesInDir = new ArrayList(Arrays.asList(dir.listFiles()));
@@ -102,7 +107,7 @@ public class WarehouseDBLegacy implements IDatabase {
     
     /**
      * saves Warehouses to a CSV file
-     * @throws IOException
+     * @throws IOException -
      */
     @Override
     public void save() throws IOException {
