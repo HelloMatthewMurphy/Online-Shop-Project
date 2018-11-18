@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package Services;
-
-import Database.DBControler;
-import Services.Money.Currency;
-import Stock.StockItem;
-import Storage.Warehouse;
 import User.Customer;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +103,8 @@ public class ShopTest {
         if(Shop.getInstance().getAccount().getPaymentType() != null){
             workedFine = true;
         }
-            assert(workedFine);
+        
+        assert(workedFine);
     }
     
         /**
