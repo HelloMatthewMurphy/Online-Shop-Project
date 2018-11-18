@@ -154,7 +154,7 @@ public class SupervisorMenuUI extends javax.swing.JFrame {
     private void buttonRollbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRollbackActionPerformed
         String[] backupDateStrings;
         try {
-            backupDateStrings = DBControler.getInstance().getWarehouseDB().getBackupTimeStrings();
+            backupDateStrings = DBControler.getInstance().getWarehouseDB().getBackupTimes();
         }
         catch (IOException ex) {
             return;
