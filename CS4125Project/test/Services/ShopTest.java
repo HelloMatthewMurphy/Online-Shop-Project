@@ -93,19 +93,6 @@ public class ShopTest {
         Shop instance = Shop.getInstance();
         instance.returnItem(item, 1, Currency.EUR);
     }
-
-    /**
-     * Test of makePurchase method, of class Shop.
-     */
-    @Test   
-    public void testMakePurchase() {
-        StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
-        assertNotNull(item);
-        int quantity = 1;
-        Shop instance = Shop.getInstance();
-        instance.setAccount(new Customer("Brian", "test", "testing"));
-        instance.makePurchase(item, quantity, "Brian", Currency.EUR);
-    }
     
         /**
      * Test of setPaymentType method, of class Shop.
@@ -120,6 +107,22 @@ public class ShopTest {
         Shop.getInstance().getAccount().setPaymentType(paymentType);
         
         assertNotNull(Shop.getInstance().getAccount().getPaymentType());
+    }
+    
+        /**
+     * Test of makePurchase method, of class Shop.
+     */
+    @Test   
+    public void testMakePurchase() {
+        StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
+        assertNotNull(item);
+        int quantity = 1;
+        Shop instance = Shop.getInstance();
+        instance.setAccount(new Customer("Brian", "test", "testing"));
+        Payment paymentType = new NetBankingPayment();
+        paymentType._IPaymentSystem = new BOIPaymentSystem();
+        Shop.getInstance().getAccount().setPaymentType(paymentType);
+        instance.makePurchase(item, quantity, "Brian", Currency.EUR);
     }
     
         /**
