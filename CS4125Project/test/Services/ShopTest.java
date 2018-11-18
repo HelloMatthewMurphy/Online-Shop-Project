@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Services;
+import Database.DBControler;
+import Services.Money.Currency;
+import Stock.StockItem;
 import User.Customer;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,8 @@ import ThirdParty.Payment.*;
 public class ShopTest {
     
     public ShopTest() {
+        /* Load CSV files when creating a ShopTest instance */
+        DBControler.getInstance().load(DBControler.ALL_DB);
     }
     
     @BeforeClass
@@ -86,6 +91,31 @@ public class ShopTest {
         }
         assert(workedFine);
     }
+    
+    /**
+     * Test of returnItem method, of class Shop.
+     */
+    @Test
+    public void testReturnItem() {
+        System.out.println("returnItem");
+        StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
+        Shop instance = Shop.getInstance();
+        instance.returnItem(item, 1, Currency.EUR);
+    }
+
+    /**
+     * Test of makePurchase method, of class Shop.
+     */
+    @Test   
+    public void testMakePurchase() {
+        System.out.println("makePurchase");
+        StockItem item = DBControler.getInstance().getStockItemDB().getStockItemByName("yeezy");
+        int quantity = 1;
+        Shop instance = Shop.getInstance();
+        instance.setAccount(new Customer("Brian", "test", "testing"));
+        instance.makePurchase(item, quantity, "Brian", Currency.EUR);
+    }
+    
         /**
      * Test of setPaymentType method, of class Shop.
      */
