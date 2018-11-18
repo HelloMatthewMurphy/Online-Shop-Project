@@ -40,7 +40,7 @@ public class PurchaseRequestDispatcher {
             interceptor.onPrePurchaseRequest(req);
         }
         
-        req.execute();
+        req.doPurchase();
         
         // Post-purchase
         for (PurchaseRequestInterceptor interceptor : interceptors) {
