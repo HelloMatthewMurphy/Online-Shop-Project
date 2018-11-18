@@ -36,7 +36,7 @@ public class EcoFriendlyReceiptBuilder implements ReceiptBuilder{
         float total = 0;
 
         for (Purchase p : purchases) {
-            total += p.getItem().getPrice() * p.getQuantity();
+            total += p.getMoney().getAmount();
         }
         
         Money totalMoney = new Money(purchases.get(0).getMoney().getCurrency(), total);
